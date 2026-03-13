@@ -1,47 +1,24 @@
 [gd_scene format=3 uid="uid://cdd3xnigme7uh"]
 
-[ext_resource type="Script" uid="uid://dmi2lp0j8y0is" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://3pg28qetguky" path="res://scripts/staff_roll_scene_button.gd" id="1_ig7tw"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_ig7tw"]
-font_size = 32
+[node name="Main" type="Node2D" unique_id=555851919]
 
-[node name="Main" type="Node2D" unique_id=555851919 node_paths=PackedStringArray("LeftInstrumentLabel", "RightInstrumentLabel")]
-script = ExtResource("1_ig7tw")
-LeftInstrumentLabel = NodePath("CanvasLayer/UIContainer/HBoxContainer/LeftStickLabel")
-RightInstrumentLabel = NodePath("CanvasLayer/UIContainer/HBoxContainer/RightStickLabel")
+[node name="ScreenCanvas" type="CanvasLayer" parent="." unique_id=1098293850]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2139172130]
-
-[node name="UIContainer" type="Control" parent="CanvasLayer" unique_id=1886492358]
+[node name="ScreenControl" type="Control" parent="ScreenCanvas" unique_id=1141525320]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UIContainer" unique_id=1176208083]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -28.0
-offset_top = -20.0
-offset_right = 28.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 16
-alignment = 1
+[node name="Button" type="Button" parent="ScreenCanvas/ScreenControl" unique_id=644140105]
+layout_mode = 0
+offset_left = 536.0
+offset_top = 273.0
+offset_right = 704.0
+offset_bottom = 304.0
+text = "Go to staff roll scene"
+script = ExtResource("1_ig7tw")
 
-[node name="LeftStickLabel" type="Label" parent="CanvasLayer/UIContainer/HBoxContainer" unique_id=1479098187]
-layout_mode = 2
-text = "aaaaaa"
-label_settings = SubResource("LabelSettings_ig7tw")
-
-[node name="RightStickLabel" type="Label" parent="CanvasLayer/UIContainer/HBoxContainer" unique_id=1756218607]
-layout_mode = 2
-text = "aaaaaa"
-label_settings = SubResource("LabelSettings_ig7tw")
+[connection signal="button_down" from="ScreenCanvas/ScreenControl/Button" to="ScreenCanvas/ScreenControl/Button" method="_on_button_down"]

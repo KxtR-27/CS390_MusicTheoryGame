@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://mlmfy2oy28cr"]
+
+[ext_resource type="Texture2D" uid="uid://dql7qp0tv0xr8" path="res://assets/Screenshot_2026-03-13_123151.webp" id="1_bk2oq"]
+[ext_resource type="Script" uid="uid://cf1by1hw8eur0" path="res://scripts/staff_roll.gd" id="1_qn7q8"]
+[ext_resource type="Script" uid="uid://20omwecx306p" path="res://scripts/cursor.gd" id="3_awu8h"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_awu8h"]
+radius = 27.94
+height = 74.5
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rmox1"]
+height = 371.33
+
+[node name="StaffRoll" type="Node2D" unique_id=817701890]
+metadata/_edit_lock_ = true
+
+[node name="StaffRoll" type="Node2D" parent="." unique_id=773958962]
+position = Vector2(2750, 324)
+script = ExtResource("1_qn7q8")
+speed = 200.0
+
+[node name="Sprite2D" type="Sprite2D" parent="StaffRoll" unique_id=121381812]
+scale = Vector2(2.3284228, 1)
+texture = ExtResource("1_bk2oq")
+
+[node name="Notes" type="Node2D" parent="StaffRoll" unique_id=1384522794]
+metadata/_edit_lock_ = true
+
+[node name="Note" type="CharacterBody2D" parent="StaffRoll/Notes" unique_id=681001627]
+position = Vector2(53, -3)
+metadata/_edit_group_ = true
+
+[node name="Shape" type="CollisionShape2D" parent="StaffRoll/Notes/Note" unique_id=18701716]
+shape = SubResource("CapsuleShape2D_awu8h")
+
+[node name="Note2" type="CharacterBody2D" parent="StaffRoll/Notes" unique_id=373886225]
+position = Vector2(126, -2)
+metadata/_edit_group_ = true
+
+[node name="Shape" type="CollisionShape2D" parent="StaffRoll/Notes/Note2" unique_id=1389618757]
+shape = SubResource("CapsuleShape2D_awu8h")
+
+[node name="Note3" type="CharacterBody2D" parent="StaffRoll/Notes" unique_id=1574726637]
+position = Vector2(272, -3)
+metadata/_edit_group_ = true
+
+[node name="Shape" type="CollisionShape2D" parent="StaffRoll/Notes/Note3" unique_id=1629599077]
+shape = SubResource("CapsuleShape2D_awu8h")
+
+[node name="Note4" type="CharacterBody2D" parent="StaffRoll/Notes" unique_id=981543657]
+position = Vector2(346, -21)
+metadata/_edit_group_ = true
+
+[node name="Shape" type="CollisionShape2D" parent="StaffRoll/Notes/Note4" unique_id=1056481238]
+shape = SubResource("CapsuleShape2D_awu8h")
+
+[node name="Note5" type="CharacterBody2D" parent="StaffRoll/Notes" unique_id=1757921334]
+position = Vector2(418, -2)
+metadata/_edit_group_ = true
+
+[node name="Shape" type="CollisionShape2D" parent="StaffRoll/Notes/Note5" unique_id=1202121665]
+shape = SubResource("CapsuleShape2D_awu8h")
+
+[node name="Note6" type="CharacterBody2D" parent="StaffRoll/Notes" unique_id=964131843]
+position = Vector2(489, -5)
+metadata/_edit_group_ = true
+
+[node name="Shape" type="CollisionShape2D" parent="StaffRoll/Notes/Note6" unique_id=1049655045]
+shape = SubResource("CapsuleShape2D_awu8h")
+
+[node name="Note7" type="CharacterBody2D" parent="StaffRoll/Notes" unique_id=1825682996]
+position = Vector2(126, -2)
+metadata/_edit_group_ = true
+
+[node name="Shape" type="CollisionShape2D" parent="StaffRoll/Notes/Note7" unique_id=303727730]
+position = Vector2(-511, 11)
+shape = SubResource("CapsuleShape2D_awu8h")
+metadata/_edit_group_ = true
+
+[node name="Note8" type="CharacterBody2D" parent="StaffRoll/Notes" unique_id=1249473266]
+position = Vector2(-610, -15)
+metadata/_edit_group_ = true
+
+[node name="Shape" type="CollisionShape2D" parent="StaffRoll/Notes/Note8" unique_id=1572124534]
+shape = SubResource("CapsuleShape2D_awu8h")
+
+[node name="Note9" type="CharacterBody2D" parent="StaffRoll/Notes" unique_id=1628895286]
+position = Vector2(-746, -1)
+metadata/_edit_group_ = true
+
+[node name="Shape" type="CollisionShape2D" parent="StaffRoll/Notes/Note9" unique_id=325953530]
+shape = SubResource("CapsuleShape2D_awu8h")
+
+[node name="Note10" type="CharacterBody2D" parent="StaffRoll/Notes" unique_id=325176826]
+position = Vector2(-897, -1)
+metadata/_edit_group_ = true
+
+[node name="Shape" type="CollisionShape2D" parent="StaffRoll/Notes/Note10" unique_id=1449641496]
+shape = SubResource("CapsuleShape2D_awu8h")
+
+[node name="Note11" type="CharacterBody2D" parent="StaffRoll/Notes" unique_id=1673933552]
+position = Vector2(-1051, -3)
+metadata/_edit_group_ = true
+
+[node name="Shape" type="CollisionShape2D" parent="StaffRoll/Notes/Note11" unique_id=1719183184]
+shape = SubResource("CapsuleShape2D_awu8h")
+
+[node name="Cursor" type="Area2D" parent="." unique_id=541207230]
+script = ExtResource("3_awu8h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cursor" unique_id=763195464]
+position = Vector2(151, 297)
+shape = SubResource("CapsuleShape2D_rmox1")
+debug_color = Color(1, 1, 1, 0.41960785)
+
+[connection signal="body_entered" from="Cursor" to="Cursor" method="_on_body_entered"]
+[connection signal="body_exited" from="Cursor" to="Cursor" method="_on_body_exited"]
