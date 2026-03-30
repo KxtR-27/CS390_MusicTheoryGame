@@ -1,4 +1,4 @@
-class_name MasterCursor
+class_name MasterCursorArpeggio
 extends Area2D
 
 ## the maximum distance the cursor can move from its origin. 
@@ -28,8 +28,16 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Hit Note"):
 		if note:
 			print("note %s is hit!" % note.name)
+ 		if (note.name == "eNote2"):
+			$eNoteExSound.play()
+			print("Yes! E!")
+		if (note.name == "notENote"):
+			$gNoteExSound.play()
+			print("You did not hit the correct note.")
 		else:
 			print("no note was hit!")
+		if note and note.name:
+			return
 		pass
 	
 
@@ -55,9 +63,10 @@ func _on_body_entered(body: Node2D) -> void:
 	
 	# cast immediately, may cause errors if body is something like a RigidBody2D
 	note = body as CharacterBody2D
+	#if (body.name === "cNote"):
+		#
 	print("New note: %s" % body.name)
 	pass
-	#some notes need to be hit, others just to be heard (defense mechanism)
 
 
 func _on_body_exited(_body: Node2D) -> void:
