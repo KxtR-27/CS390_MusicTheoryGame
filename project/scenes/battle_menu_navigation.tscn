@@ -21,7 +21,6 @@ dmg = NodePath("Note_list_panel/dmg")
 mp = NodePath("Note_list_panel/mp")
 
 [node name="Action_list" type="HBoxContainer" parent="." unique_id=397584406]
-visible = false
 layout_mode = 0
 offset_left = 75.0
 offset_top = 201.0
@@ -52,6 +51,7 @@ text = "Rest
 "
 
 [node name="Note_list_panel" type="Panel" parent="." unique_id=295160987]
+visible = false
 custom_minimum_size = Vector2(600, 350)
 layout_mode = 0
 offset_left = 19.0
