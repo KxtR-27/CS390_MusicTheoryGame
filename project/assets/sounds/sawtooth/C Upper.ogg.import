@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://v60e33t62bow"
+path="res://.godot/imported/C Upper.ogg-bc9b2328274cb68c5f5360459afd0dbc.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/sawtooth/C Upper.ogg"
+dest_files=["res://.godot/imported/C Upper.ogg-bc9b2328274cb68c5f5360459afd0dbc.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

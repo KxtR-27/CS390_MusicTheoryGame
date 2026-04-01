@@ -3,9 +3,9 @@ extends Node
 
 
 @export_tool_button("Play Sample Right", "Play") var hit_note_button := \
-	func() -> void: _play_hit_note("")
+	func() -> void: _play_hit_note("Sine","C")
 @export_tool_button("Play Sample Wrong", "Node3D") var missed_note_button := \
-	func() -> void: _play_missed_note("")
+	func() -> void: _play_missed_note("Sine", "C")
 @export_tool_button("Stop Samples", "Stop") var stop_playing_notes := \
 	func() -> void: _stop_playing_notes()
 
@@ -23,16 +23,31 @@ enum NOTES {
 @onready var violin_hit_C: AudioStreamPlayer = $ViolinHit/AudioStreamPlayer
 
 
-func _play_hit_note(_note: String) -> void:
-	violin_hit_C.play()
+func _play_hit_note(instrument: String, pitch: String) -> void:
+	if find_child(instrument):
+		var target_note: AudioStreamPlayer = get_node(instrument).get_node(pitch)
+		target_note.play()
 
 
-func _play_missed_note(_note: String) -> void:
-	violin_hit_C.pitch_scale = randf_range(0.5, 1.2)
-	# wait until it's done playing, would be a signal from the audiostreamplayer or a manual check
-	violin_hit_C.play()
-	violin_hit_C.pitch_scale = 1
+func _play_missed_note(instrument: String, pitch: String) -> void:
+	if find_child(instrument):
+		var target_note: AudioStreamPlayer = get_node(instrument).get_node(pitch)
+		target_note.pitch_scale = randf_range (0.7, 1.4)
+		target_note.play()
+		# tween pitch down
+		var tween : Tween = get_tree().create_tween()
+		tween.tween_property(target_note, "pitch_scale", .5, .75)
+		# wait until it's done playing, would be a signal from the audiostreamplayer or a manual check
+		target_note.finished.connect(func() -> void: 
+			target_note.pitch_scale = 1
+		, CONNECT_ONE_SHOT)
 
 
 func _stop_playing_notes() -> void:
 	violin_hit_C.stop()
+
+
+func _stop_note(instrument : String, pitch : String) -> void:
+	if find_child(instrument):
+		var target_note: AudioStreamPlayer = get_node(instrument).get_node(pitch)
+		target_note.stop()
