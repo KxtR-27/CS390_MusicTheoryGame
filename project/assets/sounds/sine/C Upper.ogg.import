@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cfg7sl4s7b3yp"
+path="res://.godot/imported/C Upper.ogg-03f1561523f2ab351c42f945110a0a60.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/sine/C Upper.ogg"
+dest_files=["res://.godot/imported/C Upper.ogg-03f1561523f2ab351c42f945110a0a60.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
