@@ -1,24 +1,24 @@
 @tool
-class_name AmyWrapper 
+class_name NotePlayer 
 extends Node
 
-# wraps a node from the plugin "AMY Music Synthesizer"
-# AssetLib: https://godotengine.org/asset-library/asset/4952
 
+## emits when a note starts playing
 signal note_played(note: NoteEntry)
+## emits when a note stops playing
 signal note_stopped(note: NoteEntry)
+## emits when a sequence starts playing
 signal sequence_played(sequence: NoteSequence)
+## emits when a sequence stops playing
 signal sequence_stopped(sequence: NoteSequence)
 
 const starting_frequency := 16.35 # C0
 
 @export var note_sequence: NoteSequence = NoteSequence.new()
-
 @export_tool_button("Play Sequence", "AudioStreamWAV") var play_sequence_button := \
 	func() -> void: play_sequence(note_sequence)
 
 @onready var amy: Amy = _init_amy()
-@onready var timer: Timer = $AmyTimer
 
 
 func _init_amy() -> Amy:
@@ -44,15 +44,15 @@ func play_sequence(sequence: NoteSequence) -> void:
 	sequence_played.emit(sequence)
 	for note in sequence.get_notes():
 		if note: 
-			await play_note(note)
+			await play_note(note, sequence.waveform)
 	sequence_stopped.emit(sequence)
 
 
-func play_note(note: NoteEntry) -> void:
+func play_note(note: NoteEntry, waveform := NoteSequence.Waves.SINE) -> void:
 	# ensure that the oscillator actually exists
 	if not amy: _init_amy()
 	# play note
-	amy.send({"osc": 0, "wave": Amy.SINE, "freq": note.get_frequency(), "vel": 1})
+	amy.send({"osc": 0, "wave": waveform, "freq": note.get_frequency(), "vel": 1})
 	note_played.emit(note)
 	# wait for it to "finish" (thank you Xander)
 	await get_tree().create_timer(note.sustain).timeout

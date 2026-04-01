@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://bn2mdtyed8g6d"]
-
-[ext_resource type="Script" uid="uid://c1lj2miq62bkb" path="res://debug/amy_test.gd" id="1_sr0yx"]
-[ext_resource type="Resource" uid="uid://basq1e2s7eame" path="res://resources/sequences/zelda_notes.tres" id="2_sr0yx"]
-
-[node name="AmyWrapper" type="Node" unique_id=443806133]
-script = ExtResource("1_sr0yx")
-note_sequence = ExtResource("2_sr0yx")
