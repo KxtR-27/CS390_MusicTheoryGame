@@ -2,6 +2,22 @@
 
 [ext_resource type="Script" uid="uid://dh75xdcgird1j" path="res://scripts/sound_manager.gd" id="1_rsxva"]
 [ext_resource type="AudioStream" uid="uid://ciugviqwkvoy7" path="res://assets/samples.ogg" id="2_b3sla"]
+[ext_resource type="AudioStream" uid="uid://bujyeq28yljjo" path="res://assets/sounds/sine/C.ogg" id="3_hb0q4"]
+[ext_resource type="AudioStream" uid="uid://deg425kc0o5o6" path="res://assets/sounds/sine/D.ogg" id="4_7fhcs"]
+[ext_resource type="AudioStream" uid="uid://kxi3thpe7dbt" path="res://assets/sounds/sine/E.ogg" id="5_4pe3q"]
+[ext_resource type="AudioStream" uid="uid://l4i7u0jgd740" path="res://assets/sounds/sine/F.ogg" id="6_7e2t8"]
+[ext_resource type="AudioStream" uid="uid://mdc57yq2gcl6" path="res://assets/sounds/sine/G.ogg" id="7_53jq2"]
+[ext_resource type="AudioStream" uid="uid://vetbcgn64fvo" path="res://assets/sounds/sine/A.ogg" id="8_yypge"]
+[ext_resource type="AudioStream" uid="uid://dpo7yiurlsp5e" path="res://assets/sounds/sine/B.ogg" id="9_ld8e8"]
+[ext_resource type="AudioStream" uid="uid://cfg7sl4s7b3yp" path="res://assets/sounds/sine/C Upper.ogg" id="10_3mdcr"]
+[ext_resource type="AudioStream" uid="uid://dm3fpbpsppskt" path="res://assets/sounds/sawtooth/C.ogg" id="10_a3b5r"]
+[ext_resource type="AudioStream" uid="uid://wdgxk5lclrui" path="res://assets/sounds/sawtooth/D.ogg" id="11_cyuw6"]
+[ext_resource type="AudioStream" uid="uid://opsrbnc1630y" path="res://assets/sounds/sawtooth/E.ogg" id="12_3mdcr"]
+[ext_resource type="AudioStream" uid="uid://b2oyt4p2ntyq4" path="res://assets/sounds/sawtooth/F.ogg" id="13_wto6h"]
+[ext_resource type="AudioStream" uid="uid://bos2e80tnp3b" path="res://assets/sounds/sawtooth/G.ogg" id="14_2tv32"]
+[ext_resource type="AudioStream" uid="uid://bdhkp88570gcs" path="res://assets/sounds/sawtooth/A.ogg" id="15_gv2pd"]
+[ext_resource type="AudioStream" uid="uid://n8je0mogbh1n" path="res://assets/sounds/sawtooth/B.ogg" id="16_m2bd0"]
+[ext_resource type="AudioStream" uid="uid://v60e33t62bow" path="res://assets/sounds/sawtooth/C Upper.ogg" id="18_wto6h"]
 
 [node name="SoundManager" type="Node" unique_id=178747334]
 script = ExtResource("1_rsxva")
@@ -13,3 +29,55 @@ note = 1
 stream = ExtResource("2_b3sla")
 
 [node name="ViolinSustain" type="Node" parent="." unique_id=681202651]
+
+[node name="Sine" type="Node" parent="." unique_id=712184180]
+
+[node name="C" type="AudioStreamPlayer" parent="Sine" unique_id=1309620422]
+stream = ExtResource("3_hb0q4")
+
+[node name="D" type="AudioStreamPlayer" parent="Sine" unique_id=1847996893]
+stream = ExtResource("4_7fhcs")
+
+[node name="E" type="AudioStreamPlayer" parent="Sine" unique_id=2021313738]
+stream = ExtResource("5_4pe3q")
+
+[node name="F" type="AudioStreamPlayer" parent="Sine" unique_id=191575368]
+stream = ExtResource("6_7e2t8")
+
+[node name="G" type="AudioStreamPlayer" parent="Sine" unique_id=239952485]
+stream = ExtResource("7_53jq2")
+
+[node name="A" type="AudioStreamPlayer" parent="Sine" unique_id=1793302689]
+stream = ExtResource("8_yypge")
+
+[node name="B" type="AudioStreamPlayer" parent="Sine" unique_id=454092775]
+stream = ExtResource("9_ld8e8")
+
+[node name="CU" type="AudioStreamPlayer" parent="Sine" unique_id=2015349423]
+stream = ExtResource("10_3mdcr")
+
+[node name="Sawtooth" type="Node" parent="." unique_id=2133239716]
+
+[node name="C" type="AudioStreamPlayer" parent="Sawtooth" unique_id=1266793272]
+stream = ExtResource("10_a3b5r")
+
+[node name="D" type="AudioStreamPlayer" parent="Sawtooth" unique_id=957204074]
+stream = ExtResource("11_cyuw6")
+
+[node name="E" type="AudioStreamPlayer" parent="Sawtooth" unique_id=412579382]
+stream = ExtResource("12_3mdcr")
+
+[node name="F" type="AudioStreamPlayer" parent="Sawtooth" unique_id=1402108072]
+stream = ExtResource("13_wto6h")
+
+[node name="G" type="AudioStreamPlayer" parent="Sawtooth" unique_id=177412868]
+stream = ExtResource("14_2tv32")
+
+[node name="A" type="AudioStreamPlayer" parent="Sawtooth" unique_id=1162081208]
+stream = ExtResource("15_gv2pd")
+
+[node name="B" type="AudioStreamPlayer" parent="Sawtooth" unique_id=1750942864]
+stream = ExtResource("16_m2bd0")
+
+[node name="CU" type="AudioStreamPlayer" parent="Sawtooth" unique_id=1700742284]
+stream = ExtResource("18_wto6h")
