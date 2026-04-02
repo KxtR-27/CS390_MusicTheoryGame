@@ -11,6 +11,22 @@ signal note_stopped(note: Note)
 signal sequence_played(sequence: NoteSequence)
 ## emits when a sequence stops playing
 signal sequence_stopped(sequence: NoteSequence)
+## emits when a given node does so manually
+@warning_ignore("unused_signal")
+signal play_next_note_in_await(type: PlayAwaitTypes)
+
+## emits when player hits a note correctly
+signal hit
+## emits when player completely misses a note
+signal skip
+## emits when player misses but hits incorrectly
+signal extra
+
+enum PlayAwaitTypes {
+	HIT,	# player hits the note correctly
+	SKIP,	# player completely misses the note
+	EXTRA	# player misses but hits incorrectly
+}
 
 const starting_frequency := 16.35 # C0
 
@@ -18,19 +34,18 @@ const starting_frequency := 16.35 # C0
 @export_enum("Automatic", "Await") var mode: int = 0
 @export var signalToAwaitBetweenNotes: Signal
 @export_tool_button("Play Sequence", "AudioStreamWAV") var play_sequence_button := \
-	func() -> void:
-		var overrode_mode := mode == 1 # Await
-		mode = 0 # Automatic
-		play_sequence(note_sequence)
-		await sequence_stopped
-		mode = 1 if overrode_mode else 0
+	func() -> void: 
+		print("playing sequence [%s] in editor" % note_sequence)
+		play_sequence_automatically(note_sequence)
 
 
 @export_group("Note Preview")
 @export var preview_waveform: NoteSequence.Waves = NoteSequence.Waves.SINE
 @export var preview_note: Note = Note.new()
 @export_tool_button("Play Preview", "AudioListener2D") var preview_button := \
-	func() -> void: play_note(preview_note, preview_waveform)
+	func() -> void: 
+		print("playing note preview in editor")
+		play_note(preview_note, preview_waveform)
 
 @onready var amy: Amy = _init_amy()
 
@@ -43,6 +58,7 @@ func _init_amy() -> Amy:
 
 
 func _ready() -> void:
+	if !amy: amy = _init_amy()
 	if Engine.is_editor_hint():
 		return
 	if note_sequence:
@@ -53,22 +69,45 @@ func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 	
-	#if Input.is_action_just_pressed("Hit Note"):
-		#play_note(Note.new(Note.Notes.A, 4, 1))
-	#if Input.is_action_just_pressed("ui_up"):
-		#play_note(Note.new(Note.Notes.A, 5, 1))
-	#if Input.is_action_just_pressed("ui_down"):
-		#play_note(Note.new(Note.Notes.A, 3, 1))
+	if Input.is_action_just_pressed("ui_up"):
+		play_next_note_in_await.emit(PlayAwaitTypes.HIT)
+	if Input.is_action_just_pressed("ui_right"):
+		play_next_note_in_await.emit(PlayAwaitTypes.SKIP)
+	if Input.is_action_just_pressed("ui_down"):
+		play_next_note_in_await.emit(PlayAwaitTypes.EXTRA)
 
 
 func play_sequence(sequence: NoteSequence) -> void:
+	if mode == 0: play_sequence_automatically(sequence) 
+	else: play_sequence_awaiting(sequence)
+
+
+func play_sequence_automatically(sequence: NoteSequence) -> void:
 	sequence_played.emit(sequence)
 	for note: Note in sequence.get_notes():
 		if note:
 			await play_note(note, sequence.waveform)
-			if mode == 1: # Await
-					await signalToAwaitBetweenNotes
 	sequence_stopped.emit(sequence)
+
+
+func play_sequence_awaiting(sequence: NoteSequence) -> void:
+	sequence_played.emit()
+	print("start")
+	for note: Note in sequence.get_notes():
+		var play_type: PlayAwaitTypes = await play_next_note_in_await
+		while play_type == PlayAwaitTypes.EXTRA:
+			play_extra(note, sequence.waveform)
+			extra.emit()
+			print("extra")
+			play_type = await play_next_note_in_await
+		if play_type == PlayAwaitTypes.HIT:
+			await play_note(note, sequence.waveform)
+			hit.emit()
+			print("hit")
+		elif play_type == PlayAwaitTypes.SKIP:
+			skip.emit()
+			print("skip")
+	print("end")
 
 
 func play_note(note: Note, waveform := NoteSequence.Waves.SINE) -> void:
@@ -79,6 +118,21 @@ func play_note(note: Note, waveform := NoteSequence.Waves.SINE) -> void:
 	note_played.emit(note)
 	# wait for it to "finish" (thank you Xander)
 	await get_tree().create_timer(note.sustain).timeout
+	# stop note
+	amy.send({"osc": 0, "vel": 0})
+	note_stopped.emit(note)
+
+
+func play_extra(note: Note, waveform := NoteSequence.Waves.SINE) -> void:
+	# ensure that the oscillator actually exists
+	if not amy: _init_amy()
+	# play note
+	var baseFrequency := note.get_frequency()
+	var nastyFrequency := baseFrequency + randf_range(-100, 100)
+	amy.send({"osc": 0, "wave": waveform, "freq": nastyFrequency, "vel": 1})
+	note_played.emit(note)
+	# wait for it to "finish" (thank you Xander)
+	await get_tree().create_timer(0.05).timeout
 	# stop note
 	amy.send({"osc": 0, "vel": 0})
 	note_stopped.emit(note)
