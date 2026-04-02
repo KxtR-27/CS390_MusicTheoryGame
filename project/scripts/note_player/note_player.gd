@@ -32,7 +32,6 @@ const starting_frequency := 16.35 # C0
 
 @export var note_sequence: NoteSequence = NoteSequence.new()
 @export_enum("Automatic", "Await") var mode: int = 0
-@export var signalToAwaitBetweenNotes: Signal
 @export_tool_button("Play Sequence", "AudioStreamWAV") var play_sequence_button := \
 	func() -> void: 
 		print("playing sequence [%s] in editor" % note_sequence)
@@ -59,22 +58,11 @@ func _init_amy() -> Amy:
 
 func _ready() -> void:
 	if !amy: amy = _init_amy()
-	if Engine.is_editor_hint():
-		return
-	if note_sequence:
-		play_sequence(note_sequence)
 
 
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
-	
-	if Input.is_action_just_pressed("ui_up"):
-		play_next_note_in_await.emit(PlayAwaitTypes.HIT)
-	if Input.is_action_just_pressed("ui_right"):
-		play_next_note_in_await.emit(PlayAwaitTypes.SKIP)
-	if Input.is_action_just_pressed("ui_down"):
-		play_next_note_in_await.emit(PlayAwaitTypes.EXTRA)
 
 
 func play_sequence(sequence: NoteSequence) -> void:
