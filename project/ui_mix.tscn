@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://uhsnmxsqn237"]
 
 [ext_resource type="Texture2D" uid="uid://3wy3bm3yh6mm" path="res://assets/icon.svg" id="1_f1p1p"]
+[ext_resource type="Script" uid="uid://cqa7sm8fb4waa" path="res://scripts/ui_mix.gd" id="1_hngcd"]
 [ext_resource type="Texture2D" uid="uid://bj4c3g5fypha1" path="res://assets/fire.png" id="2_hngcd"]
 [ext_resource type="Texture2D" uid="uid://d0l4ili1w1s8b" path="res://assets/sleep-mhw-status-effect.png" id="3_u20u5"]
 [ext_resource type="Texture2D" uid="uid://54jlj7udvc24" path="res://assets/Poison_JE3_BE2.png" id="4_klmld"]
 [ext_resource type="Texture2D" uid="uid://bwiymv3rw26cc" path="res://assets/musistaff.png" id="5_5tgd8"]
 
 [node name="UiMix" type="Node2D" unique_id=195094249]
+script = ExtResource("1_hngcd")
 
 [node name="Panel" type="Panel" parent="." unique_id=1466141254]
 offset_left = 53.0

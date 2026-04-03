@@ -1,10 +1,8 @@
 [gd_scene format=3 uid="uid://j4kp3gvwemce"]
 
-[ext_resource type="Script" uid="uid://cf1by1hw8eur0" path="res://scripts/staff_roll.gd" id="1_g15nn"]
+[ext_resource type="Script" path="res://scripts/staff_roll.gd" id="1_g15nn"]
 [ext_resource type="Texture2D" uid="uid://bityvgbr6nsh4" path="res://assets/test_staff_without_notes.png" id="2_378vu"]
 [ext_resource type="Texture2D" uid="uid://ylolhvxwn08e" path="res://assets/whole_note.png" id="3_1hohq"]
-[ext_resource type="Script" uid="uid://gcvwrmx0bn43" path="res://components/cursor_defense.gd" id="4_g15nn"]
-[ext_resource type="Script" uid="uid://dpyky8qtx7x2j" path="res://components/master_cursor_arpeggio.gd" id="5_378vu"]
 [ext_resource type="AudioStream" uid="uid://cigpminhwx87r" path="res://assets/sounds/freesound_community-c6-102822.mp3" id="6_nufpl"]
 [ext_resource type="AudioStream" uid="uid://c28wgc7irsv32" path="res://assets/sounds/freesound_community-e6-82016.mp3" id="7_mtq14"]
 [ext_resource type="AudioStream" uid="uid://lt226shvsm6g" path="res://assets/sounds/freesound_community-g6-82013.mp3" id="8_hg7nq"]
@@ -105,7 +103,6 @@ texture = ExtResource("3_1hohq")
 
 [node name="Cursor" type="Area2D" parent="." unique_id=541207230]
 visible = false
-script = ExtResource("4_g15nn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cursor" unique_id=763195464]
 position = Vector2(410, 297)
@@ -123,9 +120,6 @@ stream = ExtResource("8_hg7nq")
 
 [node name="MasterCursor" type="Area2D" parent="." unique_id=1318916498]
 position = Vector2(410, 328)
-script = ExtResource("5_378vu")
-max_offset = null
-deadzone = null
 metadata/_edit_group_ = true
 
 [node name="Shape" type="CollisionShape2D" parent="MasterCursor" unique_id=545085167]

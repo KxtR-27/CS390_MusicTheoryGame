@@ -24,22 +24,22 @@ func _process(_delta: float) -> void:
 	tilt = Input.get_axis("Left Instrument Up", "Left Instrument Down")
 	offset = max_offset * tilt
 	self.position.y = origin.y + offset
-	
-	if Input.is_action_just_pressed("Hit Note"):
+
+	#if Input.is_action_just_pressed("Hit Note"): look for hit signal
 		if note:
 			print("note %s is hit!" % note.name)
- 		if (note.name == "eNote2"):
+		if (note.name == "eNote2"):
 			$eNoteExSound.play()
 			print("Yes! E!")
 		if (note.name == "notENote"):
 			$gNoteExSound.play()
 			print("You did not hit the correct note.")
-		else:
-			print("no note was hit!")
-		if note and note.name:
-			return
-		pass
-	
+	else:
+		print("no note was hit!")
+	if note and note.name:
+		return
+	pass
+
 
 func _on_body_entered(body: Node2D) -> void:
 	# check type

@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://cwu3xnqpclgur"]
+
+[ext_resource type="Texture2D" uid="uid://3wy3bm3yh6mm" path="res://assets/icon.svg" id="1_3fj4c"]
+[ext_resource type="Script" uid="uid://dq572vvx7xv4i" path="res://scripts/arpeggio_frame.gd" id="1_ooqln"]
+[ext_resource type="PackedScene" uid="uid://j4kp3gvwemce" path="res://components/staff_roll_arpeggio.tscn" id="1_rojaf"]
+
+[node name="ArpeggioFrame" type="Control" unique_id=1300448282]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ooqln")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1825526601]
+
+[node name="top_panel" type="Panel" parent="CanvasLayer" unique_id=2034542089]
+offset_left = 35.0
+offset_top = 63.0
+offset_right = 1109.0
+offset_bottom = 259.0
+
+[node name="bottom_panel" type="Panel" parent="CanvasLayer" unique_id=320209557]
+offset_left = 36.0
+offset_top = 381.0
+offset_right = 1109.0
+offset_bottom = 607.0
+
+[node name="right_panel" type="Panel" parent="CanvasLayer" unique_id=2011042430]
+offset_left = 935.0
+offset_top = 259.0
+offset_right = 1108.9736
+offset_bottom = 381.0
+
+[node name="left_panel" type="Panel" parent="CanvasLayer" unique_id=310152758]
+offset_left = 36.0
+offset_top = 259.0
+offset_right = 212.97363
+offset_bottom = 381.0
+
+[node name="accuracy_attack" type="Label" parent="CanvasLayer" unique_id=1658254982]
+offset_left = 103.0
+offset_top = 115.0
+offset_right = 249.0
+offset_bottom = 138.0
+text = "Defense Accuracy: "
+
+[node name="playerHP" type="Label" parent="CanvasLayer" unique_id=1686012706]
+offset_left = 117.0
+offset_top = 418.0
+offset_right = 220.0
+offset_bottom = 441.0
+text = "Health: 10/10"
+
+[node name="enemyHP" type="Label" parent="CanvasLayer" unique_id=1947480948]
+offset_left = 920.0
+offset_top = 418.0
+offset_right = 1042.0
+offset_bottom = 441.0
+text = "Health: 100/100"
+
+[node name="player_icon" type="Sprite2D" parent="CanvasLayer" unique_id=364463269]
+position = Vector2(164, 514)
+texture = ExtResource("1_3fj4c")
+
+[node name="enemy_icon" type="Sprite2D" parent="CanvasLayer" unique_id=343886709]
+position = Vector2(985, 512)
+texture = ExtResource("1_3fj4c")
+
+[node name="StaffRoll" parent="." unique_id=817701890 instance=ExtResource("1_rojaf")]
+visible = false
