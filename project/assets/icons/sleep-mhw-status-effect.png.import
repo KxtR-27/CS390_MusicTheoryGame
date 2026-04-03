@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://54jlj7udvc24"
-path="res://.godot/imported/Poison_JE3_BE2.png-3698bd549826e3864b6ea3b282ae2e4d.ctex"
+uid="uid://d0l4ili1w1s8b"
+path="res://.godot/imported/sleep-mhw-status-effect.png-1d6c8d9b5369d8b2ec7c003b83a30557.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Poison_JE3_BE2.png"
-dest_files=["res://.godot/imported/Poison_JE3_BE2.png-3698bd549826e3864b6ea3b282ae2e4d.ctex"]
+source_file="res://assets/icons/sleep-mhw-status-effect.png"
+dest_files=["res://.godot/imported/sleep-mhw-status-effect.png-1d6c8d9b5369d8b2ec7c003b83a30557.ctex"]
 
 [params]
 

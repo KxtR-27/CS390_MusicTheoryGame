@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="move_attack" format=3 uid="uid://cn5g8hbrb4qca"]
+
+[ext_resource type="Script" uid="uid://6u7lbu2fdt12" path="res://scripts/Move_Attack.gd" id="1_d1c5b"]
+
+[resource]
+script = ExtResource("1_d1c5b")
+NAME = "midnight_sonata"
+DMG = 3.0
+mana_value = 5
+move_description = "Damages all enemies. If played perfectly, inflicts sleep to 1 target"
+metadata/_custom_type_script = "uid://6u7lbu2fdt12"

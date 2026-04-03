@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="move_attack" format=3 uid="uid://dkky8mqkk43m6"]
+
+[ext_resource type="Script" uid="uid://6u7lbu2fdt12" path="res://scripts/Move_Attack.gd" id="1_p3fib"]
+
+[resource]
+script = ExtResource("1_p3fib")
+NAME = "In Bleak Midwinter"
+DMG = 4.0
+mana_value = 4
+move_description = "Damages all enemies. If perfectly played, freezes 1 target"
+metadata/_custom_type_script = "uid://6u7lbu2fdt12"

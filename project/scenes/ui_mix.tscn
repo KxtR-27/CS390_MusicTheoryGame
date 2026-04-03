@@ -1,22 +1,31 @@
 [gd_scene format=3 uid="uid://uhsnmxsqn237"]
 
 [ext_resource type="Texture2D" uid="uid://3wy3bm3yh6mm" path="res://assets/icon.svg" id="1_f1p1p"]
+<<<<<<< Updated upstream:project/ui_mix.tscn
 [ext_resource type="Script" uid="uid://cqa7sm8fb4waa" path="res://scripts/ui_mix.gd" id="1_hngcd"]
 [ext_resource type="Texture2D" uid="uid://bj4c3g5fypha1" path="res://assets/fire.png" id="2_hngcd"]
 [ext_resource type="Texture2D" uid="uid://d0l4ili1w1s8b" path="res://assets/sleep-mhw-status-effect.png" id="3_u20u5"]
 [ext_resource type="Texture2D" uid="uid://54jlj7udvc24" path="res://assets/Poison_JE3_BE2.png" id="4_klmld"]
+=======
+[ext_resource type="Texture2D" uid="uid://bj4c3g5fypha1" path="res://assets/icons/fire.png" id="2_hngcd"]
+[ext_resource type="Script" uid="uid://cly32xdhxjht8" path="res://scenes/h_pvalue.gd" id="2_n5p3v"]
+[ext_resource type="Script" uid="uid://bfrg4wuf2mcqb" path="res://scripts/enemy.gd" id="2_s5bb2"]
+[ext_resource type="Texture2D" uid="uid://d0l4ili1w1s8b" path="res://assets/icons/sleep-mhw-status-effect.png" id="3_u20u5"]
+[ext_resource type="Texture2D" uid="uid://54jlj7udvc24" path="res://assets/icons/Poison_JE3_BE2.png" id="4_klmld"]
+>>>>>>> Stashed changes:project/scenes/ui_mix.tscn
 [ext_resource type="Texture2D" uid="uid://bwiymv3rw26cc" path="res://assets/musistaff.png" id="5_5tgd8"]
+[ext_resource type="PackedScene" uid="uid://ctwd7potyweht" path="res://scenes/battle_menu_navigation.tscn" id="6_v7pk5"]
 
 [node name="UiMix" type="Node2D" unique_id=195094249]
 script = ExtResource("1_hngcd")
 
-[node name="Panel" type="Panel" parent="." unique_id=1466141254]
+[node name="Player1HPMP" type="Panel" parent="." unique_id=1466141254]
 offset_left = 53.0
 offset_top = 17.0
 offset_right = 274.0
 offset_bottom = 64.0
 
-[node name="Label" type="Label" parent="Panel" unique_id=1963313108]
+[node name="HPMPValues" type="Label" parent="Player1HPMP" unique_id=1963313108]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 12.0
@@ -26,18 +35,18 @@ text = "Health: 10/10    MP: 10/10
 "
 metadata/_edit_use_anchors_ = true
 
-[node name="Icon" type="Sprite2D" parent="Panel" unique_id=194824262]
+[node name="HPMPPortrait" type="Sprite2D" parent="Player1HPMP" unique_id=194824262]
 position = Vector2(-20, 17)
 scale = Vector2(0.3984375, 0.3984375)
 texture = ExtResource("1_f1p1p")
 
-[node name="Panel2" type="Panel" parent="." unique_id=865523600]
+[node name="Player2HPMP" type="Panel" parent="." unique_id=865523600]
 offset_left = 53.0
 offset_top = 78.0
 offset_right = 276.0
 offset_bottom = 125.0
 
-[node name="Label" type="Label" parent="Panel2" unique_id=825373815]
+[node name="HPMPValues" type="Label" parent="Player2HPMP" unique_id=825373815]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 12.0
@@ -47,18 +56,18 @@ text = "Health: 10/10    MP: 10/10
 "
 metadata/_edit_use_anchors_ = true
 
-[node name="Icon2" type="Sprite2D" parent="Panel2" unique_id=1964252967]
+[node name="HPMPPortrait" type="Sprite2D" parent="Player2HPMP" unique_id=1964252967]
 position = Vector2(-20, 15)
 scale = Vector2(0.3984375, 0.3984375)
 texture = ExtResource("1_f1p1p")
 
-[node name="Panel3" type="Panel" parent="." unique_id=2086489834]
+[node name="EnemyHP" type="Panel" parent="." unique_id=2086489834]
 offset_left = 884.0
 offset_top = 36.0
 offset_right = 1107.0
 offset_bottom = 83.0
 
-[node name="Label2" type="Label" parent="Panel3" unique_id=1313889812]
+[node name="HPvalue" type="Label" parent="EnemyHP" unique_id=1313889812]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 12.0
@@ -66,26 +75,28 @@ offset_right = 194.0
 offset_bottom = 61.0
 text = "Health: 100/100
 "
+script = ExtResource("2_n5p3v")
 
-[node name="Icon4" type="Sprite2D" parent="Panel3" unique_id=164985745]
+[node name="Portait" type="Sprite2D" parent="EnemyHP" unique_id=164985745]
 position = Vector2(210, 20)
 scale = Vector2(0.671875, 0.671875)
 texture = ExtResource("1_f1p1p")
 
-[node name="Icon" type="Sprite2D" parent="." unique_id=294211510]
+[node name="Player1" type="Sprite2D" parent="." unique_id=294211510]
 position = Vector2(83, 531)
 scale = Vector2(0.8203125, 0.8203125)
 texture = ExtResource("1_f1p1p")
 
-[node name="Icon2" type="Sprite2D" parent="." unique_id=181280006]
+[node name="Player2" type="Sprite2D" parent="." unique_id=181280006]
 position = Vector2(211, 530.00006)
 scale = Vector2(0.8203125, 0.8203125)
 texture = ExtResource("1_f1p1p")
 
-[node name="Icon3" type="Sprite2D" parent="." unique_id=1723623278]
+[node name="Enemy" type="Sprite2D" parent="." unique_id=1723623278]
 position = Vector2(1035, 495)
 scale = Vector2(1.394531, 1.394531)
 texture = ExtResource("1_f1p1p")
+script = ExtResource("2_s5bb2")
 
 [node name="Fire" type="Sprite2D" parent="." unique_id=434551858]
 position = Vector2(52.5, 615.5)
@@ -97,7 +108,7 @@ position = Vector2(183.00002, 614.00006)
 scale = Vector2(0.22499986, 0.22499986)
 texture = ExtResource("3_u20u5")
 
-[node name="Label" type="Label" parent="." unique_id=1286342610]
+[node name="ControlGuide" type="Label" parent="." unique_id=1286342610]
 offset_left = 476.0
 offset_top = 588.0
 offset_right = 719.0
@@ -115,3 +126,12 @@ visible = false
 position = Vector2(574, 292)
 scale = Vector2(0.6185715, 0.6185715)
 texture = ExtResource("5_5tgd8")
+
+[node name="BattleMenuNavigation" parent="." unique_id=1690783701 instance=ExtResource("6_v7pk5")]
+offset_left = 1.0
+offset_top = 125.0
+offset_right = 1.0
+offset_bottom = 125.0
+
+[connection signal="enemy_took_damage" from="Enemy" to="EnemyHP/HPvalue" method="_on_enemy_enemy_took_damage"]
+[connection signal="attack_enemy" from="BattleMenuNavigation" to="Enemy" method="_on_battle_menu_navigation_attack_enemy"]
