@@ -5,6 +5,11 @@ extends Node2D
 
 
 func _ready() -> void:
+	# load sequence manually
+	#var loaded_sequence: NoteSequence = load("res://resources/sequences/c_major_arpeggio.tres")
+	#player.play_sequence(loaded_sequence)
+	
+	# use the player's sequence from the editor
 	player.play_sequence(player.note_sequence)
 
 
