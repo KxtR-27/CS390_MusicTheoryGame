@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://b8t2ptkostw87"]
+
+[ext_resource type="Script" uid="uid://whhpiyr6fqpp" path="res://scripts/scrolling_note_spawner/scrolling_note.gd" id="1_0q2mw"]
+[ext_resource type="Texture2D" uid="uid://3wy3bm3yh6mm" path="res://assets/icon.svg" id="2_od756"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bfgn8"]
+
+[node name="ScrollingNote" type="Area2D" unique_id=2116270455]
+script = ExtResource("1_0q2mw")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=523927674]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_od756")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1586921093]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_bfgn8")

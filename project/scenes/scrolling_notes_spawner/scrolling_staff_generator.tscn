@@ -1,22 +1,24 @@
 [gd_scene format=3 uid="uid://dik007inyrm85"]
 
-[ext_resource type="Script" uid="uid://baa77sy5wyiwy" path="res://scripts/scrolling_staff_generator.gd" id="1_bfgn8"]
+[ext_resource type="Script" uid="uid://baa77sy5wyiwy" path="res://scripts/scrolling_staff_generator.gd" id="1_5b86b"]
+[ext_resource type="Script" uid="uid://cc74qymmpgsf" path="res://scripts/sequencer/amy_manager.gd" id="2_c2h7a"]
+[ext_resource type="Script" uid="uid://f60yk4jvehid" path="res://scripts/scrolling_note_spawner/scrolling_note_spawner.gd" id="2_s6t1f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_74jum"]
 bg_color = Color(0.25882354, 0.33333334, 0.88235295, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vrpol"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g86js"]
-height = 400.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bfgn8"]
 size = Vector2(20, 648)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_bfgn8"]
+[node name="ScrollingStaffGenerator" type="Node2D" unique_id=215309787 node_paths=PackedStringArray("spawner")]
+script = ExtResource("1_5b86b")
+spawner = NodePath("MainControl/Spawner")
 
-[node name="ScrollingStaffGenerator" type="Node2D" unique_id=215309787]
-script = ExtResource("1_bfgn8")
+[node name="AmyManager" type="Node" parent="." unique_id=2086110837]
+script = ExtResource("2_c2h7a")
+metadata/_custom_type_script = "uid://cc74qymmpgsf"
 
 [node name="MeasureTimer" type="Timer" parent="." unique_id=1680440629]
 
@@ -65,11 +67,9 @@ position = Vector2(176, 324)
 scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_vrpol")
 
-[node name="SpawnPoint" type="Area2D" parent="MainControl" unique_id=1173662288]
+[node name="Spawner" type="Node2D" parent="MainControl" unique_id=994065912]
 position = Vector2(976, 324)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MainControl/SpawnPoint" unique_id=856711318]
-shape = SubResource("CapsuleShape2D_g86js")
+script = ExtResource("2_s6t1f")
 
 [node name="FileDialog" type="FileDialog" parent="." unique_id=149639758]
 oversampling_override = 1.0
@@ -79,19 +79,14 @@ file_mode = 0
 access = 1
 
 [node name="ClearArea" type="Area2D" parent="." unique_id=1862242290]
+position = Vector2(-10, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ClearArea" unique_id=1645766656]
 position = Vector2(-50, 324)
 shape = SubResource("RectangleShape2D_bfgn8")
 
-[node name="ScrollingNote" type="Area2D" parent="." unique_id=344795105]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ScrollingNote" unique_id=1936974832]
-position = Vector2(576, 324)
-scale = Vector2(2, 2)
-shape = SubResource("CircleShape2D_bfgn8")
-
 [connection signal="timeout" from="MeasureTimer" to="." method="_on_measure_timer_timeout"]
 [connection signal="button_down" from="MainControl/LoadSongHBox/LoadButton" to="." method="_on_load_button_button_down"]
+[connection signal="button_down" from="MainControl/PlayButton" to="." method="_on_play_button_button_down"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
-[connection signal="body_entered" from="ClearArea" to="." method="_on_clear_area_body_entered"]
+[connection signal="area_entered" from="ClearArea" to="." method="_on_clear_area_area_entered"]
