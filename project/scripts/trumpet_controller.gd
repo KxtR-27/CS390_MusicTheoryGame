@@ -21,9 +21,9 @@ static var NOTE_MAP: Dictionary[Array, Array] = {
 	[false, true,  false]: [Note.new(Notes.B, 3),       Note.new(Notes.F_SHARP, 4), Note.new(Notes.B, 4),        Note.new(Notes.D_SHARP, 5)],
 	[true,  false, false]: [Note.new(Notes.B_FLAT, 3),  Note.new(Notes.F, 4),       Note.new(Notes.B_FLAT, 4),   Note.new(Notes.D, 5)],
 	[true,  true,  false]: [Note.new(Notes.A, 3),       Note.new(Notes.E, 4),       Note.new(Notes.A, 4),        Note.new(Notes.C_SHARP, 5)],
-	[false, true,  true]:  [Note.new(Notes.G_SHARP, 3), Note.new(Notes.D_SHARP, 4), Note.new(Notes.G_SHARP, 4)],
-	[true,  false, true]:  [Note.new(Notes.G, 3),       Note.new(Notes.D, 4)],
-	[true,  true,  true]:  [Note.new(Notes.F_SHARP, 3), Note.new(Notes.C, 4)],
+	[false, true,  true]:  [Note.new(Notes.G_SHARP, 3), Note.new(Notes.D_SHARP, 4), Note.new(Notes.G_SHARP, 4),  Note.new(Notes.G_SHARP, 4)],
+	[true,  false, true]:  [Note.new(Notes.G, 3),       Note.new(Notes.D, 4),        Note.new(Notes.D, 4),       Note.new(Notes.D, 4)],
+	[true,  true,  true]:  [Note.new(Notes.F_SHARP, 3), Note.new(Notes.C, 4),        Note.new(Notes.C, 4),       Note.new(Notes.C, 4)],
 	
 	# apparently you almost never close the third valve alone. 
 	# like, it's weird. I cannot find a fingering chart that has an embouchure for just the third valve.
@@ -36,14 +36,8 @@ static var NOTE_MAP: Dictionary[Array, Array] = {
 @export_group("Instrumentation")
 @export var embouchure: int
 @export var valve_combo := [false, false, false]
-@export var playing: bool = false
-
-@export_group("Debug")
 @export var current_note: Note
-@export_tool_button("Update Note", "AudioStreamPolyphonic") var upd_n_btn := \
-	func() -> void: _update_current_note()
-@export_tool_button("Print Valve Flags", "ActionPaste") var flag_btn := \
-	func() -> void: print(valve_combo)
+@export var playing: bool = false
 
 var embouchure_input: String
 #var current_note: Note = Note.new()

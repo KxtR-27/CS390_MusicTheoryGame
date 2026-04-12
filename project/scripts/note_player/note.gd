@@ -46,6 +46,10 @@ func _init(n: Notes = Notes.C, o: int = 4, s: float = 1.0) -> void:
 	self.sustain = s
 
 
+func _to_string() -> String:
+	return "Note %s%d (%s Hz)" % [note, octave, get_frequency()]
+
+
 func get_frequency() -> float:
 	return (starting_frequency * pow(2, octave)) * pow(2, note/12.0)
 

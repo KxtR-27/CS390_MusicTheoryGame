@@ -2,21 +2,45 @@
 
 [ext_resource type="PackedScene" uid="uid://h0iixqg2ivqe" path="res://debug/gamepad_display.tscn" id="1_ald8e"]
 [ext_resource type="PackedScene" uid="uid://fpfoyuu5yeb0" path="res://components/trumpet_controller.tscn" id="2_augbh"]
-[ext_resource type="Script" uid="uid://dadxpfiqnn274" path="res://scripts/note_player/note.gd" id="3_ald8e"]
-
-[sub_resource type="Resource" id="Resource_dyvmd"]
-script = ExtResource("3_ald8e")
-debug_frequency = 261.6
+[ext_resource type="PackedScene" uid="uid://bldegub3cq0s4" path="res://debug/trumpet_state_display.tscn" id="2_dyvmd"]
+[ext_resource type="Texture2D" uid="uid://d1fd07fkrjmht" path="res://assets/Trumpet-Fingering-Chart.png" id="3_dyvmd"]
 
 [node name="TrumpetControllerTest" type="Node2D" unique_id=1818084558]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=239335447]
 
-[node name="GamepadDisplay" parent="CanvasLayer" unique_id=1147803843 instance=ExtResource("1_ald8e")]
-offset_left = 556.0
-offset_top = 304.0
-offset_right = 637.0
-offset_bottom = 373.0
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=270834815]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GamepadDisplay" parent="CanvasLayer/Control" unique_id=1147803843 instance=ExtResource("1_ald8e")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 494.0
+offset_top = 8.0
+offset_right = -577.0
+offset_bottom = -571.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.1463995, 2.1463995)
+
+[node name="TrumpetStateDisplay" parent="CanvasLayer/Control" unique_id=276149349 node_paths=PackedStringArray("trumpet") instance=ExtResource("2_dyvmd")]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 246.0
+offset_bottom = 126.0
+trumpet = NodePath("../../../TrumpetController")
+
+[node name="TrumpetFingeringChart" type="Sprite2D" parent="CanvasLayer" unique_id=21867228]
+position = Vector2(154, 341)
+scale = Vector2(0.26891616, 0.26891613)
+texture = ExtResource("3_dyvmd")
 
 [node name="TrumpetController" parent="." unique_id=581634359 instance=ExtResource("2_augbh")]
-current_note = SubResource("Resource_dyvmd")
