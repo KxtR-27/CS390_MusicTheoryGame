@@ -3,61 +3,105 @@ class_name TrumpetController
 extends Node
 
 
-enum OpenNoteTypes { BOTTOM, LEFT, RIGHT, TOP }
+# 
+static var Notes := Note.Notes
 
-static var open_type_map: Dictionary[String, OpenNoteTypes] = {
-	"trumpet_open_bottom": OpenNoteTypes.BOTTOM,
-	"trumpet_open_left": OpenNoteTypes.LEFT,
-	"trumpet_open_right": OpenNoteTypes.RIGHT,
-	"trumpet_open_top": OpenNoteTypes.TOP,
+static var EMBOUCHURE_INPUT_MAP: Dictionary[String, int] = {
+	"trumpet_open_bottom": 0,
+	"trumpet_open_left": 1,
+	"trumpet_open_right": 2, 
+	"trumpet_open_top": 3,
 }
 
-static var open_note_map: Dictionary[OpenNoteTypes, Note] = {
-	OpenNoteTypes.BOTTOM: Note.new(Note.Notes.C, 4),
-	OpenNoteTypes.LEFT: Note.new(Note.Notes.G, 4),
-	OpenNoteTypes.RIGHT: Note.new(Note.Notes.C, 5),
-	OpenNoteTypes.TOP: Note.new(Note.Notes.E, 5),
+## keys are boolean parsed arrays of valve combos
+## values are embouchure arrays
+## this is line-for-line in project root trumpet fingerings
+static var NOTE_MAP: Dictionary[Array, Array] = {
+	[false, false, false]: [Note.new(Notes.C, 4),       Note.new(Notes.G, 4),       Note.new(Notes.C, 5),        Note.new(Notes.E, 5)],
+	[false, true,  false]: [Note.new(Notes.B, 3),       Note.new(Notes.F_SHARP, 4), Note.new(Notes.B, 4),        Note.new(Notes.D_SHARP, 5)],
+	[true,  false, false]: [Note.new(Notes.B_FLAT, 3),  Note.new(Notes.F, 4),       Note.new(Notes.B_FLAT, 4),   Note.new(Notes.D, 5)],
+	[true,  true,  false]: [Note.new(Notes.A, 3),       Note.new(Notes.E, 4),       Note.new(Notes.A, 4),        Note.new(Notes.C_SHARP, 5)],
+	[false, true,  true]:  [Note.new(Notes.G_SHARP, 3), Note.new(Notes.D_SHARP, 4), Note.new(Notes.G_SHARP, 4)],
+	[true,  false, true]:  [Note.new(Notes.G, 3),       Note.new(Notes.D, 4)],
+	[true,  true,  true]:  [Note.new(Notes.F_SHARP, 3), Note.new(Notes.C, 4)],
+	
+	# apparently you almost never close the third valve alone. 
+	# like, it's weird. I cannot find a fingering chart that has an embouchure for just the third valve.
+	# even my twin sister says you almost never hold only the third valve.
+	# BUT. since it's technically an input option, the below is to appease the code throwing Nil
+	# have fun with the exact same embouchure as open lol
+	[false, false, true]:  [Note.new(Notes.C, 4),       Note.new(Notes.G, 4),       Note.new(Notes.C, 5),        Note.new(Notes.E, 5)],
 }
 
-@export var current_open_input: String
-@export var current_open_type: OpenNoteTypes
-@export var current_valve_combo: Array[bool] = [false, false, false]
-@export var current_note: Note = Note.new()
+@export_group("Instrumentation")
+@export var embouchure: int
+@export var valve_combo := [false, false, false]
+@export var playing: bool = false
+
+@export_group("Debug")
+@export var current_note: Note
 @export_tool_button("Update Note", "AudioStreamPolyphonic") var upd_n_btn := \
 	func() -> void: _update_current_note()
+@export_tool_button("Print Valve Flags", "ActionPaste") var flag_btn := \
+	func() -> void: print(valve_combo)
 
-@onready var note_player: NotePlayer
+var embouchure_input: String
+#var current_note: Note = Note.new()
+
+@onready var note_player: NotePlayer = $NotePlayer
 
 
 func _ready() -> void:
-	note_player = (load("res://components/note_player.tscn") as PackedScene).instantiate() as NotePlayer
-	self.add_child(note_player)
 	_update_current_note()
 
 
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint(): return
 	
-	if _update_open_type() or _update_valve_combo():
-		_update_current_note()
-		note_player.play_note(current_note, NoteSequence.Waves.PULSE, true)
+	var changed_embouchure: bool = _update_embouchure()
+	var changed_valve_combo: bool = _update_valve_combo()
 	
-	if current_open_input and Input.is_action_just_released(current_open_input):
+	if changed_embouchure or changed_valve_combo:
+		_update_current_note()
+	
+	if (
+		(embouchure_input != "" and Input.is_action_just_pressed(embouchure_input))
+		or (playing and (changed_embouchure or changed_valve_combo))
+	):
+		note_player.play_note(current_note.transpose(-2), NoteSequence.Waves.PULSE, true)
+		playing = true
+	
+	if embouchure_input and Input.is_action_just_released(embouchure_input):
 		note_player.stop_note()
+		embouchure_input = ""
+		playing = false
 
-func _update_open_type() -> bool:
-	for input: String in open_type_map.keys():
+
+func _update_embouchure() -> bool:
+	for input: String in EMBOUCHURE_INPUT_MAP.keys():
 		if Input.is_action_just_pressed(input):
-			current_open_input = input
-			current_open_type = open_type_map.get(input)
+			embouchure_input = input
+			embouchure = EMBOUCHURE_INPUT_MAP.get(input)
 			return true
 	
 	return false
 
 
 func _update_valve_combo() -> bool:
-	return false
+	var changed := false
+	
+	const inputs_array: Array[String] = \
+		["trumpet_valve_one", "trumpet_valve_two", "trumpet_valve_three"]
+	
+	for i in range(0, valve_combo.size()):
+		if Input.is_action_pressed(inputs_array[i]) != valve_combo[i]:
+			valve_combo[i] = !valve_combo[i]
+			changed = true
+	
+	return changed
 
 
 func _update_current_note() -> void:
-	current_note = open_note_map.get(current_open_type)
+	var new_note: Note = NOTE_MAP.get(valve_combo)[embouchure]
+	if new_note:
+		current_note = new_note

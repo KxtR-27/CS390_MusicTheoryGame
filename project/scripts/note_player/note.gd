@@ -48,3 +48,23 @@ func _init(n: Notes = Notes.C, o: int = 4, s: float = 1.0) -> void:
 
 func get_frequency() -> float:
 	return (starting_frequency * pow(2, octave)) * pow(2, note/12.0)
+
+
+func bend(half_steps: int) -> Note:
+	var bent_note: int = self.note + half_steps
+	var bent_octave: int
+	
+	if bent_note >= 12:
+		bent_octave = self.octave + 1
+		bent_note -= 12
+	elif bent_note <= -1:
+		bent_octave = self.octave - 1
+		bent_note += 12
+	else:
+		bent_octave = self.octave
+	
+	return Note.new(bent_note, bent_octave, self.sustain) 
+
+
+func transpose(half_steps: int) -> Note:
+	return bend(half_steps)
