@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://co1gr388dbkcu"]
+
+[ext_resource type="PackedScene" uid="uid://h0iixqg2ivqe" path="res://debug/gamepad_display.tscn" id="1_rhf2l"]
+[ext_resource type="Script" uid="uid://buvlvj5e5cwdo" path="res://debug/violin_state_display.gd" id="2_uf301"]
+[ext_resource type="PackedScene" uid="uid://bik1lfv0tm6du" path="res://components/violin_controller.tscn" id="3_b270q"]
+
+[node name="ViolinControllerTest" type="Node2D" unique_id=1818084558]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=239335447]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=270834815]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GamepadDisplay" parent="CanvasLayer/Control" unique_id=1147803843 instance=ExtResource("1_rhf2l")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 480.0
+offset_top = 8.0
+offset_right = -591.0
+offset_bottom = -571.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.1463995, 2.1463995)
+
+[node name="ViolinStateDisplay" type="Label" parent="CanvasLayer/Control" unique_id=1832991004 node_paths=PackedStringArray("violin")]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Play a down bow!
+Note 24 (293.636071837732 Hz)"
+script = ExtResource("2_uf301")
+violin = NodePath("../../../ViolinController")
+
+[node name="ViolinController" parent="." unique_id=686884029 instance=ExtResource("3_b270q")]

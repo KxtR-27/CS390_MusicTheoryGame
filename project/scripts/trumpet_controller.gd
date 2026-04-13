@@ -3,7 +3,6 @@ class_name TrumpetController
 extends Node
 
 
-# 
 static var Notes := Note.Notes
 
 static var EMBOUCHURE_INPUT_MAP: Dictionary[String, int] = {
@@ -13,9 +12,9 @@ static var EMBOUCHURE_INPUT_MAP: Dictionary[String, int] = {
 	"trumpet_open_top": 3,
 }
 
-## keys are boolean parsed arrays of valve combos
+## keys are valve combos
 ## values are embouchure arrays
-## this is line-for-line in project root trumpet fingerings
+## this is line-for-line in trumpet fingerings
 static var NOTE_MAP: Dictionary[Array, Array] = {
 	[false, false, false]: [Note.new(Notes.C, 4),       Note.new(Notes.G, 4),       Note.new(Notes.C, 5),        Note.new(Notes.E, 5)],
 	[false, true,  false]: [Note.new(Notes.B, 3),       Note.new(Notes.F_SHARP, 4), Note.new(Notes.B, 4),        Note.new(Notes.D_SHARP, 5)],
@@ -37,7 +36,10 @@ static var NOTE_MAP: Dictionary[Array, Array] = {
 @export var embouchure: int
 @export var valve_combo := [false, false, false]
 @export var current_note: Note
+
+@export_group("Debug")
 @export var playing: bool = false
+@export var accepting_input := true
 
 var embouchure_input: String
 #var current_note: Note = Note.new()
@@ -50,7 +52,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if Engine.is_editor_hint(): return
+	if Engine.is_editor_hint() or not accepting_input: return
 	
 	var changed_embouchure: bool = _update_embouchure()
 	var changed_valve_combo: bool = _update_valve_combo()
@@ -59,12 +61,15 @@ func _process(_delta: float) -> void:
 		_update_current_note()
 	
 	if (
+		# face button was pressed
 		(embouchure_input != "" and Input.is_action_just_pressed(embouchure_input))
+		# or already playing pressed face button and valves changed or other face button pressed
 		or (playing and (changed_embouchure or changed_valve_combo))
 	):
 		note_player.play_note(current_note.transpose(-2), NoteSequence.Waves.PULSE, true)
 		playing = true
 	
+	# face button released
 	if embouchure_input and Input.is_action_just_released(embouchure_input):
 		note_player.stop_note()
 		embouchure_input = ""
