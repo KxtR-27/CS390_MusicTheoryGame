@@ -9,7 +9,7 @@ class_name Player
 ## determines how much damage players take from attacks
 @export var health: int = 0
 ## the moves the player has at their disposal
-@export var moves: Dictionary[String, move_attack]
+@export var moves: Array[move_attack]
 
 @onready var max_hp: int = health
 @onready var max_mp: int = mana

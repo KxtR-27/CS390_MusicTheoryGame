@@ -5,11 +5,14 @@
 [ext_resource type="Resource" uid="uid://dkky8mqkk43m6" path="res://assets/moves/In_Bleak_Midwinter.tres" id="3_0gh5r"]
 [ext_resource type="Resource" uid="uid://cn5g8hbrb4qca" path="res://assets/moves/midnight_sonata.tres" id="4_2fdxo"]
 [ext_resource type="Resource" uid="uid://cu4tjgdyuqdt2" path="res://assets/moves/concierto_for_triangle.tres" id="5_8467g"]
+[ext_resource type="Resource" uid="uid://djtl7du6e4kmr" path="res://assets/moves/cure_song.tres" id="6_fkgu6"]
+[ext_resource type="Resource" uid="uid://d0i4m88ge5gre" path="res://assets/moves/fight_song.tres" id="7_8spvb"]
+[ext_resource type="Resource" uid="uid://b8jjh3ubrfr04" path="res://assets/moves/song_of_healing.tres" id="8_pw2xn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x8jjg"]
 bg_color = Color(0.8039216, 0.21568628, 0.25882354, 1)
 
-[node name="BattleMenuNavigation" type="Control" unique_id=1690783701 node_paths=PackedStringArray("midnight_sonata", "concierto_for_triangle", "in_bleak_midwinter", "move_description", "dmg", "mp")]
+[node name="BattleMenuNavigation" type="Control" unique_id=1690783701 node_paths=PackedStringArray("move_description", "dmg", "mp")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,16 +20,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_x8jjg")
-midnight_sonata = NodePath("Note_list_panel/Note_selection/Midnight_Sonata")
-concierto_for_triangle = NodePath("Note_list_panel/Note_selection/ConciertoForTriangle")
-in_bleak_midwinter = NodePath("Note_list_panel/Note_selection/InBleakMidwinter")
 move_description = NodePath("Note_list_panel/move_description_panel/Move_description")
 dmg = NodePath("Note_list_panel/dmg")
 mp = NodePath("Note_list_panel/mp")
 move_list = Dictionary[String, ExtResource("2_r147m")]({
-"midnight": ExtResource("4_2fdxo"),
-"triangle": ExtResource("5_8467g"),
-"winter": ExtResource("3_0gh5r")
+"Concierto For Triangle": ExtResource("5_8467g"),
+"Cure Song": ExtResource("6_fkgu6"),
+"Fight Song": ExtResource("7_8spvb"),
+"In Bleak Midwinter": ExtResource("3_0gh5r"),
+"Midnight Sonata": ExtResource("4_2fdxo"),
+"Song of Healing": ExtResource("8_pw2xn")
 })
 
 [node name="Action_list" type="HBoxContainer" parent="." unique_id=397584406]
@@ -60,7 +63,6 @@ text = "Rest
 "
 
 [node name="Note_list_panel" type="Panel" parent="." unique_id=295160987]
-visible = false
 custom_minimum_size = Vector2(600, 350)
 layout_mode = 0
 offset_left = 19.0
@@ -74,23 +76,6 @@ offset_left = 17.0
 offset_top = 89.0
 offset_right = 302.0
 offset_bottom = 229.0
-
-[node name="Midnight_Sonata" type="Button" parent="Note_list_panel/Note_selection" unique_id=213168979]
-layout_mode = 2
-focus_neighbor_top = NodePath("../InBleakMidwinter")
-theme_override_font_sizes/font_size = 26
-text = "Midnight Sonata"
-
-[node name="ConciertoForTriangle" type="Button" parent="Note_list_panel/Note_selection" unique_id=142873913]
-layout_mode = 2
-theme_override_font_sizes/font_size = 26
-text = "Concierto For Triangle"
-
-[node name="InBleakMidwinter" type="Button" parent="Note_list_panel/Note_selection" unique_id=792554453]
-layout_mode = 2
-focus_neighbor_bottom = NodePath("../Midnight_Sonata")
-theme_override_font_sizes/font_size = 26
-text = "In Bleak Midwinter"
 
 [node name="Control Guide" type="Label" parent="Note_list_panel" unique_id=228452753]
 layout_mode = 1

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="move_attack" format=3 uid="uid://d0i4m88ge5gre"]
+
+[ext_resource type="Script" uid="uid://6u7lbu2fdt12" path="res://scripts/Move_Attack.gd" id="1_wu8su"]
+
+[resource]
+script = ExtResource("1_wu8su")
+NAME = "Fight Song"
+mana_value = 3
+move_description = "Buffs target. If perfect, buffs additional target"
+metadata/_custom_type_script = "uid://6u7lbu2fdt12"

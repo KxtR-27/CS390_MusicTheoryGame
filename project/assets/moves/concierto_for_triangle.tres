@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_g53s0")
-NAME = "concierto for triangle"
+NAME = "Concierto For Triangle"
 DMG = 10.0
 mana_value = 3
 move_description = "Player must hit one tricky note. If the tricky note is hit, stun 1 enemy"
