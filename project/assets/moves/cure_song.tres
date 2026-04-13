@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="move_attack" format=3 uid="uid://djtl7du6e4kmr"]
+
+[ext_resource type="Script" uid="uid://6u7lbu2fdt12" path="res://scripts/Move_Attack.gd" id="1_h10qt"]
+
+[resource]
+script = ExtResource("1_h10qt")
+NAME = "Cure Song"
+mana_value = 4
+move_description = "Removes debuff from target. If perfect, removes debuff from other ally."
+metadata/_custom_type_script = "uid://6u7lbu2fdt12"

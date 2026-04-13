@@ -17,9 +17,12 @@ var currently_selected_move: move_attack = null
 
 
 
+
+
 @onready var action_list: HBoxContainer = $Action_list
 @onready var note: Button = $Action_list/Note
 @onready var note_list: Panel = $Note_list_panel
+@onready var note_selection: VBoxContainer = $Note_list_panel/Note_selection
 @onready var currently_selected_player: Player = player1
 
 
@@ -54,22 +57,31 @@ func _process(_delta: float) -> void:
 
 
 func _on_button_pressed() -> void:
+	for child in note_selection.get_children():
+		child.free()
+	for move: move_attack in currently_selected_player.moves:
+			var move_button: PackedScene = preload("res://scenes/move_button.tscn")
+			var move_instance: MoveButton = move_button.instantiate()
+			move_instance.move_data = move
+			move_instance.text = move.NAME
+			note_selection.add_child(move_instance)
 	action_list.visible = false
 	note_list.visible = true
-	midnight_sonata.grab_focus.call_deferred()
+	var first_child: MoveButton = note_selection.get_child(0);
+	var last_child: MoveButton = note_selection.get_child(-1);
+	first_child.focus_neighbor_top = last_child.get_path()
+	last_child.focus_neighbor_bottom = first_child.get_path()
+	first_child.grab_focus.call_deferred()
+	
+
+	
 
 func _on_gui_focus_changed(object: Object) -> void:
+	if object is MoveButton:
+		currently_selected_move = object.move_data
+		move_description.text = currently_selected_move.move_description
+		dmg.text = str(currently_selected_move.DMG)
+		mp.text = str(currently_selected_move.mana_value)
+
 	
-	match object:
-		midnight_sonata:
-			currently_selected_move = move_list["midnight"]
-		in_bleak_midwinter:
-			currently_selected_move = move_list["winter"]
-		concierto_for_triangle:
-			currently_selected_move = move_list["triangle"]
-		_:
-			return
 	
-	move_description.text = currently_selected_move.move_description
-	dmg.text = str(currently_selected_move.DMG)
-	mp.text = str(currently_selected_move.mana_value)

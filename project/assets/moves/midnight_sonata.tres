@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_d1c5b")
-NAME = "midnight_sonata"
+NAME = "Midnight Sonata"
 DMG = 3.0
 mana_value = 5
 move_description = "Damages all enemies. If played perfectly, inflicts sleep to 1 target"
