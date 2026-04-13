@@ -1,4 +1,5 @@
 extends Control
+class_name BattleNavMenu
 
 signal attack_enemy(damage: float)
 signal mana_changed(player_who_lost_mana: Player)
@@ -14,6 +15,7 @@ signal mana_changed(player_who_lost_mana: Player)
 @export var move_list: Dictionary[String, move_attack]
 
 var currently_selected_move: move_attack = null
+var can_interact: bool = false
 
 
 
@@ -38,25 +40,28 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if note_list.visible and Input.is_action_just_pressed("ui_cancel"):
-		action_list.visible = true
-		note_list.visible = false
-		note.grab_focus.call_deferred()
+	pass
+	# if note_list.visible and Input.is_action_just_pressed("ui_cancel"):
+	# 	action_list.visible = true
+	# 	note_list.visible = false
+	# 	note.grab_focus.call_deferred()
 
-	if note_list.visible and Input.is_action_just_pressed("ui_accept"):
-		print("the mana of move used is " + str(currently_selected_move.mana_value))
-		print("The mana the currently selected player has is" + str(currently_selected_player.mana))
-		if (currently_selected_move.mana_value > currently_selected_player.mana):
-			return
-		currently_selected_player.mana -= currently_selected_move.mana_value
-		mana_changed.emit(currently_selected_player)
-		attack_enemy.emit(currently_selected_move.DMG)
+	# if note_list.visible and Input.is_action_just_pressed("ui_accept"):
+	# 	print("the mana of move used is " + str(currently_selected_move.mana_value))
+	# 	print("The mana the currently selected player has is" + str(currently_selected_player.mana))
+	# 	if (currently_selected_move.mana_value > currently_selected_player.mana):
+	# 		return
+	# 	currently_selected_player.mana -= currently_selected_move.mana_value
+	# 	mana_changed.emit(currently_selected_player)
+	# 	attack_enemy.emit(currently_selected_move.DMG)
 
 
 
 
 
 func _on_button_pressed() -> void:
+	if !can_interact:
+		return
 	for child in note_selection.get_children():
 		child.free()
 	for move: move_attack in currently_selected_player.moves:
@@ -77,11 +82,16 @@ func _on_button_pressed() -> void:
 	
 
 func _on_gui_focus_changed(object: Object) -> void:
+	if !can_interact:
+		return
 	if object is MoveButton:
 		currently_selected_move = object.move_data
 		move_description.text = currently_selected_move.move_description
 		dmg.text = str(currently_selected_move.DMG)
 		mp.text = str(currently_selected_move.mana_value)
 
-	
+func reset_battle_menu() -> void:
+	action_list.visible = true
+	note_list.visible = false
+	note.grab_focus.call_deferred()
 	

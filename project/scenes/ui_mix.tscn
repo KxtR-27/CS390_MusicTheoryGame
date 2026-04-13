@@ -7,7 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://bj4c3g5fypha1" path="res://assets/icons/fire.png" id="2_hngcd"]
 [ext_resource type="Script" uid="uid://cly32xdhxjht8" path="res://scripts/h_pvalue.gd" id="2_n5p3v"]
 [ext_resource type="Script" uid="uid://bfrg4wuf2mcqb" path="res://scripts/enemy.gd" id="2_s5bb2"]
+[ext_resource type="Script" uid="uid://dwao5v14tg6be" path="res://scripts/player_attack.gd" id="3_tw7ia"]
 [ext_resource type="Texture2D" uid="uid://d0l4ili1w1s8b" path="res://assets/icons/sleep-mhw-status-effect.png" id="3_u20u5"]
+[ext_resource type="Script" uid="uid://csx8xp05imxt3" path="res://scripts/test_state.gd" id="4_1okau"]
 [ext_resource type="Script" uid="uid://cqqic6rv6vr0c" path="res://scripts/player.gd" id="4_5d0mk"]
 [ext_resource type="Texture2D" uid="uid://54jlj7udvc24" path="res://assets/icons/Poison_JE3_BE2.png" id="4_klmld"]
 [ext_resource type="Texture2D" uid="uid://bwiymv3rw26cc" path="res://assets/musistaff.png" id="5_5tgd8"]
@@ -23,8 +25,18 @@
 [node name="UiMix" type="Node2D" unique_id=195094249]
 script = ExtResource("1_hngcd")
 
-[node name="StateMachine" type="Node" parent="." unique_id=74671769]
+[node name="StateMachine" type="Node" parent="." unique_id=74671769 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_1coue")
+initial_state = NodePath("PlayerAttack")
+
+[node name="PlayerAttack" type="Node" parent="StateMachine" unique_id=905334845 node_paths=PackedStringArray("batNavMenu")]
+script = ExtResource("3_tw7ia")
+batNavMenu = NodePath("../../BattleMenuNavigation")
+metadata/_custom_type_script = "uid://dwao5v14tg6be"
+
+[node name="TestState" type="Node" parent="StateMachine" unique_id=621161524]
+script = ExtResource("4_1okau")
+metadata/_custom_type_script = "uid://csx8xp05imxt3"
 
 [node name="Player1HPMP" parent="." unique_id=1726576926 node_paths=PackedStringArray("bar_owner") instance=ExtResource("2_g847m")]
 bar_owner = NodePath("../Player1")
