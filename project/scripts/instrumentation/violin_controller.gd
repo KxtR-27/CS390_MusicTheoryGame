@@ -21,6 +21,7 @@ static var finger_position_values: Dictionary[String, int] = {
 @export var last_bow_dir_was_up := true
 @export var current_open_note: Note = open_notes_map.get("violin_open_d")
 @export var current_finger_position: int = 0
+@export var finger_position_modifier: int = 0
 
 @export var accepting_input := true
 
@@ -35,9 +36,13 @@ func _process(_delta: float) -> void:
 	
 	var hit_occurred: bool = _check_for_hit()
 	if hit_occurred:
-		print("note played!")
 		last_bow_dir_was_up = not last_bow_dir_was_up
-		note_player.play_note(current_open_note.bend(current_finger_position), NotePlayer.Waves.SAW_DOWN)
+		var bend_factor: int = current_finger_position
+		if Input.is_action_pressed("violin_lower_current_finger"):
+			bend_factor -= 1
+		elif Input.is_action_pressed("violin_higher_current_finger"):
+			bend_factor += 1
+		note_player.play_note(current_open_note.bend(bend_factor), NotePlayer.Waves.SAW_DOWN)
 
 
 func _update_current_open_note() -> void:
@@ -53,7 +58,6 @@ func _update_current_open_note() -> void:
 	
 	for open_input: String in open_notes_map.keys():
 		if Input.is_action_just_pressed(open_input):
-			print("note changed!")
 			current_open_note = open_notes_map.get(open_input)
 
 

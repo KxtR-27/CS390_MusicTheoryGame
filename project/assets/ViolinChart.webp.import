@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1fd07fkrjmht"
-path="res://.godot/imported/Trumpet-Fingering-Chart.png-9e182f88a89dd37c7bf17ff34ecb89e1.ctex"
+uid="uid://cks2wvcanvsbp"
+path="res://.godot/imported/ViolinChart.webp-6d67db4bba28ea2f58120ef54c87e8c3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Trumpet-Fingering-Chart.png"
-dest_files=["res://.godot/imported/Trumpet-Fingering-Chart.png-9e182f88a89dd37c7bf17ff34ecb89e1.ctex"]
+source_file="res://assets/ViolinChart.webp"
+dest_files=["res://.godot/imported/ViolinChart.webp-6d67db4bba28ea2f58120ef54c87e8c3.ctex"]
 
 [params]
 

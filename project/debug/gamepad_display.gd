@@ -17,7 +17,7 @@ func _process(delta: float) -> void:
 
 func _draw() -> void:
 	# Set the size, the layout isn't dynamic and based on something I sketched!
-	size = Vector2(81, 69)
+	#size = Vector2(81, 69)
 	# Draw the background
 	draw_rect(Rect2(0, 0, size.x, size.y), Color(0.15, 0.15, 0.15, 0.45))
 	

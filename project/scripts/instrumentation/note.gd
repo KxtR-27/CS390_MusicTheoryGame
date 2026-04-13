@@ -13,21 +13,23 @@ static var Notes: Dictionary[String, int] = {
 	"E" = 4,
 	"F" = 5,
 	"F#" = 6,
-	"G_FLAT" = 6,
+	"Gb" = 6,
 	"G" = 7,
-	"G_SHARP" = 8,
-	"A_FLAT" = 8,
+	"G#" = 8,
+	"Ab" = 8,
 	"A" = 9,
-	"A_SHARP" = 10,
-	"B_FLAT" = 10,
+	"A#" = 10,
+	"Bb" = 10,
 	"B" = 11,
 }
 
 static var starting_frequency := 16.35 # C0
 
+
 @export var note := Notes["C"]:
 	set(new_note):
 		note = new_note
+		note_name = Notes.find_key(note)
 		debug_frequency = self.get_frequency()
 @export_range(0, 9) var octave: int = 4:
 	set(new_octave):
@@ -38,6 +40,7 @@ static var starting_frequency := 16.35 # C0
 
 @export_group("Debug")
 @export var debug_frequency: float
+@export var note_name: String
 
 
 func _init(n := Notes["C"], o: int = 4, s: float = 1.0) -> void:
@@ -61,7 +64,7 @@ func bend(half_steps: int) -> Note:
 	if bent_note >= 12:
 		bent_octave = self.octave + 1
 		bent_note -= 12
-	elif bent_note <= -1:
+	elif bent_note < 0:
 		bent_octave = self.octave - 1
 		bent_note += 12
 	else:

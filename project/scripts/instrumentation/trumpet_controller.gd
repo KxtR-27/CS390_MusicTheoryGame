@@ -12,9 +12,7 @@ static var EMBOUCHURE_INPUT_MAP: Dictionary[String, Note] = {
 	"trumpet_open_top": Note.new(Notes.E, 5),
 }
 
-## keys are valve combos
-## values are the bends required
-## this is line-for-line in trumpet fingerings
+# keys are valve combos, values are how they bend the note
 static var VALVE_BEND_MAP: Dictionary[Array, int] = {
 	[false, false, false]: 0,
 	[false, true,  false]: -1,
@@ -23,8 +21,7 @@ static var VALVE_BEND_MAP: Dictionary[Array, int] = {
 	[false, true,  true]:  -4,
 	[true,  false, true]:  -5,
 	[true,  true,  true]:  -6,
-	# apparently you almost never close the third valve alone, 
-	# so this is a fallback
+	# apparently you almost never close the third valve alone, so this is a fallback
 	[false, false, true]: 0,
 }
 
@@ -52,7 +49,8 @@ func _process(_delta: float) -> void:
 	
 	if embouchure_changed or valves_changed:
 		_update_current_note()
-		if Input.is_action_pressed(embouchure_input):
+		if embouchure_input and Input.is_action_pressed(embouchure_input):
+			# this is bent down because trumpets play in Bb pitch instead of concert pitch
 			note_player.play_note(current_note.bend(-2), NotePlayer.Waves.SAW_DOWN, true)
 	
 	if not embouchure_input or Input.is_action_just_released(embouchure_input):
@@ -85,7 +83,7 @@ func _update_valve_combo() -> bool:
 func _update_current_note() -> void:
 	var open_note: Note = EMBOUCHURE_INPUT_MAP.get(embouchure_input)
 	
-	if !open_note: 
+	if not open_note: 
 		return
 	
 	var valve_bent_note: Note = open_note.bend(VALVE_BEND_MAP[valve_combo])
