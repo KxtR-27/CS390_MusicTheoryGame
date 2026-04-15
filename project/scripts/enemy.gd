@@ -14,10 +14,10 @@ func _ready():
 	update_health_label()
 
 
-# Called when player attacks enemy
+
 func _on_battle_menu_navigation_attack_enemy(damage: float) -> void: 
 	health -= damage
-	health = max(health, 0) # prevent negative HP
+	health = max(health, 0)
 	enemy_took_damage.emit(health)
 
 
@@ -26,7 +26,7 @@ func deal_random_damage(min_damage: float, max_damage: float) -> float:
 	return randf_range(min_damage, max_damage)
 
 
-# MAIN attack function
+
 func attack_player():
 	var target = get_random_player()
 	if target == null:
@@ -36,7 +36,7 @@ func attack_player():
 	var damage = int(deal_random_damage(1, 5))
 	print("Boss attacks ", target.name, " for ", damage, " damage!")
 	
-	target.take_damage(damage) # ✅ IMPORTANT
+	target.take_damage(damage)
 
 
 # Picks a random ALIVE player
