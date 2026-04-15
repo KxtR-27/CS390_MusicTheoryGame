@@ -77,7 +77,7 @@ func play_note(note : SequencerNote, tempo : int, added_delay_ms : int) -> void:
 	var pulse : float = 60.0/tempo
 	
 	var sustain_sec : float = note.length * pulse 
-	var measure_added_delay : int = ((pulse * 4) * (note.measure - 1)) * 1000
+	var measure_added_delay: int = int((pulse * 4) * (note.measure - 1)) * 1000
 	var start_delay_sec : float = ((note.beat - 1) * pulse)
 	var start_delay_ms : int = \
 	added_delay_ms + playback_start_time_ms + measure_added_delay + int(start_delay_sec * 1000.0) #amy calculates delay in ms

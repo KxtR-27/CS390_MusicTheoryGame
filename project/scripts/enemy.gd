@@ -1,14 +1,16 @@
 extends Sprite2D
 class_name Enemy
 
-@export var health: float = 100
-@onready var health_label = $EnemyHP/HPvalue
+
+@export var health: float = 25
+@onready var health_label: Label = $EnemyHP/HPvalue
 
 signal enemy_took_damage(current_health: int)
 
 var players: Array[Player] = []
 
-func _ready():
+
+func _ready() -> void:
 	randomize()
 	enemy_took_damage.connect(_on_enemy_took_damage)
 	update_health_label()
@@ -19,6 +21,8 @@ func _on_battle_menu_navigation_attack_enemy(damage: float) -> void:
 	health -= damage
 	health = max(health, 0)
 	enemy_took_damage.emit(health)
+	if health <= 0:
+		print("players win! I died, yeowch!")
 
 
 # Random damage generator
@@ -27,13 +31,13 @@ func deal_random_damage(min_damage: float, max_damage: float) -> float:
 
 
 
-func attack_player():
-	var target = get_random_player()
+func attack_player() -> void:
+	var target: Player = get_random_player()
 	if target == null:
 		print("No valid targets")
 		return
 	
-	var damage = int(deal_random_damage(1, 5))
+	var damage := int(deal_random_damage(1, 5))
 	print("Boss attacks ", target.name, " for ", damage, " damage!")
 	
 	target.take_damage(damage)
@@ -54,9 +58,9 @@ func get_random_player() -> Player:
 
 
 # Updates UI
-func _on_enemy_took_damage(current_health: int) -> void:
+func _on_enemy_took_damage(_current_health: int) -> void:
 	update_health_label()
 
 
-func update_health_label():
+func update_health_label() -> void:
 	health_label.text = "Health: " + str(int(health)) + "/100"

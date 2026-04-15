@@ -17,7 +17,6 @@ var note_offsets : Dictionary = {
 
 
 func spawn_note(note : SequencerNote, speed : int, tempo : int) -> ScrollingNote:
-	var note_pitch : String = note.pitch_name
 	var octave : int = note.octave - OCTAVE_OFFSET
 	
 	var new_scrolling_note : ScrollingNote = SCROLLING_NOTE.instantiate()
@@ -30,7 +29,7 @@ func spawn_note(note : SequencerNote, speed : int, tempo : int) -> ScrollingNote
 	new_scrolling_note.global_position = self.global_position
 	new_scrolling_note.global_position.x += x_offset
 	new_scrolling_note.global_position.y -= y_offset
-	print(new_scrolling_note.position, " ", note_pitch, "beat ", note.beat)
+	print(new_scrolling_note.position, " ", "%s%s" % [note.pitch_name, octave], "beat ", note.beat)
 	new_scrolling_note.speed = speed
 	
 	return new_scrolling_note

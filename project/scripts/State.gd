@@ -1,16 +1,14 @@
+@abstract
 extends Node
 class_name State
 
+@warning_ignore("unused_signal")
 signal Transitioned
 
-func Enter() -> void:
-	pass
+@abstract func Enter() -> void
 
-func Exit() -> void:
-	pass
+@abstract func Exit() -> void
 
-func Update(_delta: float) -> void:
-	pass
+@abstract func Update(_delta: float) -> void
 
-func Physics_Update(_delta: float) -> void:
-	pass
+@abstract func Physics_Update(_delta: float) -> void

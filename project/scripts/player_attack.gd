@@ -1,6 +1,11 @@
 extends State
 class_name PlayerAttack
 
+
+static var sequencer_scene: PackedScene = preload("res://scenes/scrolling_notes_spawner/scrolling_staff_generator.tscn")
+
+static var song_scene: Song = preload("res://resources/hot cross buns.tres")
+
 @export var batNavMenu: BattleNavMenu
 
 
@@ -10,11 +15,27 @@ func Enter() -> void:
 	batNavMenu.reset_battle_menu()
 	batNavMenu.can_interact = true
 	batNavMenu.currently_selected_player = batNavMenu.player1
+	
+	var player_1_alive := batNavMenu.player1.health > 0
+	var player_2_alive := batNavMenu.player2.health > 0
+	
+	if not player_1_alive and not player_2_alive:
+		# go to game over scene
+		print("player loses!")
+		Exit()
+		
+	
+	if batNavMenu.currently_selected_player == batNavMenu.player1 and not player_1_alive:
+		batNavMenu.currently_selected_player = batNavMenu.player2
+	elif batNavMenu.currently_selected_player == batNavMenu.player1 and not player_1_alive:
+		batNavMenu.currently_selected_player = batNavMenu.player2
+	
+
 
 func Exit() -> void:
 	batNavMenu.visible = false
 	batNavMenu.currently_selected_player = null
-	
+
 
 func Update(_delta: float) -> void:
 	if batNavMenu.note_list.visible and Input.is_action_just_pressed("ui_cancel"):
@@ -25,12 +46,17 @@ func Update(_delta: float) -> void:
 	if batNavMenu.note_list.visible and Input.is_action_just_pressed("ui_accept"):
 		print("the mana of move used is " + str(batNavMenu.currently_selected_move.mana_value))
 		print("The mana the currently selected player has is" + str(batNavMenu.currently_selected_player.mana))
+		
 		if (batNavMenu.currently_selected_move.mana_value > batNavMenu.currently_selected_player.mana):
 			return
+			
 		batNavMenu.currently_selected_player.mana -= batNavMenu.currently_selected_move.mana_value
 		batNavMenu.mana_changed.emit(batNavMenu.currently_selected_player)
-
-		batNavMenu.attack_enemy.emit(batNavMenu.currently_selected_move.DMG)
+		
+		#var accuracy: float = await _use_sequencer()
+		var accuracy: float = _use_sequencer()
+		
+		batNavMenu.attack_enemy.emit(batNavMenu.currently_selected_move.DMG * accuracy)
 		batNavMenu.note_list.visible = false
 		
 		if batNavMenu.currently_selected_player == batNavMenu.player1:
@@ -43,3 +69,16 @@ func Update(_delta: float) -> void:
 
 func Physics_Update(_delta: float) -> void:
 	pass
+
+
+func _use_sequencer() -> float:
+	#var new_sequencer: ScrollingStaffGenerator = sequencer_scene.instantiate()
+	#self.add_child(new_sequencer)
+	#
+	#new_sequencer.create_song(song_scene)
+	#new_sequencer._play_song()
+	#var accuracy: float = await new_sequencer.song_finished
+	#
+	#new_sequencer.queue_free()
+	#return accuracy
+	return 1.00

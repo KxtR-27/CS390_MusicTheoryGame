@@ -1,5 +1,7 @@
-extends Sprite2D
 class_name Player
+extends Sprite2D
+
+
 ## how strong attacks hit
 @export var strength: int = 0
 ## reduces how much damage players take from attacks
@@ -16,7 +18,9 @@ class_name Player
 
 signal health_changed(player: Player)
 
-func take_damage(amount: int):
-	var final_damage = max(amount - defense, 0)
+
+func take_damage(amount: int) -> void:
+	var accuracy: float = PlayerAttack.new()._use_sequencer()
+	var final_damage: int = max(amount - (defense * accuracy), 0)
 	health -= final_damage
 	health_changed.emit(self)

@@ -5,10 +5,13 @@ extends Control
 
 #var noteGuessAmount = 1
 #var rightNote: bool = false 
-var enemyAttackPoints = 10;
-var healthStandIn = 100;
+var enemyAttackPoints := 10
+var healthStandIn := 100
 
 signal close_defense
+
+@onready var player_hp: Label = $CanvasLayer/playerHP
+
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("close_defense"):
@@ -21,12 +24,12 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 
 func _on_button_pressed() -> void:
-	var damagePercentage = randf() * enemyAttackPoints
+	var damagePercentage: float = randf() * enemyAttackPoints
 	print("Damage to subtract: ", damagePercentage)
-	var newHealth = healthStandIn - round(damagePercentage)
-	$CanvasLayer/playerHP.text = str(newHealth) + "/100"
+	var newHealth: int = healthStandIn - round(damagePercentage)
+	player_hp.text = str(newHealth) + "/100"

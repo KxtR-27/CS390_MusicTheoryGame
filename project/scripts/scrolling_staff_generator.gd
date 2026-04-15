@@ -48,10 +48,9 @@ func create_song(new_song : Song) -> void:
 				current_track.push_back(note_at_index)
 
 
-func _play_next_measure() -> void:
+func _play_next_measure() -> bool:
 	if playback_queue.is_empty():
-		song_finished.emit(_get_score_percent())
-		return
+		return false
 	
 	var notes_to_play : Array = []
 	var frontmost_measure : Measure = playback_queue[0]
@@ -65,6 +64,8 @@ func _play_next_measure() -> void:
 	_spawn_measure(measure)
 	amy_manager.play_notes_in_array(notes_to_play, tempo, 1000)
 	measure += 1
+	
+	return true
 
 
 func _spawn_measure(measure_num : int) -> void:
@@ -100,10 +101,14 @@ func _play_song() -> void:
 	
 	measure = 1
 	measure_timer.wait_time = (60.0 / tempo) * 4
-	
 	amy_manager.playback_start_time_ms = Time.get_ticks_msec()
-	_play_next_measure()
-	measure_timer.start()
+	
+	while (_play_next_measure()):
+		measure_timer.start()
+		await measure_timer.timeout
+	
+	# ternary -- if there's a %, return that, otherwise return 100%
+	song_finished.emit(_get_score_percent() if _get_score_percent() else 1.00)
 
 
 func _load_song(new_song : Song) -> void:
@@ -187,6 +192,5 @@ func _get_score_percent() -> float:
 
 
 func _on_song_finished(hit_percentage: float) -> void:
-	var format_text : String = "wow you did it! %.2f%"
-	var actual_text : String = format_text % [_get_score_percent()]
-	print("wow you did it! ", hit_percentage, "%")
+	var format_text: String = "wow you did it! %.2f%s" % [hit_percentage, "%"]
+	print(format_text)
