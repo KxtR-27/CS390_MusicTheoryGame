@@ -101,3 +101,19 @@ func play_note(note : SequencerNote, tempo : int, added_delay_ms : int) -> void:
 func play_notes_in_array(array : Array, tempo : int, added_delay_ms : int) -> void:
 	for note : SequencerNote in array:
 		play_note(note, tempo, added_delay_ms)
+
+
+func start_sustain(instrument : String, midi_note : int) -> void:
+	amy.send({
+		"synth" : instrument_ids[instrument],
+		"note" : midi_note,
+		"vel" : 1
+	})
+
+
+func stop_sustain(instrument : String, midi_note : int) -> void:
+	amy.send({
+		"synth" : instrument_ids[instrument],
+		"note" : midi_note,
+		"vel" : 0
+	})

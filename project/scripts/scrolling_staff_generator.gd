@@ -13,13 +13,30 @@ class_name ScrollingStaffGenerator extends Node2D
 
 @export var spawner : ScrollingNoteSpawner
 @export var measure_timer : Timer
-@export var cursor : Area2D
 
 @export var amy_manager : AmyManager
 
+var notes_hit : int = 0
+var notes_missed : int = 0
+var total_notes : int = 0
+var current_note : ScrollingNote
+var offset_interval : float = 20.0
+var note_offsets : Dictionary = {
+	"B" = 6,
+	"A" = 5,
+	"G" = 4,
+	"F" = 3,
+	"E" = 2,
+	"D" = 1,
+	"C" = 0
+}
+
+@onready var cursor : Area2D = $MainControl/Cursor
+@onready var initial_cursor_position : Vector2 = cursor.global_position
+@onready var controller : TrumpetControllerForSequencer = $AmyManager/TrumpetControllerForSequencer
+
 
 func _create_song(new_song : Song) -> void:
-	print("creating song")
 	spawner.position.x = cursor.position.x + (scroll_speed * 2)
 	for measure_index : int in new_song.measures.keys():
 		var loaded_measure : Measure = new_song.measures[measure_index]
@@ -66,7 +83,10 @@ func _spawn_measure(measure_num : int) -> void:
 	
 	if not notes_to_spawn.is_empty():
 		for note : SequencerNote in notes_to_spawn:
-			spawner.spawn_note(note, scroll_speed)
+			var new_note : ScrollingNote = spawner.spawn_note(note, scroll_speed, tempo)
+			new_note.pitch_name = note.pitch_name
+			new_note.octave = note.octave
+			total_notes += 1
 
 
 func _play_song() -> void:
@@ -80,7 +100,6 @@ func _play_song() -> void:
 	
 	amy_manager.playback_start_time_ms = Time.get_ticks_msec()
 	_play_next_measure()
-	print("playing song")
 	measure_timer.start()
 
 
@@ -88,7 +107,6 @@ func _load_song(new_song : Song) -> void:
 	song = new_song
 	current_track.clear()
 	tempo = new_song.tempo
-	print("loading song")
 	_create_song(new_song)
 
 
@@ -98,18 +116,16 @@ func _on_load_button_button_down() -> void:
 
 
 func _on_file_dialog_file_selected(path: String) -> void:
-	var path_string_split = path.split("/")
-	var file_name = path_string_split[(path_string_split.size() - 1)]
+	var path_string_split : Array = path.split("/")
+	var file_name : String = path_string_split[(path_string_split.size() - 1)]
 	var label : Label = $MainControl/LoadSongHBox/CurrentSongLabel
 	label.text = "Current song: " + file_name
 	var loaded_song : Song = ResourceLoader.load(path, "Song")
 	_load_song(loaded_song)
-	print("file selected")
 
 
 func _on_measure_timer_timeout() -> void:
 	_play_next_measure()
-	print("timeout")
 
 
 func _on_play_button_button_down() -> void:
@@ -119,3 +135,48 @@ func _on_play_button_button_down() -> void:
 func _on_clear_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("ScrollingNotes"):
 		area.queue_free()
+
+
+func _on_trumpet_controller_for_sequencer_note_started(note_name: String, octave: int) -> void:
+	if current_note:
+		if current_note.pitch_name == note_name and current_note.octave == (octave - 1):
+			current_note.queue_free()
+			current_note = null
+			
+			notes_hit += 1
+			_update_score()
+
+
+func _on_trumpet_controller_for_sequencer_note_stopped() -> void:
+	pass
+
+
+func _update_cursor_position(note_pitch : String, octave : int) -> void:
+	cursor.visible = true
+	var offset : float = offset_interval * note_offsets[note_pitch]
+	offset += (octave * offset_interval)
+	
+	cursor.position = Vector2(176.0, 324.0)
+	cursor.position.y -= offset
+
+
+func _on_cursor_area_entered(area: Area2D) -> void:
+	if area is ScrollingNote:
+		current_note = area
+
+
+func _on_cursor_area_exited(area: Area2D) -> void:
+	if area == current_note:
+		current_note = null
+		notes_missed += 1
+		_update_score()
+
+
+func _update_score() -> void:
+	var format_text : String = "Hit: %d / %d (%.2f)"
+	var actual_text : String = format_text % [notes_hit, total_notes, _get_score_percent()]
+	$MainControl/ScoreLabel.text = actual_text
+
+
+func _get_score_percent() -> float:
+	return (float(notes_hit) / float(total_notes))
