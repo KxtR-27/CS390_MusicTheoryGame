@@ -1,6 +1,6 @@
 class_name ScrollingStaffGenerator extends Node2D
 
-@export var scroll_speed : int = 250
+@export var scroll_speed : int = 500
 @export var beats_elapsed : int = 0
 @export var measure : int = 0
 @export var tempo : int = 0
@@ -35,20 +35,22 @@ var note_offsets : Dictionary = {
 @onready var initial_cursor_position : Vector2 = cursor.global_position
 @onready var controller : TrumpetControllerForSequencer = $AmyManager/TrumpetControllerForSequencer
 
+signal song_finished(hit_percentage : float)
 
-func _create_song(new_song : Song) -> void:
+func create_song(new_song : Song) -> void:
 	spawner.position.x = cursor.position.x + (scroll_speed * 2)
 	for measure_index : int in new_song.measures.keys():
 		var loaded_measure : Measure = new_song.measures[measure_index]
 		measures[measure_index] = loaded_measure
 		for note_index : int in loaded_measure.notes.keys():
-			var current_note : SequencerNote = loaded_measure.notes[note_index]
-			if current_note.instrument == current_instrument:
+			var note_at_index : SequencerNote = loaded_measure.notes[note_index]
+			if note_at_index.instrument == current_instrument:
 				current_track.push_back(current_note)
 
 
 func _play_next_measure() -> void:
 	if playback_queue.is_empty():
+		song_finished.emit(_get_score_percent())
 		return
 	
 	var notes_to_play : Array = []
@@ -91,6 +93,7 @@ func _spawn_measure(measure_num : int) -> void:
 
 func _play_song() -> void:
 	playback_queue.clear()
+	amy_manager.amy.panic()
 	
 	for measure_index : int in measures.keys():
 		playback_queue.push_back(measures[measure_index])
@@ -107,7 +110,7 @@ func _load_song(new_song : Song) -> void:
 	song = new_song
 	current_track.clear()
 	tempo = new_song.tempo
-	_create_song(new_song)
+	create_song(new_song)
 
 
 func _on_load_button_button_down() -> void:
@@ -175,8 +178,15 @@ func _on_cursor_area_exited(area: Area2D) -> void:
 func _update_score() -> void:
 	var format_text : String = "Hit: %d / %d (%.2f)"
 	var actual_text : String = format_text % [notes_hit, total_notes, _get_score_percent()]
-	$MainControl/ScoreLabel.text = actual_text
+	var score_label : Label = $MainControl/ScoreLabel
+	score_label.text = actual_text
 
 
 func _get_score_percent() -> float:
 	return (float(notes_hit) / float(total_notes))
+
+
+func _on_song_finished(hit_percentage: float) -> void:
+	var format_text : String = "wow you did it! %.2f%"
+	var actual_text : String = format_text % [_get_score_percent()]
+	print("wow you did it! ", hit_percentage, "%")

@@ -26,7 +26,6 @@ metadata/_custom_type_script = "uid://cc74qymmpgsf"
 
 [node name="TrumpetControllerForSequencer" parent="AmyManager" unique_id=581634359 node_paths=PackedStringArray("amy_manager") instance=ExtResource("3_c2h7a")]
 amy_manager = NodePath("..")
-current_note = []
 
 [node name="MeasureTimer" type="Timer" parent="." unique_id=1680440629]
 
@@ -104,6 +103,7 @@ position = Vector2(-10, 0)
 position = Vector2(-50, 324)
 shape = SubResource("RectangleShape2D_bfgn8")
 
+[connection signal="song_finished" from="." to="." method="_on_song_finished"]
 [connection signal="note_started" from="AmyManager/TrumpetControllerForSequencer" to="." method="_on_trumpet_controller_for_sequencer_note_started"]
 [connection signal="note_stopped" from="AmyManager/TrumpetControllerForSequencer" to="." method="_on_trumpet_controller_for_sequencer_note_stopped"]
 [connection signal="timeout" from="MeasureTimer" to="." method="_on_measure_timer_timeout"]

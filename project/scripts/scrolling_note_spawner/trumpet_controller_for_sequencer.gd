@@ -59,12 +59,6 @@ var embouchure_input: String
 #var current_note: Note = Note.new()
 
 
-
-
-func _ready() -> void:
-	_update_current_note()
-
-
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint() or not accepting_input: return
 	
@@ -144,4 +138,4 @@ func _update_current_note() -> void:
 		
 	if not old_note.is_empty():
 		var midi_note : int = get_midi_note(old_note)
-		amy_manager.stop_sustain("Triangle", midi_note)
+		amy_manager.stop_sustain("Sine", midi_note)
