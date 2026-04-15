@@ -13,6 +13,7 @@ signal mana_changed(player_who_lost_mana: Player)
 @export var player1: Player
 @export var player2: Player
 @export var move_list: Dictionary[String, move_attack]
+@export var enemy: Enemy
 
 var currently_selected_move: move_attack = null
 var can_interact: bool = false
@@ -25,17 +26,19 @@ var can_interact: bool = false
 @onready var note: Button = $Action_list/Note
 @onready var note_list: Panel = $Note_list_panel
 @onready var note_selection: VBoxContainer = $Note_list_panel/Note_selection
-@onready var currently_selected_player: Player = player1
+var currently_selected_player: Player = null
 
 
 
 
 func _ready() -> void:
+	currently_selected_player = player1
 	note.grab_focus.call_deferred()
 	note.pressed.connect(_on_button_pressed)
 	get_viewport().gui_focus_changed.connect(_on_gui_focus_changed)
 	action_list.visible = true
 	note_list.visible = false
+	enemy.players = [player1, player2]
 
 
 
@@ -95,3 +98,8 @@ func reset_battle_menu() -> void:
 	note_list.visible = false
 	note.grab_focus.call_deferred()
 	
+
+
+func _on_run_pressed() -> void:
+	#This is just to test boss damage is working 
+	enemy.attack_player()

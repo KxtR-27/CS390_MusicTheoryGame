@@ -141,3 +141,5 @@ offset_right = -18.0
 offset_bottom = 25.0
 grow_horizontal = 0
 text = "mp: a lot"
+
+[connection signal="pressed" from="Action_list/Run" to="." method="_on_run_pressed"]

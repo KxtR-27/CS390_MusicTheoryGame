@@ -13,3 +13,10 @@ class_name Player
 
 @onready var max_hp: int = health
 @onready var max_mp: int = mana
+
+signal health_changed(player: Player)
+
+func take_damage(amount: int):
+	var final_damage = max(amount - defense, 0)
+	health -= final_damage
+	health_changed.emit(self)
