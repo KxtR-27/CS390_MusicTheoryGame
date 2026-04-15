@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dcu86gj7wl1c"]
+
+[ext_resource type="Script" path="res://scripts/scrolling_note_spawner/trumpet_controller_for_sequencer.gd" id="1_xfenw"]
+
+[node name="TrumpetControllerForSequencer" type="Node" unique_id=581634359]
+script = ExtResource("1_xfenw")
