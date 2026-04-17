@@ -27,8 +27,8 @@ func Enter() -> void:
 	
 	if batNavMenu.currently_selected_player == batNavMenu.player1 and not player_1_alive:
 		batNavMenu.currently_selected_player = batNavMenu.player2
-	elif batNavMenu.currently_selected_player == batNavMenu.player1 and not player_1_alive:
-		batNavMenu.currently_selected_player = batNavMenu.player2
+	elif batNavMenu.currently_selected_player == batNavMenu.player2 and not player_2_alive:
+		self.Transitioned.emit(self, "BossAttack")
 	
 
 
@@ -53,8 +53,8 @@ func Update(_delta: float) -> void:
 		batNavMenu.currently_selected_player.mana -= batNavMenu.currently_selected_move.mana_value
 		batNavMenu.mana_changed.emit(batNavMenu.currently_selected_player)
 		
-		#var accuracy: float = await _use_sequencer()
-		var accuracy: float = _use_sequencer()
+		var accuracy: float = await _use_sequencer()
+		#var accuracy: float = _use_sequencer()
 		
 		batNavMenu.attack_enemy.emit(batNavMenu.currently_selected_move.DMG * accuracy)
 		batNavMenu.note_list.visible = false
@@ -72,13 +72,12 @@ func Physics_Update(_delta: float) -> void:
 
 
 func _use_sequencer() -> float:
-	#var new_sequencer: ScrollingStaffGenerator = sequencer_scene.instantiate()
-	#self.add_child(new_sequencer)
-	#
-	#new_sequencer.create_song(song_scene)
-	#new_sequencer._play_song()
-	#var accuracy: float = await new_sequencer.song_finished
-	#
-	#new_sequencer.queue_free()
-	#return accuracy
-	return 1.00
+	var minigame_generator : ScrollingStaffGenerator = sequencer_scene.instantiate()
+	get_tree().current_scene.add_child(minigame_generator)
+	minigame_generator.visible = true
+	minigame_generator.play_song(song_scene)
+	var accuracy: float = await minigame_generator.song_finished
+	
+	minigame_generator.queue_free()
+	return accuracy
+	#return 1.00

@@ -1,121 +1,24 @@
-class_name ScrollingStaffGenerator extends Node2D
+class_name ScrollingStaffGenerator
+extends Node2D
 
-@export var scroll_speed : int = 500
-@export var beats_elapsed : int = 0
-@export var measure : int = 0
-@export var tempo : int = 0
-@export var current_instrument : String = "Sine"
-@export var song : Song
+@export var debug : bool = false
+@onready var staff_minigame : StaffMinigame = $StaffMinigame
+@onready var main_control : Control = $MainControl
 
-@export var current_track : Array = []
-@export var playback_queue : Array = []
-@export var measures : Dictionary = {}
+signal song_finished(accuracy : float)
 
-@export var spawner : ScrollingNoteSpawner
-@export var measure_timer : Timer
+func _ready() -> void:
+	if debug:
+		$MainControl/LoadSongHBox.visible = true
+		$MainControl/ScoreLabel.visible = true
+		$MainControl/PlayButton.visible = true
 
-@export var amy_manager : AmyManager
-
-var notes_hit : int = 0
-var notes_missed : int = 0
-var total_notes : int = 0
-var current_note : ScrollingNote
-var offset_interval : float = 20.0
-var note_offsets : Dictionary = {
-	"B" = 6,
-	"A" = 5,
-	"G" = 4,
-	"F" = 3,
-	"E" = 2,
-	"D" = 1,
-	"C" = 0
-}
-
-@onready var cursor : Area2D = $MainControl/Cursor
-@onready var initial_cursor_position : Vector2 = cursor.global_position
-@onready var controller : TrumpetControllerForSequencer = $AmyManager/TrumpetControllerForSequencer
-
-signal song_finished(hit_percentage : float)
-
-func create_song(new_song : Song) -> void:
-	spawner.position.x = cursor.position.x + (scroll_speed * 2)
-	for measure_index : int in new_song.measures.keys():
-		var loaded_measure : Measure = new_song.measures[measure_index]
-		measures[measure_index] = loaded_measure
-		for note_index : int in loaded_measure.notes.keys():
-			var note_at_index : SequencerNote = loaded_measure.notes[note_index]
-			if note_at_index.instrument == current_instrument:
-				current_track.push_back(note_at_index)
-
-
-func _play_next_measure() -> bool:
-	if playback_queue.is_empty():
-		return false
+func play_song(song : Song) -> void:
+	staff_minigame.reset()
+	staff_minigame._load_song(song)
+	staff_minigame._play_song()
 	
-	var notes_to_play : Array = []
-	var frontmost_measure : Measure = playback_queue[0]
-	for note_index : int in frontmost_measure.notes.keys():
-		var note : SequencerNote = frontmost_measure.notes[note_index]
-		if note.instrument != current_instrument:
-			notes_to_play.append(note)
-	
-	playback_queue.pop_front()
-	
-	_spawn_measure(measure)
-	amy_manager.play_notes_in_array(notes_to_play, tempo, 1000)
-	measure += 1
-	
-	return true
-
-
-func _spawn_measure(measure_num : int) -> void:
-	print("spawning measure ", measure_num)
-	var notes_to_spawn : Array = []
-	
-	if not current_track.is_empty():
-			var mismatch : bool = false
-			while mismatch == false and not current_track.is_empty():
-				var next_note : SequencerNote = current_track[0]
-				if current_track[0].measure == measure_num:
-					notes_to_spawn.append(next_note)
-					current_track.pop_front()
-				else:
-					mismatch = true
-	else:
-		measure_timer.stop()
-	
-	if not notes_to_spawn.is_empty():
-		for note : SequencerNote in notes_to_spawn:
-			var new_note : ScrollingNote = spawner.spawn_note(note, scroll_speed, tempo)
-			new_note.pitch_name = note.pitch_name
-			new_note.octave = note.octave
-			total_notes += 1
-
-
-func _play_song() -> void:
-	playback_queue.clear()
-	amy_manager.amy.panic()
-	
-	for measure_index : int in measures.keys():
-		playback_queue.push_back(measures[measure_index])
-	
-	measure = 1
-	measure_timer.wait_time = (60.0 / tempo) * 4
-	amy_manager.playback_start_time_ms = Time.get_ticks_msec()
-	
-	while (_play_next_measure()):
-		measure_timer.start()
-		await measure_timer.timeout
-	
-	# ternary -- if there's a %, return that, otherwise return 100%
-	song_finished.emit(_get_score_percent() if _get_score_percent() else 1.00)
-
-
-func _load_song(new_song : Song) -> void:
-	song = new_song
-	current_track.clear()
-	tempo = new_song.tempo
-	create_song(new_song)
+	main_control.visible = true
 
 
 func _on_load_button_button_down() -> void:
@@ -129,68 +32,13 @@ func _on_file_dialog_file_selected(path: String) -> void:
 	var label : Label = $MainControl/LoadSongHBox/CurrentSongLabel
 	label.text = "Current song: " + file_name
 	var loaded_song : Song = ResourceLoader.load(path, "Song")
-	_load_song(loaded_song)
-
-
-func _on_measure_timer_timeout() -> void:
-	_play_next_measure()
+	staff_minigame._load_song(loaded_song)
 
 
 func _on_play_button_button_down() -> void:
-	_play_song()
+	staff_minigame._play_song()
 
 
-func _on_clear_area_area_entered(area: Area2D) -> void:
-	if area.is_in_group("ScrollingNotes"):
-		area.queue_free()
-
-
-func _on_trumpet_controller_for_sequencer_note_started(note_name: String, octave: int) -> void:
-	if current_note:
-		if current_note.pitch_name == note_name and current_note.octave == (octave - 1):
-			current_note.queue_free()
-			current_note = null
-			
-			notes_hit += 1
-			_update_score()
-
-
-func _on_trumpet_controller_for_sequencer_note_stopped() -> void:
-	pass
-
-
-func _update_cursor_position(note_pitch : String, octave : int) -> void:
-	cursor.visible = true
-	var offset : float = offset_interval * note_offsets[note_pitch]
-	offset += (octave * offset_interval)
-	
-	cursor.position = Vector2(176.0, 324.0)
-	cursor.position.y -= offset
-
-
-func _on_cursor_area_entered(area: Area2D) -> void:
-	if area is ScrollingNote:
-		current_note = area
-
-
-func _on_cursor_area_exited(area: Area2D) -> void:
-	if area == current_note:
-		current_note = null
-		notes_missed += 1
-		_update_score()
-
-
-func _update_score() -> void:
-	var format_text : String = "Hit: %d / %d (%.2f)"
-	var actual_text : String = format_text % [notes_hit, total_notes, _get_score_percent()]
-	var score_label : Label = $MainControl/ScoreLabel
-	score_label.text = actual_text
-
-
-func _get_score_percent() -> float:
-	return (float(notes_hit) / float(total_notes))
-
-
-func _on_song_finished(hit_percentage: float) -> void:
-	var format_text: String = "wow you did it! %.2f%s" % [hit_percentage, "%"]
-	print(format_text)
+func _on_staff_minigame_score_tallied(hit_percentage: float) -> void:
+	song_finished.emit(hit_percentage)
+	main_control.visible = false

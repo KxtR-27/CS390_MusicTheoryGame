@@ -2,11 +2,9 @@
 
 [ext_resource type="Script" uid="uid://baa77sy5wyiwy" path="res://scripts/scrolling_staff_generator.gd" id="1_5b86b"]
 [ext_resource type="Script" uid="uid://cc74qymmpgsf" path="res://scripts/sequencer/amy_manager.gd" id="2_c2h7a"]
+[ext_resource type="Script" uid="uid://bwfnt1f18snnm" path="res://scenes/scrolling_notes_spawner/staff_minigame.gd" id="2_fk3p3"]
 [ext_resource type="Script" uid="uid://f60yk4jvehid" path="res://scripts/scrolling_note_spawner/scrolling_note_spawner.gd" id="2_s6t1f"]
 [ext_resource type="PackedScene" uid="uid://dcu86gj7wl1c" path="res://scenes/scrolling_notes_spawner/trumpet_controller_for_sequencer.tscn" id="3_c2h7a"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_74jum"]
-bg_color = Color(0.25882354, 0.33333334, 0.88235295, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c2h7a"]
 size = Vector2(20, 350)
@@ -14,11 +12,39 @@ size = Vector2(20, 350)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bfgn8"]
 size = Vector2(20, 648)
 
-[node name="ScrollingStaffGenerator" type="Node2D" unique_id=215309787 node_paths=PackedStringArray("spawner", "measure_timer", "amy_manager")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_74jum"]
+bg_color = Color(0.25882354, 0.33333334, 0.88235295, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fk3p3"]
+bg_color = Color(0.093160845, 0.093160845, 0.0931608, 1)
+
+[node name="ScrollingStaffGenerator" type="Node2D" unique_id=215309787]
 script = ExtResource("1_5b86b")
-spawner = NodePath("MainControl/Spawner")
-measure_timer = NodePath("MeasureTimer")
-amy_manager = NodePath("AmyManager")
+debug = true
+
+[node name="StaffMinigame" type="Node2D" parent="." unique_id=1623888693 node_paths=PackedStringArray("spawner", "measure_timer", "amy_manager")]
+script = ExtResource("2_fk3p3")
+spawner = NodePath("Spawner")
+measure_timer = NodePath("../MeasureTimer")
+amy_manager = NodePath("../AmyManager")
+
+[node name="Cursor" type="Area2D" parent="StaffMinigame" unique_id=1769164578]
+position = Vector2(176, 324)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaffMinigame/Cursor" unique_id=1664472019]
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_c2h7a")
+
+[node name="Spawner" type="Node2D" parent="StaffMinigame" unique_id=994065912]
+position = Vector2(976, 324)
+script = ExtResource("2_s6t1f")
+
+[node name="ClearArea" type="Area2D" parent="." unique_id=1862242290]
+position = Vector2(-10, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClearArea" unique_id=1645766656]
+position = Vector2(-50, 324)
+shape = SubResource("RectangleShape2D_bfgn8")
 
 [node name="AmyManager" type="Node" parent="." unique_id=2086110837]
 script = ExtResource("2_c2h7a")
@@ -40,6 +66,9 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="LoadSongHBox" type="HBoxContainer" parent="MainControl" unique_id=556073422]
+visible = false
+top_level = true
+z_index = 1
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 0
 offset_right = 324.0
@@ -58,6 +87,9 @@ layout_mode = 2
 text = "Current song: "
 
 [node name="PlayButton" type="Button" parent="MainControl" unique_id=909156174]
+visible = false
+top_level = true
+z_index = 1
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 0
 offset_top = 50.0
@@ -67,18 +99,10 @@ theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_74jum")
 text = "Play Song"
 
-[node name="Cursor" type="Area2D" parent="MainControl" unique_id=1769164578]
-position = Vector2(176, 324)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MainControl/Cursor" unique_id=1664472019]
-scale = Vector2(2, 2)
-shape = SubResource("RectangleShape2D_c2h7a")
-
-[node name="Spawner" type="Node2D" parent="MainControl" unique_id=994065912]
-position = Vector2(976, 324)
-script = ExtResource("2_s6t1f")
-
 [node name="ScoreLabel" type="Label" parent="MainControl" unique_id=1761034469]
+visible = false
+top_level = true
+z_index = 1
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -89,6 +113,16 @@ grow_horizontal = 0
 theme_override_font_sizes/font_size = 32
 text = "Hit: 0/0"
 
+[node name="Panel" type="Panel" parent="MainControl" unique_id=522120473]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fk3p3")
+
 [node name="FileDialog" type="FileDialog" parent="." unique_id=149639758]
 oversampling_override = 1.0
 title = "Open a File"
@@ -96,20 +130,15 @@ position = Vector2i(0, 36)
 file_mode = 0
 access = 1
 
-[node name="ClearArea" type="Area2D" parent="." unique_id=1862242290]
-position = Vector2(-10, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ClearArea" unique_id=1645766656]
-position = Vector2(-50, 324)
-shape = SubResource("RectangleShape2D_bfgn8")
-
-[connection signal="song_finished" from="." to="." method="_on_song_finished"]
-[connection signal="note_started" from="AmyManager/TrumpetControllerForSequencer" to="." method="_on_trumpet_controller_for_sequencer_note_started"]
-[connection signal="note_stopped" from="AmyManager/TrumpetControllerForSequencer" to="." method="_on_trumpet_controller_for_sequencer_note_stopped"]
-[connection signal="timeout" from="MeasureTimer" to="." method="_on_measure_timer_timeout"]
+[connection signal="score_tallied" from="StaffMinigame" to="." method="_on_staff_minigame_score_tallied"]
+[connection signal="score_tallied" from="StaffMinigame" to="StaffMinigame" method="_on_score_tallied"]
+[connection signal="song_finished" from="StaffMinigame" to="StaffMinigame" method="_on_song_finished"]
+[connection signal="area_entered" from="StaffMinigame/Cursor" to="StaffMinigame" method="_on_cursor_area_entered"]
+[connection signal="area_exited" from="StaffMinigame/Cursor" to="StaffMinigame" method="_on_cursor_area_exited"]
+[connection signal="area_entered" from="ClearArea" to="StaffMinigame" method="_on_clear_area_area_entered"]
+[connection signal="note_started" from="AmyManager/TrumpetControllerForSequencer" to="StaffMinigame" method="_on_trumpet_controller_for_sequencer_note_started"]
+[connection signal="note_stopped" from="AmyManager/TrumpetControllerForSequencer" to="StaffMinigame" method="_on_trumpet_controller_for_sequencer_note_stopped"]
+[connection signal="timeout" from="MeasureTimer" to="StaffMinigame" method="_on_measure_timer_timeout"]
 [connection signal="button_down" from="MainControl/LoadSongHBox/LoadButton" to="." method="_on_load_button_button_down"]
 [connection signal="button_down" from="MainControl/PlayButton" to="." method="_on_play_button_button_down"]
-[connection signal="area_entered" from="MainControl/Cursor" to="." method="_on_cursor_area_entered"]
-[connection signal="area_exited" from="MainControl/Cursor" to="." method="_on_cursor_area_exited"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
-[connection signal="area_entered" from="ClearArea" to="." method="_on_clear_area_area_entered"]

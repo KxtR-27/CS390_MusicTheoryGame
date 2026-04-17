@@ -20,7 +20,8 @@ signal health_changed(player: Player)
 
 
 func take_damage(amount: int) -> void:
-	var accuracy: float = PlayerAttack.new()._use_sequencer()
+	#var accuracy: float = await PlayerAttack.new()._use_sequencer()
+	var accuracy : float = 0.5
 	var final_damage: int = max(amount - (defense * accuracy), 0)
 	health -= final_damage
 	health_changed.emit(self)

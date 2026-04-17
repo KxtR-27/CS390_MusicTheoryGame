@@ -28,7 +28,7 @@ func spawn_note(note : SequencerNote, speed : int, tempo : int) -> ScrollingNote
 	
 	new_scrolling_note.global_position = self.global_position
 	new_scrolling_note.global_position.x += x_offset
-	new_scrolling_note.global_position.y -= y_offset
+	new_scrolling_note.global_position.y -= y_offset + 140.0
 	print(new_scrolling_note.position, " ", "%s%s" % [note.pitch_name, octave], "beat ", note.beat)
 	new_scrolling_note.speed = speed
 	
