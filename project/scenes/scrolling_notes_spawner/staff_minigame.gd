@@ -173,7 +173,7 @@ func _on_cursor_area_exited(area: Area2D) -> void:
 func _update_score() -> void:
 	var format_text : String = "Hit: %d / %d (%.2f)"
 	var actual_text : String = format_text % [notes_hit, total_notes, _get_score_percent()]
-	var score_label : Label = $MainControl/ScoreLabel
+	var score_label : Label = get_parent().get_node("MainControl/ScoreLabel")
 	score_label.text = actual_text
 
 

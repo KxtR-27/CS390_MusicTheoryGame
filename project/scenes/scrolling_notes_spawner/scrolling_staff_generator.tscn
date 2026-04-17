@@ -20,7 +20,6 @@ bg_color = Color(0.093160845, 0.093160845, 0.0931608, 1)
 
 [node name="ScrollingStaffGenerator" type="Node2D" unique_id=215309787]
 script = ExtResource("1_5b86b")
-debug = true
 
 [node name="StaffMinigame" type="Node2D" parent="." unique_id=1623888693 node_paths=PackedStringArray("spawner", "measure_timer", "amy_manager")]
 script = ExtResource("2_fk3p3")
@@ -75,6 +74,7 @@ offset_right = 324.0
 offset_bottom = 40.0
 
 [node name="LoadButton" type="Button" parent="MainControl/LoadSongHBox" unique_id=1733002532]
+visible = false
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
@@ -82,6 +82,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_74jum")
 text = "Load Song"
 
 [node name="CurrentSongLabel" type="Label" parent="MainControl/LoadSongHBox" unique_id=1156185120]
+visible = false
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 text = "Current song: "
