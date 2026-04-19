@@ -82,7 +82,6 @@ func _play_next_measure() -> bool:
 
 
 func _spawn_measure(measure_num : int) -> void:
-	print("spawning measure ", measure_num)
 	var notes_to_spawn : Array = []
 	
 	if not current_track.is_empty():
@@ -124,7 +123,6 @@ func _play_song() -> void:
 	measure_timer.stop()
 	# ternary -- if there's a %, return that, otherwise return 100%
 	score_tallied.emit(_get_score_percent() if _get_score_percent() else 1.00)
-	print("song finished")
 
 
 func _load_song(new_song : Song) -> void:
@@ -192,6 +190,4 @@ func reset() -> void:
 
 
 func _on_score_tallied(hit_percentage: float) -> void:
-	var format_text: String = "wow you did it! %.2f%s" % [hit_percentage, "%"]
-	print(format_text)
-	print(notes_hit, "/", total_notes)
+	var format_text: String = "accuracy: %.2f%s" % [hit_percentage, "%"]

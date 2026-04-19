@@ -72,6 +72,14 @@ func Physics_Update(_delta: float) -> void:
 
 
 func _use_sequencer() -> float:
+	var ui_mix : Node2D = get_parent().get_parent()
+	ui_mix.get_node("Player1HPMP").visible = false
+	ui_mix.get_node("Player2HPMP").visible = false
+	ui_mix.get_node("Player1").visible = false
+	ui_mix.get_node("Player2").visible = false
+	ui_mix.get_node("Enemy").visible = false
+	ui_mix.get_node("BattleMenuNavigation").visible = false
+	
 	var minigame_generator : ScrollingStaffGenerator = sequencer_scene.instantiate()
 	get_tree().current_scene.add_child(minigame_generator)
 	minigame_generator.visible = true
@@ -79,5 +87,12 @@ func _use_sequencer() -> float:
 	var accuracy: float = await minigame_generator.song_finished
 	
 	minigame_generator.queue_free()
+	
+	ui_mix.get_node("Player1HPMP").visible = true
+	ui_mix.get_node("Player2HPMP").visible = true
+	ui_mix.get_node("Player1").visible = true
+	ui_mix.get_node("Player2").visible = true
+	ui_mix.get_node("Enemy").visible = true
+	
 	return accuracy
 	#return 1.00
