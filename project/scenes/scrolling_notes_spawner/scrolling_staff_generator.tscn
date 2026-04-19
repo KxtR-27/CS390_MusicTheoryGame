@@ -124,6 +124,15 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_fk3p3")
 
+[node name="ColorRect" type="ColorRect" parent="MainControl" unique_id=1852593502]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 156.0
+offset_right = 196.0
+grow_vertical = 2
+color = Color(1, 0, 0, 0.50980395)
+
 [node name="FileDialog" type="FileDialog" parent="." unique_id=149639758]
 oversampling_override = 1.0
 title = "Open a File"
