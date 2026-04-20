@@ -8,11 +8,13 @@
 [ext_resource type="Resource" uid="uid://djtl7du6e4kmr" path="res://assets/moves/cure_song.tres" id="6_fkgu6"]
 [ext_resource type="Resource" uid="uid://d0i4m88ge5gre" path="res://assets/moves/fight_song.tres" id="7_8spvb"]
 [ext_resource type="Resource" uid="uid://b8jjh3ubrfr04" path="res://assets/moves/song_of_healing.tres" id="8_pw2xn"]
+[ext_resource type="Texture2D" uid="uid://dhykrk0hdy8ee" path="res://resources/textures/gameboy_quest/panel_rect_marginless.tres" id="9_8spvb"]
+[ext_resource type="LabelSettings" uid="uid://dge4kigionryt" path="res://resources/adjusted_default_label_settings.tres" id="10_pw2xn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x8jjg"]
-bg_color = Color(0.8039216, 0.21568628, 0.25882354, 1)
+bg_color = Color(0.47058824, 0.6431373, 0.41568628, 1)
 
-[node name="BattleMenuNavigation" type="Control" unique_id=1690783701 node_paths=PackedStringArray("move_description", "dmg", "mp", "note_list", "action_list", "note")]
+[node name="BattleMenuNavigation" type="Control" unique_id=1690783701 node_paths=PackedStringArray("move_description", "dmg", "mp", "action_list", "note")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,7 +33,6 @@ move_list = Dictionary[String, ExtResource("2_r147m")]({
 "Midnight Sonata": ExtResource("4_2fdxo"),
 "Song of Healing": ExtResource("8_pw2xn")
 })
-note_list = NodePath("Note_list_panel")
 action_list = NodePath("Action_list")
 note = NodePath("Action_list/Note")
 
@@ -65,13 +66,18 @@ focus_neighbor_right = NodePath("../Note")
 text = "Rest
 "
 
-[node name="Note_list_panel" type="Panel" parent="." unique_id=295160987]
+[node name="Note_list_panel" type="NinePatchRect" parent="." unique_id=471274057]
 custom_minimum_size = Vector2(600, 350)
 layout_mode = 0
 offset_left = 19.0
 offset_top = 95.0
-offset_right = 59.0
-offset_bottom = 135.0
+offset_right = 619.0
+offset_bottom = 445.0
+texture = ExtResource("9_8spvb")
+patch_margin_left = 14
+patch_margin_top = 13
+patch_margin_right = 14
+patch_margin_bottom = 12
 
 [node name="Note_selection" type="VBoxContainer" parent="Note_list_panel" unique_id=448151205]
 layout_mode = 0
@@ -91,9 +97,9 @@ offset_right = 175.0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 21
 text = "A: Select  B: Back"
+label_settings = ExtResource("10_pw2xn")
 
 [node name="move_description_panel" type="Panel" parent="Note_list_panel" unique_id=1621225258]
-z_index = -1
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -113,12 +119,14 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -123.0
-offset_right = 123.0
-offset_bottom = 258.0
+offset_left = -113.0
+offset_top = 11.0
+offset_right = 133.0
+offset_bottom = 318.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 18
 text = "This is blank descripition that  should never be readable to any type of player that would be playing this game omg if you are seeing this you are probably some type of evil genius or some super duper smart hacker."
+label_settings = ExtResource("10_pw2xn")
 autowrap_mode = 3
 
 [node name="dmg" type="Label" parent="Note_list_panel" unique_id=1644883760]
@@ -132,6 +140,8 @@ offset_right = -200.0
 offset_bottom = 25.0
 grow_horizontal = 0
 text = "dmg: a lot"
+label_settings = ExtResource("10_pw2xn")
+vertical_alignment = 1
 
 [node name="mp" type="Label" parent="Note_list_panel" unique_id=1279773133]
 layout_mode = 1
@@ -144,5 +154,7 @@ offset_right = -18.0
 offset_bottom = 25.0
 grow_horizontal = 0
 text = "mp: a lot"
+label_settings = ExtResource("10_pw2xn")
+vertical_alignment = 1
 
 [connection signal="pressed" from="Action_list/Run" to="." method="_on_run_pressed"]

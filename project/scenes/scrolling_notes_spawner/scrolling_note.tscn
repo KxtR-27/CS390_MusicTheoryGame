@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b8t2ptkostw87"]
 
 [ext_resource type="Script" uid="uid://whhpiyr6fqpp" path="res://scripts/scrolling_note_spawner/scrolling_note.gd" id="1_0q2mw"]
-[ext_resource type="Texture2D" uid="uid://q3tmo3jg8c7j" path="res://scenes/scrolling_notes_spawner/note_icon.png" id="2_od756"]
+[ext_resource type="Texture2D" uid="uid://nlcj85ctmwan" path="res://resources/textures/gameboy_quest/sword_icon.tres" id="2_od756"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bfgn8"]
 
@@ -24,8 +24,10 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=523927674]
+scale = Vector2(2, 2)
 texture = ExtResource("2_od756")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1586921093]
 scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_bfgn8")
+debug_color = Color(1, 1, 1, 0.101960786)

@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="MusicTheoryGame"
+config/name="MelodyMarauders"
 run/main_scene="uid://cdd3xnigme7uh"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://assets/icon.svg"
@@ -26,6 +26,10 @@ gdscript/warnings/unsafe_call_argument=1
 [display]
 
 window/stretch/mode="viewport"
+
+[gui]
+
+theme/custom_font="uid://cujw32xc8ikd4"
 
 [input]
 
@@ -177,3 +181,4 @@ skip_prompt={
 
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
+environment/defaults/default_clear_color=Color(0.34509805, 0.26666668, 0.13333334, 1)

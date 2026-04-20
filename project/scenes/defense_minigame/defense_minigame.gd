@@ -17,6 +17,8 @@ var current_chord : Array = []
 
 var selected_panel : int = 0
 
+@onready var chord_label: Label = $MainControl/TopVBox/ChordLabel
+
 signal answer_submitted(accuracy : float)
 
 func _ready() -> void:

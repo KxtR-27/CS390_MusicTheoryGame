@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://cwu3xnqpclgur"]
 
-[ext_resource type="Texture2D" uid="uid://3wy3bm3yh6mm" path="res://assets/icon.svg" id="1_3fj4c"]
 [ext_resource type="Script" uid="uid://dq572vvx7xv4i" path="res://scripts/arpeggio_frame.gd" id="1_ooqln"]
+[ext_resource type="Texture2D" uid="uid://bg1cey8814yks" path="res://resources/textures/gameboy_quest/player_icon.tres" id="2_ooqln"]
+[ext_resource type="Texture2D" uid="uid://c8sh8l73jeqpg" path="res://resources/textures/gameboy_quest/enemy_icon.tres" id="3_embse"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3fj4c"]
 content_margin_left = 0.0
@@ -68,11 +69,13 @@ text = "Health: 100/100"
 
 [node name="player_icon" type="Sprite2D" parent="CanvasLayer" unique_id=364463269]
 position = Vector2(164, 514)
-texture = ExtResource("1_3fj4c")
+scale = Vector2(8, 8)
+texture = ExtResource("2_ooqln")
 
 [node name="enemy_icon" type="Sprite2D" parent="CanvasLayer" unique_id=343886709]
 position = Vector2(985, 512)
-texture = ExtResource("1_3fj4c")
+scale = Vector2(8, 8)
+texture = ExtResource("3_embse")
 
 [node name="Button" type="Button" parent="CanvasLayer" unique_id=1024962582]
 z_index = 4096

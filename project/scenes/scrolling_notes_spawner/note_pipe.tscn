@@ -11,6 +11,7 @@ script = ExtResource("1_lg4qn")
 layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 2.0
+color = Color(0.7921569, 0.78039217, 0.5686275, 1)
 
 [node name="Spawner" type="Control" parent="." unique_id=251477216]
 anchors_preset = 0

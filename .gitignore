@@ -1,0 +1,2 @@
+asset_packs/*
+!asset_packs/*.zip

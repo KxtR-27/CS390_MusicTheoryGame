@@ -21,6 +21,8 @@
 [ext_resource type="Resource" uid="uid://b8jjh3ubrfr04" path="res://assets/moves/song_of_healing.tres" id="10_3j5jb"]
 [ext_resource type="Resource" uid="uid://djtl7du6e4kmr" path="res://assets/moves/cure_song.tres" id="11_w8dc6"]
 [ext_resource type="Resource" uid="uid://d0i4m88ge5gre" path="res://assets/moves/fight_song.tres" id="12_2ioj6"]
+[ext_resource type="LabelSettings" uid="uid://dge4kigionryt" path="res://resources/adjusted_default_label_settings.tres" id="16_w8dc6"]
+[ext_resource type="Texture2D" uid="uid://c8sh8l73jeqpg" path="res://resources/textures/gameboy_quest/enemy_icon.tres" id="17_2ioj6"]
 
 [node name="UiMix" type="Node2D" unique_id=195094249]
 script = ExtResource("1_hngcd")
@@ -41,14 +43,6 @@ script = ExtResource("4_1okau")
 script = ExtResource("5_1okau")
 enemy = NodePath("../../Enemy")
 batNavMenu = NodePath("../../BattleMenuNavigation")
-
-[node name="Player1HPMP" parent="." unique_id=1726576926 node_paths=PackedStringArray("bar_owner") instance=ExtResource("2_g847m")]
-bar_owner = NodePath("../Player1")
-
-[node name="Player2HPMP" parent="." unique_id=439124445 node_paths=PackedStringArray("bar_owner") instance=ExtResource("2_g847m")]
-offset_top = 83.0
-offset_bottom = 130.0
-bar_owner = NodePath("../Player2")
 
 [node name="Player1" type="Sprite2D" parent="." unique_id=294211510]
 position = Vector2(83, 531)
@@ -82,17 +76,19 @@ offset_bottom = -392.0
 
 [node name="HPvalue" type="Label" parent="Enemy/EnemyHP" unique_id=1313889812]
 layout_mode = 0
-offset_left = 10.0
-offset_top = 12.0
-offset_right = 194.0
-offset_bottom = 61.0
+offset_left = 18.0
+offset_top = 7.0
+offset_right = 181.0
+offset_bottom = 81.0
 text = "Health: 100/100
 "
+label_settings = ExtResource("16_w8dc6")
+autowrap_mode = 2
 
 [node name="Portait" type="Sprite2D" parent="Enemy/EnemyHP" unique_id=164985745]
-position = Vector2(210, 20)
-scale = Vector2(0.671875, 0.671875)
-texture = ExtResource("1_f1p1p")
+position = Vector2(188, 20)
+scale = Vector2(4, 4)
+texture = ExtResource("17_2ioj6")
 
 [node name="Fire" type="Sprite2D" parent="." unique_id=434551858]
 visible = false
@@ -136,8 +132,8 @@ player1 = NodePath("../Player1")
 player2 = NodePath("../Player2")
 enemy = NodePath("../Enemy")
 
-[connection signal="health_changed" from="Player1" to="Player1HPMP" method="_on_player_1_health_changed"]
+[node name="Player1HPMP" parent="." unique_id=1726576926 node_paths=PackedStringArray("bar_owner") instance=ExtResource("2_g847m")]
+bar_owner = NodePath("../Player1")
+
 [connection signal="enemy_took_damage" from="Enemy" to="Enemy/EnemyHP/HPvalue" method="_on_enemy_enemy_took_damage"]
 [connection signal="attack_enemy" from="BattleMenuNavigation" to="Enemy" method="_on_battle_menu_navigation_attack_enemy"]
-[connection signal="mana_changed" from="BattleMenuNavigation" to="Player1HPMP" method="_on_battle_menu_navigation_mana_changed"]
-[connection signal="mana_changed" from="BattleMenuNavigation" to="Player2HPMP" method="_on_battle_menu_navigation_mana_changed"]
