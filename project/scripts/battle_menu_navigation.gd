@@ -17,7 +17,7 @@ signal mana_changed(player_who_lost_mana: Player)
 @export var player2: Player
 @export var move_list: Dictionary[String, move_attack]
 @export var enemy: Enemy
-@export var note_list: Panel
+@export var note_list: NinePatchRect
 @export var action_list: HBoxContainer
 @export var note: Button
 

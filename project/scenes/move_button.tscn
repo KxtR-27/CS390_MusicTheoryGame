@@ -3,5 +3,6 @@
 [ext_resource type="Script" uid="uid://ceui7n63yqnme" path="res://scenes/move_button.gd" id="1_tkqq8"]
 
 [node name="Midnight_Sonata" type="Button" unique_id=1010283203]
-theme_override_font_sizes/font_size = 26
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 12
 script = ExtResource("1_tkqq8")

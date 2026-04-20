@@ -3,8 +3,8 @@ extends Panel
 ## this represents which player this bar corresponds to
 @export var bar_owner: Player
 
-@onready var mpvalue: Label = $MPValue
-@onready var hpvalue: Label = $HPValue
+@onready var mpvalue: Label = $HBoxContainer/MPValue
+@onready var hpvalue: Label = $HBoxContainer/HPValue
 
 func _ready() -> void:
 	# allows the text to match the acutal mana values that the players have

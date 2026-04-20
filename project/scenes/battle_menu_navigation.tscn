@@ -14,7 +14,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x8jjg"]
 bg_color = Color(0.47058824, 0.6431373, 0.41568628, 1)
 
-[node name="BattleMenuNavigation" type="Control" unique_id=1690783701 node_paths=PackedStringArray("move_description", "dmg", "mp", "action_list", "note")]
+[node name="BattleMenuNavigation" type="Control" unique_id=1690783701 node_paths=PackedStringArray("move_description", "dmg", "mp", "note_list", "action_list", "note")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,6 +33,7 @@ move_list = Dictionary[String, ExtResource("2_r147m")]({
 "Midnight Sonata": ExtResource("4_2fdxo"),
 "Song of Healing": ExtResource("8_pw2xn")
 })
+note_list = NodePath("Note_list_panel")
 action_list = NodePath("Action_list")
 note = NodePath("Action_list/Note")
 

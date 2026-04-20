@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://uhsnmxsqn237"]
 
-[ext_resource type="Texture2D" uid="uid://3wy3bm3yh6mm" path="res://assets/icon.svg" id="1_f1p1p"]
 [ext_resource type="Script" uid="uid://cqa7sm8fb4waa" path="res://scripts/ui_mix.gd" id="1_hngcd"]
 [ext_resource type="Script" uid="uid://btxh0ktbyasvb" path="res://scripts/state_machine.gd" id="2_1coue"]
 [ext_resource type="PackedScene" uid="uid://66uyqv601b5e" path="res://scenes/hpmpbar.tscn" id="2_g847m"]
@@ -16,6 +15,7 @@
 [ext_resource type="Script" uid="uid://6u7lbu2fdt12" path="res://scripts/Move_Attack.gd" id="6_8pnm2"]
 [ext_resource type="PackedScene" uid="uid://ctwd7potyweht" path="res://scenes/battle_menu_navigation.tscn" id="6_v7pk5"]
 [ext_resource type="Resource" uid="uid://cn5g8hbrb4qca" path="res://assets/moves/midnight_sonata.tres" id="7_1coue"]
+[ext_resource type="Texture2D" uid="uid://bg1cey8814yks" path="res://resources/textures/gameboy_quest/player_icon.tres" id="7_w8dc6"]
 [ext_resource type="Resource" uid="uid://cu4tjgdyuqdt2" path="res://assets/moves/concierto_for_triangle.tres" id="8_tw7ia"]
 [ext_resource type="Resource" uid="uid://dkky8mqkk43m6" path="res://assets/moves/In_Bleak_Midwinter.tres" id="9_1okau"]
 [ext_resource type="Resource" uid="uid://b8jjh3ubrfr04" path="res://assets/moves/song_of_healing.tres" id="10_3j5jb"]
@@ -45,9 +45,9 @@ enemy = NodePath("../../Enemy")
 batNavMenu = NodePath("../../BattleMenuNavigation")
 
 [node name="Player1" type="Sprite2D" parent="." unique_id=294211510]
-position = Vector2(83, 531)
-scale = Vector2(0.8203125, 0.8203125)
-texture = ExtResource("1_f1p1p")
+position = Vector2(106, 480.00003)
+scale = Vector2(6, 6)
+texture = ExtResource("7_w8dc6")
 script = ExtResource("4_5d0mk")
 strength = 2
 mana = 15
@@ -55,9 +55,9 @@ health = 10
 moves = Array[ExtResource("6_8pnm2")]([ExtResource("7_1coue"), ExtResource("8_tw7ia"), ExtResource("9_1okau")])
 
 [node name="Player2" type="Sprite2D" parent="." unique_id=181280006]
-position = Vector2(211, 530.00006)
-scale = Vector2(0.8203125, 0.8203125)
-texture = ExtResource("1_f1p1p")
+position = Vector2(219, 476)
+scale = Vector2(6, 6)
+texture = ExtResource("7_w8dc6")
 script = ExtResource("4_5d0mk")
 mana = 11
 health = 10
@@ -65,14 +65,17 @@ moves = Array[ExtResource("6_8pnm2")]([ExtResource("10_3j5jb"), ExtResource("11_
 
 [node name="Enemy" type="Sprite2D" parent="." unique_id=1723623278]
 position = Vector2(1035, 495)
-texture = ExtResource("1_f1p1p")
+scale = Vector2(6, 6)
+texture = ExtResource("17_2ioj6")
 script = ExtResource("2_s5bb2")
 
 [node name="EnemyHP" type="Panel" parent="Enemy" unique_id=2086489834]
-offset_left = -168.0
-offset_top = -439.0
-offset_right = 55.0
-offset_bottom = -392.0
+offset_left = -34.166656
+offset_top = 6.6666718
+offset_right = 188.83334
+offset_bottom = 53.66667
+scale = Vector2(0.167, 0.167)
+metadata/_edit_group_ = true
 
 [node name="HPvalue" type="Label" parent="Enemy/EnemyHP" unique_id=1313889812]
 layout_mode = 0
@@ -89,6 +92,15 @@ autowrap_mode = 2
 position = Vector2(188, 20)
 scale = Vector2(4, 4)
 texture = ExtResource("17_2ioj6")
+
+[node name="BattleMenuNavigation" parent="." unique_id=1690783701 node_paths=PackedStringArray("player1", "player2", "enemy") instance=ExtResource("6_v7pk5")]
+offset_left = 1.0
+offset_top = 125.0
+offset_right = 1.0
+offset_bottom = 125.0
+player1 = NodePath("../Player1")
+player2 = NodePath("../Player2")
+enemy = NodePath("../Enemy")
 
 [node name="Fire" type="Sprite2D" parent="." unique_id=434551858]
 visible = false
@@ -123,17 +135,13 @@ position = Vector2(574, 292)
 scale = Vector2(0.6185715, 0.6185715)
 texture = ExtResource("5_5tgd8")
 
-[node name="BattleMenuNavigation" parent="." unique_id=1690783701 node_paths=PackedStringArray("player1", "player2", "enemy") instance=ExtResource("6_v7pk5")]
-offset_left = 1.0
-offset_top = 125.0
-offset_right = 1.0
-offset_bottom = 125.0
-player1 = NodePath("../Player1")
-player2 = NodePath("../Player2")
-enemy = NodePath("../Enemy")
-
 [node name="Player1HPMP" parent="." unique_id=1726576926 node_paths=PackedStringArray("bar_owner") instance=ExtResource("2_g847m")]
 bar_owner = NodePath("../Player1")
+
+[node name="Player2HPMP" parent="." unique_id=2133537776 node_paths=PackedStringArray("bar_owner") instance=ExtResource("2_g847m")]
+offset_top = 65.0
+offset_bottom = 117.0
+bar_owner = NodePath("../Player2")
 
 [connection signal="enemy_took_damage" from="Enemy" to="Enemy/EnemyHP/HPvalue" method="_on_enemy_enemy_took_damage"]
 [connection signal="attack_enemy" from="BattleMenuNavigation" to="Enemy" method="_on_battle_menu_navigation_attack_enemy"]
