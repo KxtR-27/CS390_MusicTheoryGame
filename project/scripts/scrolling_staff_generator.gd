@@ -60,7 +60,7 @@ func _on_staff_minigame_spawn_note_requested(note : SequencerNote, speed : int, 
 	new_note.pitch_name = note.pitch_name
 	new_note.octave = note.octave
 	
-	if new_note.pitch_name == "C" and note.octave == 4:
+	if new_note.pitch_name == "C" and note.octave == 3:
 		new_note.get_node("LedgerLine").visible = true
-	elif new_note.pitch_name == "A" and note.octave == 5:
+	elif new_note.pitch_name == "A" and note.octave == 4:
 		new_note.get_node("LedgerLine").visible = true

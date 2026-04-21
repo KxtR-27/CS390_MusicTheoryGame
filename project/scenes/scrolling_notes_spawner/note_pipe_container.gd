@@ -49,4 +49,4 @@ func create_pipes(speed : int) -> void:
 
 func spawn_note(note : SequencerNote, speed : int, tempo : int) -> ScrollingNote:
 	var pitch_name : String= note.pitch_name
-	return note_pipes[[pitch_name, note.octave]].spawn_note(note.beat, speed, tempo)
+	return note_pipes[[pitch_name, note.octave + 1]].spawn_note(note.beat, speed, tempo)
