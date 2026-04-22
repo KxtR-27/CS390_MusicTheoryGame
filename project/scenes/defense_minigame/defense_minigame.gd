@@ -26,7 +26,7 @@ func _ready() -> void:
 	var ran_chord : String = chord_pool.keys()[ran_int]
 	current_chord = chord_pool[ran_chord]
 	
-	$MainControl/TopVBox/ChordLabel.text = ran_chord
+	($MainControl/TopVBox/ChordLabel as Label).text = ran_chord
 	
 	_redraw_panels()
 
@@ -44,7 +44,7 @@ func _process(_delta: float) -> void:
 		_switch_panel("right")
 	
 	if Input.is_action_just_pressed("skip_prompt"):
-		var accuracy = _calculate_accuracy()
+		var accuracy := _calculate_accuracy()
 		answer_submitted.emit(accuracy)
 
 func _update_panel(panel_index : int, direction : String) -> void:
@@ -76,38 +76,38 @@ func _switch_panel(direction : String) -> void:
 
 
 func _redraw_panels() -> void:
-	$MainControl/CenterHBox/NotePanel/NoteText.text = note_names[panel_note_states[0]]
-	$MainControl/CenterHBox/NotePanel2/NoteText.text = note_names[panel_note_states[1]]
-	$MainControl/CenterHBox/NotePanel3/NoteText.text = note_names[panel_note_states[2]]
+	($MainControl/CenterHBox/NotePanel/NoteText as Label).text = note_names[panel_note_states[0]]
+	($MainControl/CenterHBox/NotePanel2/NoteText as Label).text = note_names[panel_note_states[1]]
+	($MainControl/CenterHBox/NotePanel3/NoteText as Label).text = note_names[panel_note_states[2]]
 	
 	match selected_panel:
 		0: 
-			$MainControl/CenterHBox/NotePanel/NoteText.add_theme_color_override("font_color", Color.WHITE)
-			$MainControl/CenterHBox/NotePanel2/NoteText.add_theme_color_override("font_color", Color.WEB_GRAY)
-			$MainControl/CenterHBox/NotePanel3/NoteText.add_theme_color_override("font_color", Color.WEB_GRAY)
+			($MainControl/CenterHBox/NotePanel/NoteText as Label).add_theme_color_override("font_color", Color.WHITE)
+			($MainControl/CenterHBox/NotePanel2/NoteText as Label).add_theme_color_override("font_color", Color.WEB_GRAY)
+			($MainControl/CenterHBox/NotePanel3/NoteText as Label).add_theme_color_override("font_color", Color.WEB_GRAY)
 		1:
-			$MainControl/CenterHBox/NotePanel/NoteText.add_theme_color_override("font_color", Color.WEB_GRAY)
-			$MainControl/CenterHBox/NotePanel2/NoteText.add_theme_color_override("font_color", Color.WHITE)
-			$MainControl/CenterHBox/NotePanel3/NoteText.add_theme_color_override("font_color", Color.WEB_GRAY)
+			($MainControl/CenterHBox/NotePanel/NoteText as Label).add_theme_color_override("font_color", Color.WEB_GRAY)
+			($MainControl/CenterHBox/NotePanel2/NoteText as Label).add_theme_color_override("font_color", Color.WHITE)
+			($MainControl/CenterHBox/NotePanel3/NoteText as Label).add_theme_color_override("font_color", Color.WEB_GRAY)
 		2:
-			$MainControl/CenterHBox/NotePanel/NoteText.add_theme_color_override("font_color", Color.WEB_GRAY)
-			$MainControl/CenterHBox/NotePanel2/NoteText.add_theme_color_override("font_color", Color.WEB_GRAY)
-			$MainControl/CenterHBox/NotePanel3/NoteText.add_theme_color_override("font_color", Color.WHITE)
+			($MainControl/CenterHBox/NotePanel/NoteText as Label).add_theme_color_override("font_color", Color.WEB_GRAY)
+			($MainControl/CenterHBox/NotePanel2/NoteText as Label).add_theme_color_override("font_color", Color.WEB_GRAY)
+			($MainControl/CenterHBox/NotePanel3/NoteText as Label).add_theme_color_override("font_color", Color.WHITE)
 
 
 func _on_answer_submitted(accuracy : float) -> void:
 	var formatted_string : String = "You answered with %.0f%s accuracy!" % [(accuracy * 100), "%"]
-	$MainControl/TopVBox/ChordLabel.text = formatted_string
+	($MainControl/TopVBox/ChordLabel as Label).text = formatted_string
 
 
 func _calculate_accuracy() -> float:
 	var correct_notes : int = 0
 	
-	if $MainControl/CenterHBox/NotePanel/NoteText.text == current_chord[0]:
+	if ($MainControl/CenterHBox/NotePanel/NoteText as Label).text == current_chord[0]:
 		correct_notes += 1
-	if $MainControl/CenterHBox/NotePanel2/NoteText.text == current_chord[1]:
+	if ($MainControl/CenterHBox/NotePanel2/NoteText as Label).text == current_chord[1]:
 		correct_notes += 1
-	if $MainControl/CenterHBox/NotePanel3/NoteText.text == current_chord[2]:
+	if ($MainControl/CenterHBox/NotePanel3/NoteText as Label).text == current_chord[2]:
 		correct_notes += 1
 	
 	var accuracy : float = correct_notes / 3.0

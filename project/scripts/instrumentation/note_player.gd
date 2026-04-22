@@ -28,7 +28,7 @@ const starting_frequency := 16.35 # C0
 		print("playing note preview in editor")
 		play_note(preview_note, preview_waveform)
 
-@export_category("Hit this button in the editor. Idk why this happens.")
+@export_category("Can't hear? Hit this button and try again. Idk why this works.")
 @export_tool_button("Reset Synthesizer", "Reload") var reset_button: Callable = \
 	func() -> void:
 		if amy: amy.free()

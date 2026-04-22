@@ -90,12 +90,12 @@ func _on_rest_used(player: Player) -> void:
 
 func _use_sequencer() -> float:
 	var ui_mix : Node2D = get_parent().get_parent()
-	ui_mix.get_node("Player1HPMP").visible = false
-	ui_mix.get_node("Player2HPMP").visible = false
-	ui_mix.get_node("Player1").visible = false
-	ui_mix.get_node("Player2").visible = false
-	ui_mix.get_node("Enemy").visible = false
-	ui_mix.get_node("BattleMenuNavigation").visible = false
+	(ui_mix.get_node("Player1HPMP") as CanvasItem).visible = false
+	(ui_mix.get_node("Player2HPMP") as CanvasItem).visible = false
+	(ui_mix.get_node("Player1") as CanvasItem).visible = false
+	(ui_mix.get_node("Player2") as CanvasItem).visible = false
+	(ui_mix.get_node("Enemy") as CanvasItem).visible = false
+	(ui_mix.get_node("BattleMenuNavigation") as CanvasItem).visible = false
 	
 	var minigame_generator : ScrollingStaffGenerator = sequencer_scene.instantiate()
 	get_tree().current_scene.add_child(minigame_generator)
@@ -105,12 +105,12 @@ func _use_sequencer() -> float:
 	
 	minigame_generator.queue_free()
 	
-	ui_mix.get_node("Player1HPMP").visible = true
-	ui_mix.get_node("Player2HPMP").visible = true
-	ui_mix.get_node("Player1").visible = true
-	ui_mix.get_node("Player2").visible = true
-	ui_mix.get_node("Enemy").visible = true
-	ui_mix.get_node("BattleMenuNavigation").visible = true
+	(ui_mix.get_node("Player1HPMP") as CanvasItem).visible = true
+	(ui_mix.get_node("Player2HPMP") as CanvasItem).visible = true
+	(ui_mix.get_node("Player1") as CanvasItem).visible = true
+	(ui_mix.get_node("Player2") as CanvasItem).visible = true
+	(ui_mix.get_node("Enemy") as CanvasItem).visible = true
+	(ui_mix.get_node("BattleMenuNavigation") as CanvasItem).visible = true
 	
 	return accuracy
 	#return 1.00

@@ -193,5 +193,5 @@ func reset() -> void:
 	measures.clear()
 
 
-func _on_score_tallied(hit_percentage: float) -> void:
-	var format_text: String = "accuracy: %.2f%s" % [hit_percentage, "%"]
+#func _on_score_tallied(hit_percentage: float) -> void:
+	#var format_text: String = "accuracy: %.2f%s" % [hit_percentage, "%"]

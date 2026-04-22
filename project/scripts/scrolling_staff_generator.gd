@@ -2,6 +2,7 @@ class_name ScrollingStaffGenerator
 extends Node2D
 
 @export var debug : bool = false
+
 @onready var staff_minigame : StaffMinigame = $StaffMinigame
 @onready var main_control : Control = $MainControl
 @onready var note_pipe_container : NotePipeContainer = $MainControl/NotePipeContainer
@@ -10,9 +11,9 @@ signal song_finished(accuracy : float)
 
 func _ready() -> void:
 	if debug:
-		$MainControl/LoadSongHBox.visible = true
-		$MainControl/ScoreLabel.visible = true
-		$MainControl/PlayButton.visible = true
+		($MainControl/LoadSongHBox as Control).visible = true
+		($MainControl/ScoreLabel as Control).visible = true
+		($MainControl/PlayButton as Control).visible = true
 
 
 func play_song(song : Song) -> void:
@@ -61,6 +62,6 @@ func _on_staff_minigame_spawn_note_requested(note : SequencerNote, speed : int, 
 	new_note.octave = note.octave
 	
 	if new_note.pitch_name == "C" and note.octave == 3:
-		new_note.get_node("LedgerLine").visible = true
+		(new_note.get_node("LedgerLine") as ColorRect).visible = true
 	elif new_note.pitch_name == "A" and note.octave == 4:
-		new_note.get_node("LedgerLine").visible = true
+		(new_note.get_node("LedgerLine") as ColorRect).visible = true

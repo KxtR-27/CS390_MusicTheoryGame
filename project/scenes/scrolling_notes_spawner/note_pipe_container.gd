@@ -25,10 +25,11 @@ var note_pipes : Dictionary[Array, NotePipe] = {
 func create_pipes(speed : int) -> void:
 	print("creating pipes")
 	for i in range(13):
-		var new_note_pipe : NotePipe = PIPE_PATH.instantiate()
+		var new_note_pipe: NotePipe = PIPE_PATH.instantiate()
 		
 		add_child(new_note_pipe)
-		new_note_pipe.get_node("Spawner").global_position.x = 199.0 + (speed * 2)
+		var spawner: Control = new_note_pipe.get_node("Spawner")
+		spawner.global_position.x = 199.0 + (speed * 2)
 	
 	for i in range(13):
 		var pipe : NotePipe = get_child(i)

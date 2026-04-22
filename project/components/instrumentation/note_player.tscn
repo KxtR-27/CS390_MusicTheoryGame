@@ -3,12 +3,13 @@
 [ext_resource type="Script" uid="uid://dfx21yi6nvhc6" path="res://scripts/instrumentation/note_player.gd" id="1_e517y"]
 [ext_resource type="Script" uid="uid://cgcp8p6xcuqem" path="res://components/instrumentation/note.gd" id="2_q6pc7"]
 
-[sub_resource type="Resource" id="Resource_6i4vp"]
+[sub_resource type="Resource" id="Resource_e517y"]
 script = ExtResource("2_q6pc7")
 note = 0
 debug_frequency = 261.6
 note_name = "C"
+metadata/_custom_type_script = "uid://cgcp8p6xcuqem"
 
 [node name="NotePlayer" type="Node" unique_id=443806133]
 script = ExtResource("1_e517y")
-preview_note = SubResource("Resource_6i4vp")
+preview_note = SubResource("Resource_e517y")

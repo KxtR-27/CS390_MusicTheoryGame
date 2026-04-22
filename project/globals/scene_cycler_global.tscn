@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://crnoehw3qkqn5"]
+
+[ext_resource type="Script" uid="uid://bgnm1tcjwmttk" path="res://globals/scene_cycler_global.gd" id="1_c7y84"]
+
+[node name="SceneCyclerGlobal" type="Node" unique_id=2121849824]
+script = ExtResource("1_c7y84")
+allowed_to_cycle = true
