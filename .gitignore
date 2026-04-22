@@ -1,3 +1,3 @@
 asset_packs/*
-!asset_packs/*.zip
-.vscode/settings.json
+!asset_packs/Asset Locations.html
+.vscode/*
