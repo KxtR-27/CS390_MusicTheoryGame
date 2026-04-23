@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://ba5o2s7vhmse0"]
 
-[ext_resource type="StyleBox" path="res://resources/sequencer/active.tres" id="1_q30y4"]
-[ext_resource type="StyleBox" path="res://resources/sequencer/inactive.tres" id="2_5u3y4"]
+[ext_resource type="StyleBox" uid="uid://c3j7mlrs2smae" path="res://resources/music_maker/active.tres" id="1_q30y4"]
+[ext_resource type="StyleBox" uid="uid://d1jbegjyts83i" path="res://resources/music_maker/inactive.tres" id="2_5u3y4"]
+
 
 [sub_resource type="GDScript" id="GDScript_pp2tb"]
 script/source = "extends RadialButtonSet

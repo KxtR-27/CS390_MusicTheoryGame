@@ -1,6 +1,5 @@
-[gd_scene format=3 uid="uid://cxqjfd4fkiren"]
+[gd_scene format=3 uid="uid://b67ab0s6lci52"]
 
-[ext_resource type="Script" uid="uid://dh75xdcgird1j" path="res://scripts/sound_manager.gd" id="1_rsxva"]
 [ext_resource type="AudioStream" uid="uid://ciugviqwkvoy7" path="res://assets/samples.ogg" id="2_b3sla"]
 [ext_resource type="AudioStream" uid="uid://bujyeq28yljjo" path="res://assets/sounds/sine/C.ogg" id="3_hb0q4"]
 [ext_resource type="AudioStream" uid="uid://deg425kc0o5o6" path="res://assets/sounds/sine/D.ogg" id="4_7fhcs"]
@@ -19,8 +18,64 @@
 [ext_resource type="AudioStream" uid="uid://n8je0mogbh1n" path="res://assets/sounds/sawtooth/B.ogg" id="16_m2bd0"]
 [ext_resource type="AudioStream" uid="uid://v60e33t62bow" path="res://assets/sounds/sawtooth/C Upper.ogg" id="18_wto6h"]
 
+[sub_resource type="GDScript" id="GDScript_cyuw6"]
+script/source = "@tool
+extends Node
+
+
+@export_tool_button(\"Play Sample Right\", \"Play\") var hit_note_button := \\
+	func() -> void: _play_hit_note(\"Sine\",\"C\")
+@export_tool_button(\"Play Sample Wrong\", \"Node3D\") var missed_note_button := \\
+	func() -> void: _play_missed_note(\"Sine\", \"C\")
+@export_tool_button(\"Stop Samples\", \"Stop\") var stop_playing_notes := \\
+	func() -> void: _stop_playing_notes()
+
+# export enum method 1: exported properties with a \"fake\"
+@export_enum(\"Violin C\", \"Violin D\") var note: int
+# export enum method 2: exported a variable of type <actual enum>
+enum NOTES {
+	VIOLIN_C,
+	VIOLIN_D
+}
+
+@export var note_actual: NOTES
+
+
+@onready var violin_hit_C: AudioStreamPlayer = $ViolinHit/AudioStreamPlayer
+
+
+func _play_hit_note(instrument: String, pitch: String) -> void:
+	if find_child(instrument):
+		var target_note: AudioStreamPlayer = get_node(instrument).get_node(pitch)
+		target_note.play()
+
+
+func _play_missed_note(instrument: String, pitch: String) -> void:
+	if find_child(instrument):
+		var target_note: AudioStreamPlayer = get_node(instrument).get_node(pitch)
+		target_note.pitch_scale = randf_range (0.7, 1.4)
+		target_note.play()
+		# tween pitch down
+		var tween : Tween = get_tree().create_tween()
+		tween.tween_property(target_note, \"pitch_scale\", .5, .75)
+		# wait until it's done playing, would be a signal from the audiostreamplayer or a manual check
+		target_note.finished.connect(func() -> void: 
+			target_note.pitch_scale = 1
+		, CONNECT_ONE_SHOT)
+
+
+func _stop_playing_notes() -> void:
+	violin_hit_C.stop()
+
+
+func _stop_note(instrument : String, pitch : String) -> void:
+	if find_child(instrument):
+		var target_note: AudioStreamPlayer = get_node(instrument).get_node(pitch)
+		target_note.stop()
+"
+
 [node name="SoundManager" type="Node" unique_id=178747334]
-script = ExtResource("1_rsxva")
+script = SubResource("GDScript_cyuw6")
 note = 1
 
 [node name="ViolinHit" type="Node" parent="." unique_id=1320454960]

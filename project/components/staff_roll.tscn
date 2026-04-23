@@ -1,13 +1,80 @@
-[gd_scene format=3 uid="uid://mlmfy2oy28cr"]
+[gd_scene format=3 uid="uid://ciibe7y6m2y4a"]
 
 [ext_resource type="Texture2D" uid="uid://dmfefoctyappj" path="res://assets/test_staff_with_notes.webp" id="1_bk2oq"]
-[ext_resource type="Script" uid="uid://c5uvl5edtocg7" path="res://scripts/master_cursor.gd" id="4_f134u"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f134u"]
 radius = 5.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rmox1"]
 height = 371.33
+
+[sub_resource type="GDScript" id="GDScript_bk2oq"]
+script/source = "class_name MasterCursor
+extends Area2D
+
+## the maximum distance the cursor can move from its origin. 
+## this is a joystick with full tilt.
+@export var max_offset: float = 20 # px
+
+## remap the tilt range if this goes up so that it starts moving only when tilted that far
+@export var deadzone: float = 0.0
+
+@export var note: CharacterBody2D
+
+var origin: Vector2
+var offset: float
+var tilt: float
+
+
+
+func _ready() -> void:
+	origin = self.position
+
+
+func _process(_delta: float) -> void:
+	tilt = Input.get_axis(\"Left Instrument Up\", \"Left Instrument Down\")
+	offset = max_offset * tilt
+	self.position.y = origin.y + offset
+	
+	if Input.is_action_just_pressed(\"Hit Note\"):
+		if note:
+			print(\"note %s is hit!\" % note.name)
+		else:
+			print(\"no note was hit!\")
+		pass
+	
+
+func _on_body_entered(body: Node2D) -> void:
+	# check type
+	if (body is CharacterBody2D):
+		#print(CharacterBody2D.name)
+		#print(body.name)
+		# play sound
+		# will automatically cast body to type CharacterBody2D
+		# still shows a warning though?
+		
+		# ignores the warning the one time
+		@warning_ignore(\"unsafe_property_access\")
+		#print(body.velocity)
+		
+		# ignore all warnings of type between these annotations
+		@warning_ignore_start(\"unsafe_property_access\")
+		#print(body.velocity)
+		#print(body.velocity)
+		@warning_ignore_restore(\"unsafe_property_access\")
+		pass
+	
+	# cast immediately, may cause errors if body is something like a RigidBody2D
+	note = body as CharacterBody2D
+	print(\"New note: %s\" % body.name)
+	pass
+	#some notes need to be hit, others just to be heard (defense mechanism)
+
+
+func _on_body_exited(_body: Node2D) -> void:
+	note = null
+	#print(\"%s is removed\" % body.name)
+"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0thqk"]
 radius = 5.0
@@ -123,7 +190,7 @@ debug_color = Color(1, 1, 1, 0.41960785)
 
 [node name="MasterCursor" type="Area2D" parent="." unique_id=1318916498]
 position = Vector2(410, 328)
-script = ExtResource("4_f134u")
+script = SubResource("GDScript_bk2oq")
 metadata/_edit_group_ = true
 
 [node name="Shape" type="CollisionShape2D" parent="MasterCursor" unique_id=545085167]

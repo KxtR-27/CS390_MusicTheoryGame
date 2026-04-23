@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://blext84ivjdwx" path="res://scripts/instrumentation/violin.gd" id="1_q1ouw"]
 [ext_resource type="Script" uid="uid://cgcp8p6xcuqem" path="res://components/instrumentation/note.gd" id="2_naeuw"]
 [ext_resource type="PackedScene" uid="uid://b8oshqqt0r58n" path="res://components/instrumentation/note_player.tscn" id="3_6jnah"]
-[ext_resource type="Script" uid="uid://bj028yidwkwak" path="res://scripts/instrumentation/violin_table.gd" id="4_n2x4w"]
+[ext_resource type="Script" uid="uid://bj028yidwkwak" path="res://scripts/instrumentation/table/violin_table.gd" id="4_n2x4w"]
 [ext_resource type="LabelSettings" uid="uid://dge4kigionryt" path="res://resources/adjusted_default_label_settings.tres" id="5_ulvgi"]
 [ext_resource type="Script" uid="uid://coleee0gj2n40" path="res://scripts/instrumentation/table/lightup_glyph.gd" id="6_ayiei"]
 [ext_resource type="Texture2D" uid="uid://c6iqvj3b4srl0" path="res://resources/textures/gameboy_quest/controller/dpad_buttons/dpad_down_unpressed.tres" id="6_m17th"]

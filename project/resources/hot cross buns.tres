@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Song" format=3 uid="uid://bt4esjigsxfhc"]
 
-[ext_resource type="Script" uid="uid://wgijpnlftu5w" path="res://scripts/sequencer/sequencer_note.gd" id="1_s8vhg"]
-[ext_resource type="Script" uid="uid://kuyy5y70d7ml" path="res://scripts/sequencer/measure.gd" id="2_qp0st"]
-[ext_resource type="Script" uid="uid://nna5uo7s28n2" path="res://scripts/sequencer/song.gd" id="3_liq21"]
+[ext_resource type="Script" uid="uid://wgijpnlftu5w" path="res://scripts/music_maker/sequencer_note.gd" id="1_s8vhg"]
+[ext_resource type="Script" uid="uid://kuyy5y70d7ml" path="res://scripts/music_maker/measure.gd" id="2_qp0st"]
+[ext_resource type="Script" uid="uid://nna5uo7s28n2" path="res://scripts/music_maker/song.gd" id="3_liq21"]
 
 [sub_resource type="Resource" id="Resource_06ah2"]
 script = ExtResource("1_s8vhg")

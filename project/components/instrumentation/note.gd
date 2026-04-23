@@ -1,4 +1,3 @@
-@tool
 class_name Note
 extends Resource
 # This is in the components folder for ease of access and 

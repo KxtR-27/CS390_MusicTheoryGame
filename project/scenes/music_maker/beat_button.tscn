@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://b226qq47n32k6"]
 
-[ext_resource type="Script" uid="uid://cathyux2eqf1d" path="res://scripts/sequencer/beat_button.gd" id="1_t50ec"]
-[ext_resource type="StyleBox" path="res://resources/sequencer/inactive.tres" id="2_cnk6w"]
-[ext_resource type="StyleBox" path="res://resources/sequencer/active.tres" id="3_dakke"]
-[ext_resource type="StyleBox" path="res://resources/sequencer/sustain.tres" id="4_r5xmm"]
+[ext_resource type="Script" uid="uid://cathyux2eqf1d" path="res://scripts/music_maker/beat_button.gd" id="1_052nq"]
+[ext_resource type="StyleBox" uid="uid://d1jbegjyts83i" path="res://resources/music_maker/inactive.tres" id="2_p8uc4"]
+[ext_resource type="StyleBox" uid="uid://c3j7mlrs2smae" path="res://resources/music_maker/active.tres" id="3_sxhgf"]
+[ext_resource type="StyleBox" uid="uid://d4gthkdumi6p2" path="res://resources/music_maker/sustain.tres" id="4_2fhbw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aq3ac"]
 bg_color = Color(1, 0, 0, 1)
@@ -13,10 +13,10 @@ custom_minimum_size = Vector2(80, 80)
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_aq3ac")
-script = ExtResource("1_t50ec")
-inactive_style_box = ExtResource("2_cnk6w")
-active_style_box = ExtResource("3_dakke")
-sustain_style_box = ExtResource("4_r5xmm")
+script = ExtResource("1_052nq")
+inactive_style_box = ExtResource("2_p8uc4")
+active_style_box = ExtResource("3_sxhgf")
+sustain_style_box = ExtResource("4_2fhbw")
 
 [node name="MeasureLabel" type="Label" parent="." unique_id=1325789437]
 layout_mode = 1

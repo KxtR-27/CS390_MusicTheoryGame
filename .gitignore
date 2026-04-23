@@ -1,3 +1,4 @@
 asset_packs/*
 !asset_packs/Asset Locations.html
 .vscode/*
+project/.vscode/settings.json

@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://v6p5fp4uo14o"]
+[gd_scene format=3 uid="uid://c36g3fu5xqq5g"]
 
-[ext_resource type="PackedScene" uid="uid://h0iixqg2ivqe" path="res://debug/gamepad_display.tscn" id="1_h7i4d"]
+[ext_resource type="PackedScene" uid="uid://bn7bhuq3xs6fr" path="res://debug/gamepad_display.tscn" id="1_h7i4d"]
 
 [node name="ControlSchemes" type="Node2D" unique_id=1798945082]
 
@@ -20,5 +20,5 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -69.0
-offset_right = 81.0
+offset_bottom = 0.0
 grow_vertical = 0
