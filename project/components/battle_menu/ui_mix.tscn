@@ -1,24 +1,24 @@
 [gd_scene format=3 uid="uid://uhsnmxsqn237"]
 
-[ext_resource type="Script" uid="uid://btxh0ktbyasvb" path="res://scripts/state_machine.gd" id="2_1coue"]
-[ext_resource type="PackedScene" uid="uid://66uyqv601b5e" path="res://components/hpmpbar.tscn" id="2_g847m"]
+[ext_resource type="Script" uid="uid://btxh0ktbyasvb" path="res://scripts/battle_menu/state_machine.gd" id="2_1coue"]
+[ext_resource type="Script" uid="uid://dwao5v14tg6be" path="res://scripts/battle_menu/player_attack.gd" id="2_2rajg"]
+[ext_resource type="PackedScene" uid="uid://66uyqv601b5e" path="res://components/battle_menu/hpmpbar.tscn" id="2_g847m"]
 [ext_resource type="Texture2D" uid="uid://bj4c3g5fypha1" path="res://assets/icons/fire.png" id="2_hngcd"]
-[ext_resource type="Script" uid="uid://bfrg4wuf2mcqb" path="res://scripts/enemy.gd" id="2_s5bb2"]
-[ext_resource type="Script" uid="uid://dwao5v14tg6be" path="res://scripts/player_attack.gd" id="3_tw7ia"]
 [ext_resource type="Texture2D" uid="uid://d0l4ili1w1s8b" path="res://assets/icons/sleep-mhw-status-effect.png" id="3_u20u5"]
-[ext_resource type="Script" uid="uid://cqqic6rv6vr0c" path="res://scripts/player.gd" id="4_5d0mk"]
 [ext_resource type="Texture2D" uid="uid://54jlj7udvc24" path="res://assets/icons/Poison_JE3_BE2.png" id="4_klmld"]
-[ext_resource type="Script" uid="uid://dgb603ic60bhb" path="res://scripts/boss_attack.gd" id="5_1okau"]
+[ext_resource type="Script" uid="uid://dgb603ic60bhb" path="res://scripts/battle_menu/boss_attack.gd" id="5_1okau"]
 [ext_resource type="Texture2D" uid="uid://bwiymv3rw26cc" path="res://assets/musistaff.png" id="5_5tgd8"]
-[ext_resource type="Script" uid="uid://6u7lbu2fdt12" path="res://scripts/Move_Attack.gd" id="6_8pnm2"]
-[ext_resource type="PackedScene" uid="uid://ctwd7potyweht" path="res://components/battle_menu_navigation.tscn" id="6_v7pk5"]
-[ext_resource type="Resource" uid="uid://cn5g8hbrb4qca" path="res://assets/moves/midnight_sonata.tres" id="7_1coue"]
+[ext_resource type="Script" uid="uid://cqqic6rv6vr0c" path="res://scripts/battle_menu/player.gd" id="5_sig0y"]
+[ext_resource type="Script" uid="uid://6u7lbu2fdt12" path="res://scripts/battle_menu/Move_Attack.gd" id="6_2aenj"]
+[ext_resource type="PackedScene" uid="uid://ctwd7potyweht" path="res://components/battle_menu/battle_menu_navigation.tscn" id="6_v7pk5"]
+[ext_resource type="Script" uid="uid://bfrg4wuf2mcqb" path="res://scripts/battle_menu/enemy.gd" id="7_d8nam"]
+[ext_resource type="Resource" uid="uid://dkky8mqkk43m6" path="res://resources/moves/In_Bleak_Midwinter.tres" id="7_nt45v"]
 [ext_resource type="Texture2D" uid="uid://bg1cey8814yks" path="res://resources/textures/gameboy_quest/player_icon.tres" id="7_w8dc6"]
-[ext_resource type="Resource" uid="uid://cu4tjgdyuqdt2" path="res://assets/moves/concierto_for_triangle.tres" id="8_tw7ia"]
-[ext_resource type="Resource" uid="uid://dkky8mqkk43m6" path="res://assets/moves/In_Bleak_Midwinter.tres" id="9_1okau"]
-[ext_resource type="Resource" uid="uid://b8jjh3ubrfr04" path="res://assets/moves/song_of_healing.tres" id="10_3j5jb"]
-[ext_resource type="Resource" uid="uid://djtl7du6e4kmr" path="res://assets/moves/cure_song.tres" id="11_w8dc6"]
-[ext_resource type="Resource" uid="uid://d0i4m88ge5gre" path="res://assets/moves/fight_song.tres" id="12_2ioj6"]
+[ext_resource type="Resource" uid="uid://cn5g8hbrb4qca" path="res://resources/moves/midnight_sonata.tres" id="8_amt7q"]
+[ext_resource type="Resource" uid="uid://b8jjh3ubrfr04" path="res://resources/moves/song_of_healing.tres" id="9_323y1"]
+[ext_resource type="Resource" uid="uid://cu4tjgdyuqdt2" path="res://resources/moves/concierto_for_triangle.tres" id="10_kna4a"]
+[ext_resource type="Resource" uid="uid://djtl7du6e4kmr" path="res://resources/moves/cure_song.tres" id="11_jterj"]
+[ext_resource type="Resource" uid="uid://d0i4m88ge5gre" path="res://resources/moves/fight_song.tres" id="12_bhdlv"]
 [ext_resource type="LabelSettings" uid="uid://dge4kigionryt" path="res://resources/adjusted_default_label_settings.tres" id="16_w8dc6"]
 [ext_resource type="Texture2D" uid="uid://c8sh8l73jeqpg" path="res://resources/textures/gameboy_quest/enemy_icon.tres" id="17_2ioj6"]
 
@@ -29,7 +29,7 @@ script = ExtResource("2_1coue")
 initial_state = NodePath("PlayerAttack")
 
 [node name="PlayerAttack" type="Node" parent="StateMachine" unique_id=905334845 node_paths=PackedStringArray("batNavMenu")]
-script = ExtResource("3_tw7ia")
+script = ExtResource("2_2rajg")
 batNavMenu = NodePath("../../BattleMenuNavigation")
 metadata/_custom_type_script = "uid://dwao5v14tg6be"
 
@@ -42,26 +42,26 @@ batNavMenu = NodePath("../../BattleMenuNavigation")
 position = Vector2(106, 480.00003)
 scale = Vector2(6, 6)
 texture = ExtResource("7_w8dc6")
-script = ExtResource("4_5d0mk")
+script = ExtResource("5_sig0y")
 strength = 2
 mana = 15
 health = 10
-moves = Array[ExtResource("6_8pnm2")]([ExtResource("7_1coue"), ExtResource("8_tw7ia"), ExtResource("9_1okau")])
+moves = Array[ExtResource("6_2aenj")]([ExtResource("7_nt45v"), ExtResource("8_amt7q"), ExtResource("9_323y1")])
 
 [node name="Player2" type="Sprite2D" parent="." unique_id=181280006]
 position = Vector2(219, 476)
 scale = Vector2(6, 6)
 texture = ExtResource("7_w8dc6")
-script = ExtResource("4_5d0mk")
+script = ExtResource("5_sig0y")
 mana = 11
 health = 10
-moves = Array[ExtResource("6_8pnm2")]([ExtResource("10_3j5jb"), ExtResource("11_w8dc6"), ExtResource("12_2ioj6")])
+moves = Array[ExtResource("6_2aenj")]([ExtResource("10_kna4a"), ExtResource("11_jterj"), ExtResource("12_bhdlv")])
 
 [node name="Enemy" type="Sprite2D" parent="." unique_id=1723623278]
 position = Vector2(1035, 495)
 scale = Vector2(6, 6)
 texture = ExtResource("17_2ioj6")
-script = ExtResource("2_s5bb2")
+script = ExtResource("7_d8nam")
 
 [node name="EnemyHP" type="Panel" parent="Enemy" unique_id=2086489834]
 offset_left = -34.166656
@@ -138,3 +138,6 @@ offset_bottom = 117.0
 bar_owner = NodePath("../Player2")
 
 [connection signal="enemy_took_damage" from="Enemy" to="Enemy/EnemyHP/HPvalue" method="_on_enemy_enemy_took_damage"]
+[connection signal="attack_enemy" from="BattleMenuNavigation" to="Enemy" method="_on_battle_menu_navigation_attack_enemy"]
+[connection signal="mana_changed" from="BattleMenuNavigation" to="Player1HPMP" method="_on_battle_menu_navigation_mana_changed"]
+[connection signal="mana_changed" from="BattleMenuNavigation" to="Player2HPMP" method="_on_battle_menu_navigation_mana_changed"]

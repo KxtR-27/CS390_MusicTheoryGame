@@ -1,8 +1,16 @@
 [gd_scene format=3 uid="uid://biy2wa06axetx"]
 
-[ext_resource type="Script" uid="uid://0qmbegoj81i0" path="res://components/defense_minigame/defense_minigame.gd" id="1_8dlb5"]
-[ext_resource type="FontFile" uid="uid://dqtpe5istaaw6" path="res://components/defense_minigame/PressStart2P-Regular.ttf" id="2_fyuav"]
+[ext_resource type="Script" uid="uid://0qmbegoj81i0" path="res://scripts/defense_minigame.gd" id="1_8dlb5"]
+[ext_resource type="LabelSettings" uid="uid://ch8axx184h4p7" path="res://resources/defense_minigame_label_settings.tres" id="2_n5rb7"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_fqn2j"]
+line_spacing = 6.0
+font_size = 32
+font_color = Color(0, 1, 1, 1)
+outline_color = Color(0.36862746, 0.52156866, 0.28627452, 1)
+shadow_size = 4
+shadow_color = Color(0.36862746, 0.52156866, 0.28627452, 1)
+shadow_offset = Vector2(-1, 1)
 
 [node name="DefenseMinigame" type="Node2D" unique_id=1760020349]
 script = ExtResource("1_8dlb5")
@@ -26,17 +34,17 @@ grow_horizontal = 2
 
 [node name="InstructionsLabel" type="Label" parent="MainControl/TopVBox" unique_id=880987133]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_fyuav")
 theme_override_font_sizes/font_size = 32
 text = "Construct the following chord!"
+label_settings = ExtResource("2_n5rb7")
 horizontal_alignment = 1
 
 [node name="ChordLabel" type="Label" parent="MainControl/TopVBox" unique_id=300921892]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_fyuav")
 theme_override_font_sizes/font_size = 32
 text = "Placeholder"
+label_settings = SubResource("LabelSettings_fqn2j")
 horizontal_alignment = 1
 
 [node name="CenterHBox" type="HBoxContainer" parent="MainControl" unique_id=488841110]
@@ -66,8 +74,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("2_fyuav")
 theme_override_font_sizes/font_size = 48
+label_settings = ExtResource("2_n5rb7")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -82,8 +90,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("2_fyuav")
 theme_override_font_sizes/font_size = 48
+label_settings = ExtResource("2_n5rb7")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -98,8 +106,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("2_fyuav")
 theme_override_font_sizes/font_size = 48
+label_settings = ExtResource("2_n5rb7")
 horizontal_alignment = 1
 vertical_alignment = 1
 

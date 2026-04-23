@@ -42,20 +42,20 @@ func _ready() -> void:
 	
 		
 func _on_rest_pressed() -> void:
-	if !can_interact:
+	if not can_interact:
 		return
 	rest_used.emit(currently_selected_player)
 
 
 func _on_button_pressed() -> void:
-	if !can_interact:
+	if not can_interact:
 		return
 		
 	for child in note_selection.get_children():
 		child.free()
 		
 	for move: move_attack in currently_selected_player.moves:
-			var move_button: PackedScene = preload("res://components/move_button.tscn")
+			var move_button: PackedScene = preload("res://components/battle_menu/move_button.tscn")
 			var move_instance: MoveButton = move_button.instantiate()
 			move_instance.move_data = move
 			move_instance.text = move.NAME
@@ -64,12 +64,16 @@ func _on_button_pressed() -> void:
 	action_list.visible = false
 	note_list.visible = true
 	
-	var first_child: MoveButton = note_selection.get_child(0);
-	var last_child: MoveButton = note_selection.get_child(-1);
+	var first_child: MoveButton
+	var last_child: MoveButton
 	
-	first_child.focus_neighbor_top = last_child.get_path()
-	last_child.focus_neighbor_bottom = first_child.get_path()
-	first_child.grab_focus.call_deferred()
+	if note_selection.get_children():
+		first_child = note_selection.get_child(0)
+		last_child = note_selection.get_child(-1)
+	
+		first_child.focus_neighbor_top = last_child.get_path()
+		last_child.focus_neighbor_bottom = first_child.get_path()
+		first_child.grab_focus.call_deferred()
 
 
 func _on_gui_focus_changed(object: Object) -> void:
