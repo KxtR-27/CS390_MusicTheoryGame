@@ -172,18 +172,18 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="Glyph" type="TextureRect" parent="Table/StringInputs/StringA" unique_id=1713956201]
+[node name="Glyph2" type="TextureRect" parent="Table/StringInputs/StringA" unique_id=2145829709]
 modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
 size_flags_vertical = 0
-texture = ExtResource("11_v6hbe")
+texture = ExtResource("13_js5sb")
 expand_mode = 4
 script = ExtResource("6_ayiei")
 input_action = &"violin_open_a"
 additional_actions = Array[StringName]([&"violin_open_g", &"violin_open_d", &"violin_open_e"])
 mode = "RadioToggle"
-unpressed_texture = ExtResource("11_v6hbe")
-pressed_texture = ExtResource("12_c23as")
+unpressed_texture = ExtResource("13_js5sb")
+pressed_texture = ExtResource("14_8m0au")
 press_action = &"violin_open_a"
 metadata/_custom_type_script = "uid://coleee0gj2n40"
 
@@ -197,18 +197,18 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="Glyph" type="TextureRect" parent="Table/StringInputs/StringE" unique_id=2145829709]
+[node name="Glyph" type="TextureRect" parent="Table/StringInputs/StringE" unique_id=1713956201]
 modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
 size_flags_vertical = 0
-texture = ExtResource("13_js5sb")
+texture = ExtResource("11_v6hbe")
 expand_mode = 4
 script = ExtResource("6_ayiei")
 input_action = &"violin_open_e"
 additional_actions = Array[StringName]([&"violin_open_g", &"violin_open_d", &"violin_open_a"])
 mode = "RadioToggle"
-unpressed_texture = ExtResource("13_js5sb")
-pressed_texture = ExtResource("14_8m0au")
+unpressed_texture = ExtResource("11_v6hbe")
+pressed_texture = ExtResource("12_c23as")
 press_action = &"violin_open_e"
 metadata/_custom_type_script = "uid://coleee0gj2n40"
 
@@ -242,96 +242,96 @@ horizontal_alignment = 1
 script = ExtResource("10_07r4r")
 use_open_instead = true
 
-[node name="First2" type="VBoxContainer" parent="Table/FingerOutputs" unique_id=373135575]
+[node name="First" type="VBoxContainer" parent="Table/FingerOutputs" unique_id=1987437389]
 layout_mode = 2
 
-[node name="Glyph" type="TextureRect" parent="Table/FingerOutputs/First2" unique_id=1430090403]
-modulate = Color(1, 1, 1, 0.5019608)
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("15_udkra")
-expand_mode = 2
-script = ExtResource("6_ayiei")
-input_action = &"violin_finger_first"
-unpressed_texture = ExtResource("15_udkra")
-pressed_texture = ExtResource("16_eg04f")
-press_action = &"violin_finger_first"
-metadata/_custom_type_script = "uid://coleee0gj2n40"
-
-[node name="Output" type="Label" parent="Table/FingerOutputs/First2" unique_id=1344848186]
-layout_mode = 2
-text = "E4"
-label_settings = ExtResource("5_ulvgi")
-horizontal_alignment = 1
-script = ExtResource("10_07r4r")
-
-[node name="Second" type="VBoxContainer" parent="Table/FingerOutputs" unique_id=1358886690]
-layout_mode = 2
-
-[node name="Glyph" type="TextureRect" parent="Table/FingerOutputs/Second" unique_id=934926831]
-modulate = Color(1, 1, 1, 0.5019608)
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("18_n4w03")
-expand_mode = 2
-script = ExtResource("6_ayiei")
-input_action = &"violin_finger_second"
-unpressed_texture = ExtResource("18_n4w03")
-pressed_texture = ExtResource("19_m17th")
-press_action = &"violin_finger_second"
-metadata/_custom_type_script = "uid://coleee0gj2n40"
-
-[node name="Output" type="Label" parent="Table/FingerOutputs/Second" unique_id=226896137]
-layout_mode = 2
-text = "F#4"
-label_settings = ExtResource("5_ulvgi")
-horizontal_alignment = 1
-script = ExtResource("10_07r4r")
-finger_pos = "violin_finger_second"
-
-[node name="Third" type="VBoxContainer" parent="Table/FingerOutputs" unique_id=1987437389]
-layout_mode = 2
-
-[node name="Glyph" type="TextureRect" parent="Table/FingerOutputs/Third" unique_id=718319164]
+[node name="Glyph" type="TextureRect" parent="Table/FingerOutputs/First" unique_id=718319164]
 modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("20_odwiy")
 expand_mode = 2
 script = ExtResource("6_ayiei")
-input_action = &"violin_finger_third"
+input_action = &"violin_finger_first"
 unpressed_texture = ExtResource("20_odwiy")
 pressed_texture = ExtResource("21_tydb4")
-press_action = &"violin_finger_third"
+press_action = &"violin_finger_first"
 metadata/_custom_type_script = "uid://coleee0gj2n40"
 
-[node name="Output" type="Label" parent="Table/FingerOutputs/Third" unique_id=1580340747]
+[node name="Output" type="Label" parent="Table/FingerOutputs/First" unique_id=1580340747]
 layout_mode = 2
 text = "G4"
 label_settings = ExtResource("5_ulvgi")
 horizontal_alignment = 1
 script = ExtResource("10_07r4r")
-finger_pos = "violin_finger_third"
 
-[node name="Fourth" type="VBoxContainer" parent="Table/FingerOutputs" unique_id=1665615553]
+[node name="Second" type="VBoxContainer" parent="Table/FingerOutputs" unique_id=1665615553]
 layout_mode = 2
 
-[node name="Glyph" type="TextureRect" parent="Table/FingerOutputs/Fourth" unique_id=1007357294]
+[node name="Glyph" type="TextureRect" parent="Table/FingerOutputs/Second" unique_id=1007357294]
 modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("22_duu5k")
 expand_mode = 2
 script = ExtResource("6_ayiei")
-input_action = &"violin_finger_fourth"
+input_action = &"violin_finger_second"
 unpressed_texture = ExtResource("22_duu5k")
 pressed_texture = ExtResource("23_earyy")
+press_action = &"violin_finger_second"
+metadata/_custom_type_script = "uid://coleee0gj2n40"
+
+[node name="Output" type="Label" parent="Table/FingerOutputs/Second" unique_id=1021751117]
+layout_mode = 2
+text = "A4"
+label_settings = ExtResource("5_ulvgi")
+horizontal_alignment = 1
+script = ExtResource("10_07r4r")
+finger_pos = "violin_finger_second"
+
+[node name="Third" type="VBoxContainer" parent="Table/FingerOutputs" unique_id=373135575]
+layout_mode = 2
+
+[node name="Glyph" type="TextureRect" parent="Table/FingerOutputs/Third" unique_id=1430090403]
+modulate = Color(1, 1, 1, 0.5019608)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("15_udkra")
+expand_mode = 2
+script = ExtResource("6_ayiei")
+input_action = &"violin_finger_third"
+unpressed_texture = ExtResource("15_udkra")
+pressed_texture = ExtResource("16_eg04f")
+press_action = &"violin_finger_third"
+metadata/_custom_type_script = "uid://coleee0gj2n40"
+
+[node name="Output" type="Label" parent="Table/FingerOutputs/Third" unique_id=1344848186]
+layout_mode = 2
+text = "E4"
+label_settings = ExtResource("5_ulvgi")
+horizontal_alignment = 1
+script = ExtResource("10_07r4r")
+finger_pos = "violin_finger_third"
+
+[node name="Fourth" type="VBoxContainer" parent="Table/FingerOutputs" unique_id=1358886690]
+layout_mode = 2
+
+[node name="Glyph" type="TextureRect" parent="Table/FingerOutputs/Fourth" unique_id=934926831]
+modulate = Color(1, 1, 1, 0.5019608)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("18_n4w03")
+expand_mode = 2
+script = ExtResource("6_ayiei")
+input_action = &"violin_finger_fourth"
+unpressed_texture = ExtResource("18_n4w03")
+pressed_texture = ExtResource("19_m17th")
 press_action = &"violin_finger_fourth"
 metadata/_custom_type_script = "uid://coleee0gj2n40"
 
-[node name="Output" type="Label" parent="Table/FingerOutputs/Fourth" unique_id=1021751117]
+[node name="Output" type="Label" parent="Table/FingerOutputs/Fourth" unique_id=226896137]
 layout_mode = 2
-text = "A4"
+text = "F#4"
 label_settings = ExtResource("5_ulvgi")
 horizontal_alignment = 1
 script = ExtResource("10_07r4r")
