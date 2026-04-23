@@ -23,6 +23,10 @@ signal rest_used(player: Player)
 @export var note: Button
 @export var rest: Button
 
+@export_group("For PlayerAttack...")
+@export var player_1_hp_mp: Panel
+@export var player_2_hp_mp: Panel
+
 var currently_selected_move: move_attack = null
 var can_interact: bool = false
 

@@ -2,8 +2,8 @@ class_name MusicMaker
 extends Node2D
 
 const SAVE_PATH = "user://saves/"
-const SEQUENCING_TRACK := preload("res://scenes/sequencer/sequencing_track.tscn")
-const INSTRUMENT_NAME_ICON := preload("res://scenes/sequencer/instrument_icon.tscn")
+const SEQUENCING_TRACK := preload("res://components/music_maker/sequencing_track.tscn")
+const INSTRUMENT_NAME_ICON := preload("res://components/music_maker/instrument_icon.tscn")
 const TOTAL_MEASURES = 16
 
 @export var measures : Dictionary = {}

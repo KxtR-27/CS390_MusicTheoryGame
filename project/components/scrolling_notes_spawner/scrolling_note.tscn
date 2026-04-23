@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://b8t2ptkostw87"]
 
 [ext_resource type="Script" uid="uid://whhpiyr6fqpp" path="res://scripts/scrolling_note_spawner/scrolling_note.gd" id="1_0q2mw"]
-[ext_resource type="Texture2D" uid="uid://nlcj85ctmwan" path="res://resources/textures/gameboy_quest/sword_icon.tres" id="2_od756"]
+[ext_resource type="Texture2D" uid="uid://nlcj85ctmwan" path="res://resources/textures/sword_icon.tres" id="2_od756"]
+
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bfgn8"]
 

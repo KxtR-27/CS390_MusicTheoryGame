@@ -42,7 +42,6 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	
 	if batNavMenu.note_list.visible and Input.is_action_just_pressed("ui_cancel"):
 		batNavMenu.currently_selected_player = batNavMenu.player1
 		batNavMenu.reset_battle_menu()
@@ -89,13 +88,12 @@ func _on_rest_used(player: Player) -> void:
 
 
 func _use_sequencer() -> float:
-	var ui_mix : Node2D = get_parent().get_parent()
-	(ui_mix.get_node("Player1HPMP") as CanvasItem).visible = false
-	(ui_mix.get_node("Player2HPMP") as CanvasItem).visible = false
-	(ui_mix.get_node("Player1") as CanvasItem).visible = false
-	(ui_mix.get_node("Player2") as CanvasItem).visible = false
-	(ui_mix.get_node("Enemy") as CanvasItem).visible = false
-	(ui_mix.get_node("BattleMenuNavigation") as CanvasItem).visible = false
+	batNavMenu.player_1_hp_mp.visible = false
+	batNavMenu.player_2_hp_mp.visible = false
+	batNavMenu.player1.visible = false
+	batNavMenu.player2.visible = false
+	batNavMenu.enemy.visible = false
+	batNavMenu.visible = false
 	
 	var minigame_generator : ScrollingStaffGenerator = sequencer_scene.instantiate()
 	get_tree().current_scene.add_child(minigame_generator)
@@ -105,12 +103,12 @@ func _use_sequencer() -> float:
 	
 	minigame_generator.queue_free()
 	
-	(ui_mix.get_node("Player1HPMP") as CanvasItem).visible = true
-	(ui_mix.get_node("Player2HPMP") as CanvasItem).visible = true
-	(ui_mix.get_node("Player1") as CanvasItem).visible = true
-	(ui_mix.get_node("Player2") as CanvasItem).visible = true
-	(ui_mix.get_node("Enemy") as CanvasItem).visible = true
-	(ui_mix.get_node("BattleMenuNavigation") as CanvasItem).visible = true
+	batNavMenu.player_1_hp_mp.visible = true
+	batNavMenu.player_2_hp_mp.visible = true
+	batNavMenu.player1.visible = true
+	batNavMenu.player2.visible = true
+	batNavMenu.enemy.visible = true
+	batNavMenu.visible = true
 	
 	return accuracy
 	#return 1.00

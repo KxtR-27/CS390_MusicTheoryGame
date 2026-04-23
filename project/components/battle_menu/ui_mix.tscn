@@ -3,24 +3,23 @@
 [ext_resource type="Script" uid="uid://btxh0ktbyasvb" path="res://scripts/battle_menu/state_machine.gd" id="2_1coue"]
 [ext_resource type="Script" uid="uid://dwao5v14tg6be" path="res://scripts/battle_menu/player_attack.gd" id="2_2rajg"]
 [ext_resource type="PackedScene" uid="uid://66uyqv601b5e" path="res://components/battle_menu/hpmpbar.tscn" id="2_g847m"]
-[ext_resource type="Texture2D" uid="uid://bj4c3g5fypha1" path="res://assets/icons/fire.png" id="2_hngcd"]
-[ext_resource type="Texture2D" uid="uid://d0l4ili1w1s8b" path="res://assets/icons/sleep-mhw-status-effect.png" id="3_u20u5"]
-[ext_resource type="Texture2D" uid="uid://54jlj7udvc24" path="res://assets/icons/Poison_JE3_BE2.png" id="4_klmld"]
+[ext_resource type="Texture2D" uid="uid://bj4c3g5fypha1" path="res://assets/images/fire.png" id="2_hngcd"]
+[ext_resource type="Texture2D" uid="uid://d0l4ili1w1s8b" path="res://assets/images/sleep-mhw-status-effect.png" id="3_u20u5"]
+[ext_resource type="Texture2D" uid="uid://54jlj7udvc24" path="res://assets/images/Poison_JE3_BE2.png" id="4_klmld"]
 [ext_resource type="Script" uid="uid://dgb603ic60bhb" path="res://scripts/battle_menu/boss_attack.gd" id="5_1okau"]
-[ext_resource type="Texture2D" uid="uid://bwiymv3rw26cc" path="res://assets/musistaff.png" id="5_5tgd8"]
 [ext_resource type="Script" uid="uid://cqqic6rv6vr0c" path="res://scripts/battle_menu/player.gd" id="5_sig0y"]
 [ext_resource type="Script" uid="uid://6u7lbu2fdt12" path="res://scripts/battle_menu/Move_Attack.gd" id="6_2aenj"]
 [ext_resource type="PackedScene" uid="uid://ctwd7potyweht" path="res://components/battle_menu/battle_menu_navigation.tscn" id="6_v7pk5"]
 [ext_resource type="Script" uid="uid://bfrg4wuf2mcqb" path="res://scripts/battle_menu/enemy.gd" id="7_d8nam"]
 [ext_resource type="Resource" uid="uid://dkky8mqkk43m6" path="res://resources/moves/In_Bleak_Midwinter.tres" id="7_nt45v"]
-[ext_resource type="Texture2D" uid="uid://bg1cey8814yks" path="res://resources/textures/gameboy_quest/player_icon.tres" id="7_w8dc6"]
+[ext_resource type="Texture2D" uid="uid://bg1cey8814yks" path="res://resources/textures/player_icon.tres" id="7_w8dc6"]
 [ext_resource type="Resource" uid="uid://cn5g8hbrb4qca" path="res://resources/moves/midnight_sonata.tres" id="8_amt7q"]
 [ext_resource type="Resource" uid="uid://b8jjh3ubrfr04" path="res://resources/moves/song_of_healing.tres" id="9_323y1"]
 [ext_resource type="Resource" uid="uid://cu4tjgdyuqdt2" path="res://resources/moves/concierto_for_triangle.tres" id="10_kna4a"]
 [ext_resource type="Resource" uid="uid://djtl7du6e4kmr" path="res://resources/moves/cure_song.tres" id="11_jterj"]
 [ext_resource type="Resource" uid="uid://d0i4m88ge5gre" path="res://resources/moves/fight_song.tres" id="12_bhdlv"]
 [ext_resource type="LabelSettings" uid="uid://dge4kigionryt" path="res://resources/adjusted_default_label_settings.tres" id="16_w8dc6"]
-[ext_resource type="Texture2D" uid="uid://c8sh8l73jeqpg" path="res://resources/textures/gameboy_quest/enemy_icon.tres" id="17_2ioj6"]
+[ext_resource type="Texture2D" uid="uid://c8sh8l73jeqpg" path="res://resources/textures/enemy_icon.tres" id="17_2ioj6"]
 
 [node name="UiMix" type="Node2D" unique_id=195094249]
 
@@ -87,7 +86,7 @@ position = Vector2(188, 20)
 scale = Vector2(4, 4)
 texture = ExtResource("17_2ioj6")
 
-[node name="BattleMenuNavigation" parent="." unique_id=1690783701 node_paths=PackedStringArray("player1", "player2", "enemy") instance=ExtResource("6_v7pk5")]
+[node name="BattleMenuNavigation" parent="." unique_id=1690783701 node_paths=PackedStringArray("player1", "player2", "enemy", "player_1_hp_mp", "player_2_hp_mp") instance=ExtResource("6_v7pk5")]
 offset_left = 1.0
 offset_top = 125.0
 offset_right = 1.0
@@ -95,6 +94,8 @@ offset_bottom = 125.0
 player1 = NodePath("../Player1")
 player2 = NodePath("../Player2")
 enemy = NodePath("../Enemy")
+player_1_hp_mp = NodePath("../Player1HPMP")
+player_2_hp_mp = NodePath("../Player2HPMP")
 
 [node name="Fire" type="Sprite2D" parent="." unique_id=434551858]
 visible = false
@@ -122,12 +123,6 @@ visible = false
 position = Vector2(974, 613.00006)
 scale = Vector2(0.2888889, 0.2888889)
 texture = ExtResource("4_klmld")
-
-[node name="Musistaff" type="Sprite2D" parent="." unique_id=1293258841]
-visible = false
-position = Vector2(574, 292)
-scale = Vector2(0.6185715, 0.6185715)
-texture = ExtResource("5_5tgd8")
 
 [node name="Player1HPMP" parent="." unique_id=1726576926 node_paths=PackedStringArray("bar_owner") instance=ExtResource("2_g847m")]
 bar_owner = NodePath("../Player1")

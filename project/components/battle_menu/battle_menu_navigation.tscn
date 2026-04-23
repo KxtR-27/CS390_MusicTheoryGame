@@ -8,7 +8,7 @@
 [ext_resource type="Resource" uid="uid://djtl7du6e4kmr" path="res://resources/moves/cure_song.tres" id="6_fkgu6"]
 [ext_resource type="Resource" uid="uid://d0i4m88ge5gre" path="res://resources/moves/fight_song.tres" id="7_8spvb"]
 [ext_resource type="Resource" uid="uid://b8jjh3ubrfr04" path="res://resources/moves/song_of_healing.tres" id="8_pw2xn"]
-[ext_resource type="Texture2D" uid="uid://dhykrk0hdy8ee" path="res://resources/textures/gameboy_quest/panel_rect_marginless.tres" id="9_8spvb"]
+[ext_resource type="Texture2D" uid="uid://dhykrk0hdy8ee" path="res://resources/textures/panel_rect_marginless.tres" id="9_8spvb"]
 [ext_resource type="LabelSettings" uid="uid://dge4kigionryt" path="res://resources/adjusted_default_label_settings.tres" id="10_pw2xn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x8jjg"]

@@ -1,7 +1,7 @@
 class_name SequencingTrack extends Panel
 
 @export var instrument : String
-const BUTTON_SCENE := preload("res://scenes/sequencer/beat_button.tscn")
+const BUTTON_SCENE := preload("res://components/music_maker/beat_button.tscn")
 var beat_buttons : Dictionary = {}
 var last_note : SequencerNote
 
@@ -14,7 +14,7 @@ func populate_beat_buttons(total_measures : int) -> void:
 		var new_button : BeatButton = BUTTON_SCENE.instantiate()
 		$ButtonContainer.add_child(new_button)
 		new_button.instrument = instrument
-		new_button.measure = 1 + floori( i / 16 )
+		new_button.measure = 1 + floori( i / 16.0 )
 		new_button.beat = 1.0 + ((i % 16) * 0.25)
 		
 		beat_buttons[i] = new_button
