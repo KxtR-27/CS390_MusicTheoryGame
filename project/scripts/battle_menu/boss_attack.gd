@@ -4,7 +4,7 @@ class_name BossAttack
 @export var enemy: Enemy
 @export var batNavMenu: BattleNavMenu
 
-const DEFENSE_MINIGAME = preload("res://components/defense_minigame.tscn")
+const DEFENSE_MINIGAME = preload("res://components/battle_menu/defense_minigame.tscn")
 
 func Enter() -> void:
 	batNavMenu.can_interact = false

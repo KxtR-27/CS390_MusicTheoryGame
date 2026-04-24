@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://biy2wa06axetx"]
 
-[ext_resource type="Script" uid="uid://0qmbegoj81i0" path="res://scripts/defense_minigame.gd" id="1_8dlb5"]
+[ext_resource type="Script" uid="uid://0qmbegoj81i0" path="res://scripts/battle_menu/defense_minigame.gd" id="1_8dlb5"]
 [ext_resource type="LabelSettings" uid="uid://ch8axx184h4p7" path="res://resources/defense_minigame_label_settings.tres" id="2_n5rb7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_fqn2j"]
