@@ -19,7 +19,50 @@ var patch_settings : Dictionary = {
 		},
 		"num_voices" : 4,
 	},
+	"BassDrum" : {
+		"oscs" : {
+			0 : Amy.PCM
+		},
+		"num_voices" : 1,
+		"preset" : 1
+	},
+	"Snare" : {
+		"oscs" : {
+			0 : Amy.PCM
+		},
+		"num_voices" : 1,
+		"preset" : 2
+	},
+	"Clap" : {
+		"oscs" : {
+			0 : Amy.PCM
+		},
+		"num_voices" : 1,
+		"preset" : 9
+	},
+	"ClosedHat" : {
+		"oscs" : {
+			0 : Amy.PCM
+		},
+		"num_voices" : 1,
+		"preset" : 6
+	},
+	"OpenHat" : {
+		"oscs" : {
+			0 : Amy.PCM
+		},
+		"num_voices" : 1,
+		"preset" : 7
+	},
+	"Cowbell" : {
+		"oscs" : {
+			0 : Amy.PCM
+		},
+		"num_voices" : 1,
+		"preset" : 10
+	}
 }
+
 var pitch_offsets : Dictionary = {
 	"C" : 0,
 	"D" : 2,
@@ -44,11 +87,19 @@ func _ready() -> void:
 		var oscillators : Dictionary = current_patch_settings["oscs"]
 		
 		for osc : int in oscillators.keys():
-			amy.send({
-				"patch" : current_patch_offset,
-				"osc" : osc,
-				"wave" : oscillators[osc],
-			})
+			if oscillators[osc] != Amy.PCM:
+				amy.send({
+					"patch" : current_patch_offset,
+					"osc" : osc,
+					"wave" : oscillators[osc],
+				})
+			else:
+				amy.send({
+					"patch" : current_patch_offset,
+					"osc" : osc,
+					"wave" : oscillators[osc],
+					"preset" : current_patch_settings["preset"]
+				})
 		
 		var current_id : int = instrument_ids.size()
 		var num_voices : int = current_patch_settings["num_voices"]
