@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://cc74qymmpgsf" path="res://scripts/music_maker/amy_manager.gd" id="2_q1rcg"]
 [ext_resource type="StyleBox" uid="uid://c3j7mlrs2smae" path="res://resources/music_maker/active.tres" id="3_k3gig"]
 [ext_resource type="Script" uid="uid://xb63l2lv4qge" path="res://scripts/music_maker/track_container.gd" id="3_r205u"]
+[ext_resource type="LabelSettings" uid="uid://dge4kigionryt" path="res://resources/adjusted_default_label_settings.tres" id="4_11kpu"]
 [ext_resource type="StyleBox" uid="uid://d1jbegjyts83i" path="res://resources/music_maker/inactive.tres" id="4_23yh4"]
 [ext_resource type="PackedScene" uid="uid://2lckys4dxg56" path="res://components/music_maker/incrementable_field.tscn" id="6_gl8qd"]
 [ext_resource type="Script" uid="uid://djlwybbrbs34j" path="res://scripts/music_maker/editing_modes_container.gd" id="6_ibqgg"]
@@ -182,6 +183,7 @@ grow_vertical = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Accidental"
+label_settings = ExtResource("4_11kpu")
 horizontal_alignment = 1
 
 [node name="Accidentals" type="BoxContainer" parent="Main/PitchPanel/PitchContainer" unique_id=1987269202 node_paths=PackedStringArray("initial_selection")]
@@ -219,6 +221,7 @@ text = "♯"
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Note"
+label_settings = ExtResource("4_11kpu")
 horizontal_alignment = 1
 
 [node name="PitchButtons" type="BoxContainer" parent="Main/PitchPanel/PitchContainer" unique_id=875049524 node_paths=PackedStringArray("initial_selection")]
@@ -284,6 +287,7 @@ text = "B"
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Octave"
+label_settings = ExtResource("4_11kpu")
 horizontal_alignment = 1
 
 [node name="OctaveButtons" type="BoxContainer" parent="Main/PitchPanel/PitchContainer" unique_id=77632011 node_paths=PackedStringArray("initial_selection")]
@@ -365,6 +369,7 @@ theme_override_constants/separation = 16
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Editing Mode"
+label_settings = ExtResource("4_11kpu")
 horizontal_alignment = 1
 
 [node name="EditingModesContainer" type="HBoxContainer" parent="Main/EditingModePanel/EditingModeContainer" unique_id=216070780]
@@ -380,6 +385,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_r205u")
 text = "Activate
 Note"
@@ -389,6 +395,7 @@ layout_mode = 2
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 40
 text = "^"
+label_settings = ExtResource("4_11kpu")
 horizontal_alignment = 1
 
 [node name="DeactivateContainer" type="VBoxContainer" parent="Main/EditingModePanel/EditingModeContainer/EditingModesContainer" unique_id=1652815904]
@@ -398,6 +405,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_guxq5")
 text = "Deactivate
 Note"
@@ -408,6 +416,7 @@ layout_mode = 2
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 40
 text = "^"
+label_settings = ExtResource("4_11kpu")
 horizontal_alignment = 1
 
 [node name="SustainContainer" type="VBoxContainer" parent="Main/EditingModePanel/EditingModeContainer/EditingModesContainer" unique_id=1529897654]
@@ -417,6 +426,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_r4da6")
 text = "Sustain"
 
@@ -426,6 +436,7 @@ layout_mode = 2
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 40
 text = "^"
+label_settings = ExtResource("4_11kpu")
 horizontal_alignment = 1
 
 [node name="SongInformation" type="Panel" parent="Main" unique_id=369612195]
@@ -477,6 +488,7 @@ theme_override_constants/separation = 16
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Playback"
+label_settings = ExtResource("4_11kpu")
 horizontal_alignment = 1
 
 [node name="PlaybackButtonsContainer" type="HBoxContainer" parent="Main/PlaybackPanel/PlaybackContainer" unique_id=1676219178]
@@ -488,21 +500,21 @@ alignment = 1
 [node name="PlayButton" type="Button" parent="Main/PlaybackPanel/PlaybackContainer/PlaybackButtonsContainer" unique_id=202116658]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_w27ve")
 text = "Play"
 
 [node name="PlayFromBeginningButton" type="Button" parent="Main/PlaybackPanel/PlaybackContainer/PlaybackButtonsContainer" unique_id=1451797071]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_140sb")
 text = "Play From Beginning"
 
 [node name="StopButton" type="Button" parent="Main/PlaybackPanel/PlaybackContainer/PlaybackButtonsContainer" unique_id=953670374]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_nnd6d")
 text = "Stop"
 
@@ -510,6 +522,7 @@ text = "Stop"
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Save / Load"
+label_settings = ExtResource("4_11kpu")
 horizontal_alignment = 1
 
 [node name="SaveLoadContainer" type="HBoxContainer" parent="Main/PlaybackPanel/PlaybackContainer" unique_id=1471035303]
@@ -521,14 +534,14 @@ alignment = 1
 [node name="SaveButton" type="Button" parent="Main/PlaybackPanel/PlaybackContainer/SaveLoadContainer" unique_id=1300565283]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_w27ve")
 text = "Save Song"
 
 [node name="LoadButton" type="Button" parent="Main/PlaybackPanel/PlaybackContainer/SaveLoadContainer" unique_id=126724157]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_nnd6d")
 text = "Load Song"
 

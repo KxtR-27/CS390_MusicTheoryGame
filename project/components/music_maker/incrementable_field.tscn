@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://2lckys4dxg56"]
 
 [ext_resource type="Script" uid="uid://barvrqfccjycu" path="res://scripts/music_maker/incrementable_field.gd" id="1_85x5p"]
-
+[ext_resource type="LabelSettings" uid="uid://dge4kigionryt" path="res://resources/adjusted_default_label_settings.tres" id="2_8fepv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8nxtq"]
 bg_color = Color(0.25882354, 0.33333334, 0.88235295, 1)
@@ -20,6 +20,7 @@ starting_value = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Placeholder: "
+label_settings = ExtResource("2_8fepv")
 horizontal_alignment = 1
 
 [node name="LineEdit" type="LineEdit" parent="." unique_id=1197764100]

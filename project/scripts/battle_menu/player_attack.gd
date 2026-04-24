@@ -24,8 +24,12 @@ func Enter() -> void:
 	if not player_1_alive and not player_2_alive:
 		# go to game over scene
 		print("player loses!")
+		var results_screen = load("res://components/result_screen.tscn")
+		var new_results = results_screen.instantiate()
+		get_tree().current_scene.add_child(new_results)
+		new_results.results_label.text = "You lose!"
 		Exit()
-		
+	
 	
 	if batNavMenu.currently_selected_player == batNavMenu.player1 and not player_1_alive:
 		batNavMenu.currently_selected_player = batNavMenu.player2
@@ -63,7 +67,6 @@ func Update(_delta: float) -> void:
 		batNavMenu.mana_changed.emit(batNavMenu.currently_selected_player)
 		
 		var accuracy: float = await _use_sequencer()
-		#var accuracy: float = _use_sequencer()
 		
 		batNavMenu.attack_enemy.emit(batNavMenu.currently_selected_move.DMG * accuracy)
 		batNavMenu.note_list.visible = false
