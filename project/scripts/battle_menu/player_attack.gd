@@ -8,6 +8,8 @@ static var song_scene: Song = preload("res://resources/hot cross buns.tres")
 
 @export var batNavMenu: BattleNavMenu
 
+var can_spawn_minigame : bool = true
+
 
 func Enter() -> void:
 	print("I am in the PlayerAttack STate right now")
@@ -47,7 +49,10 @@ func Update(_delta: float) -> void:
 		batNavMenu.reset_battle_menu()
 		batNavMenu.note_list.visible = false
 
-	if batNavMenu.note_list.visible and Input.is_action_just_pressed("ui_accept"):
+	if batNavMenu.note_list.visible and Input.is_action_just_pressed("ui_accept") and can_spawn_minigame:
+		can_spawn_minigame = false
+		batNavMenu.can_interact = false
+		
 		print("the mana of move used is " + str(batNavMenu.currently_selected_move.mana_value))
 		print("The mana the currently selected player has is" + str(batNavMenu.currently_selected_player.mana))
 		
@@ -62,6 +67,9 @@ func Update(_delta: float) -> void:
 		
 		batNavMenu.attack_enemy.emit(batNavMenu.currently_selected_move.DMG * accuracy)
 		batNavMenu.note_list.visible = false
+		
+		can_spawn_minigame = true
+		batNavMenu.can_interact = true
 		
 		if batNavMenu.currently_selected_player == batNavMenu.player1:
 			batNavMenu.currently_selected_player = batNavMenu.player2
