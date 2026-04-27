@@ -126,7 +126,12 @@ func _play_song() -> void:
 	await measure_timer.timeout
 	measure_timer.stop()
 	# ternary -- if there's a %, return that, otherwise return 100%
-	score_tallied.emit(_get_score_percent() if _get_score_percent() else 1.00)
+	#score_tallied.emit(_get_score_percent() if _get_score_percent() else 1.00)
+	
+	if total_notes == 0:
+		score_tallied.emit(0.0)
+	else:
+		score_tallied.emit(_get_score_percent())
 
 
 func _load_song(new_song : Song) -> void:
