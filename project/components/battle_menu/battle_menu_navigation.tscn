@@ -8,7 +8,7 @@
 [ext_resource type="Resource" uid="uid://djtl7du6e4kmr" path="res://resources/moves/cure_song.tres" id="6_fkgu6"]
 [ext_resource type="Resource" uid="uid://d0i4m88ge5gre" path="res://resources/moves/fight_song.tres" id="7_8spvb"]
 [ext_resource type="Resource" uid="uid://b8jjh3ubrfr04" path="res://resources/moves/song_of_healing.tres" id="8_pw2xn"]
-[ext_resource type="Texture2D" uid="uid://cn4u5glonw1q3" path="res://resources/textures/box.png" id="9_bwvjv"]
+[ext_resource type="Texture2D" uid="uid://dks10nvc0ow3o" path="res://assets/images/better_box.png" id="9_ae15v"]
 [ext_resource type="LabelSettings" uid="uid://dge4kigionryt" path="res://resources/adjusted_default_label_settings.tres" id="10_pw2xn"]
 [ext_resource type="FontFile" uid="uid://didg68dnvv3um" path="res://assets/fonts/PressStart2P-Regular.ttf" id="11_ae15v"]
 
@@ -73,11 +73,12 @@ offset_left = 19.0
 offset_top = 95.0
 offset_right = 319.0
 offset_bottom = 445.0
-texture = ExtResource("9_bwvjv")
+texture = ExtResource("9_ae15v")
 patch_margin_left = 19
 patch_margin_top = 13
 patch_margin_right = 18
 patch_margin_bottom = 12
+axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
 [node name="Note_selection" type="VBoxContainer" parent="Note_list_panel" unique_id=448151205]
@@ -117,13 +118,12 @@ offset_right = 263.0
 offset_bottom = -70.0
 grow_horizontal = 0
 grow_vertical = 0
-texture = ExtResource("9_bwvjv")
+texture = ExtResource("9_ae15v")
 region_rect = Rect2(-2.7994995, 2.8401031, 230.7995, 213.1599)
 patch_margin_left = 22
 patch_margin_top = 13
 patch_margin_right = 18
 patch_margin_bottom = 13
-axis_stretch_horizontal = 1
 axis_stretch_vertical = 2
 
 [node name="Move_description" type="Label" parent="Note_list_panel/move_description_panel" unique_id=1108180250]
