@@ -2,3 +2,4 @@ asset_packs/*
 !asset_packs/Asset Locations.html
 .vscode/*
 project/.vscode/settings.json
+project/addons/amy/bin/~libamy.windows.template_debug.x86_64.dll
