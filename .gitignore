@@ -3,3 +3,4 @@ asset_packs/*
 .vscode/*
 project/.vscode/settings.json
 project/addons/amy/bin/~libamy.windows.template_debug.x86_64.dll
+/build
