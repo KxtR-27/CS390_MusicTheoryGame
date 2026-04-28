@@ -10,12 +10,12 @@ shadow_size = 8
 shadow_color = Color(0.36862746, 0.52156866, 0.28627452, 1)
 shadow_offset = Vector2(-1, 1)
 
-[node name="ResultScreen" type="Node2D" unique_id=1644888005 node_paths=PackedStringArray("results_label")]
+[node name="WinScreen" type="Node2D" unique_id=1644888005 node_paths=PackedStringArray("results_label")]
 script = ExtResource("1_0lap0")
 results_label = NodePath("MainControl/ResultsLabel")
 
 [node name="MainControl" type="Control" parent="." unique_id=1175024792]
-z_index = 15
+z_index = 80
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,7 +35,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ResultsLabel" type="Label" parent="MainControl" unique_id=516135597]
-z_index = 17
+z_index = 81
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -68,7 +68,7 @@ grow_vertical = 2
 alignment = 1
 
 [node name="Button" type="Button" parent="MainControl/HBoxContainer" unique_id=417972336]
-z_index = 17
+z_index = 81
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Play Again"

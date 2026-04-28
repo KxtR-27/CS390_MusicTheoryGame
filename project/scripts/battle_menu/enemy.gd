@@ -6,6 +6,7 @@ class_name Enemy
 @onready var health_label: Label = $EnemyHP/HPvalue
 
 signal enemy_took_damage(current_health: int)
+signal defeated
 
 var players: Array[Player] = []
 
@@ -13,6 +14,8 @@ var players: Array[Player] = []
 func _ready() -> void:
 	randomize()
 	enemy_took_damage.connect(_on_enemy_took_damage)
+	var anim_player : AnimationPlayer = $AnimationPlayer
+	anim_player.play("idle")
 	update_health_label()
 
 
@@ -23,6 +26,7 @@ func _on_battle_menu_navigation_attack_enemy(damage: float) -> void:
 	enemy_took_damage.emit(health)
 	if health <= 0:
 		print("players win! I died, yeowch!")
+		defeated.emit()
 
 
 # Random damage generator
@@ -69,8 +73,3 @@ func _on_enemy_took_damage(_current_health: int) -> void:
 
 func update_health_label() -> void:
 	health_label.text = "Health: " + str(int(health)) + "/25"
-
-
-func _on_player_attack_boss_hurt() -> void:
-	var anim_player : AnimationPlayer = $AnimationPlayer
-	anim_player.play("hurt_anim")

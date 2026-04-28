@@ -6,6 +6,9 @@ class_name BossAttack
 
 const DEFENSE_MINIGAME = preload("res://components/battle_menu/defense_minigame.tscn")
 
+signal critical_defense
+signal resume_approved
+
 func Enter() -> void:
 	batNavMenu.can_interact = false
 	
@@ -29,7 +32,12 @@ func Enter() -> void:
 	if did_damage:
 		SfxManager.play_hit_sound()
 	else:
+		batNavMenu.visible = false
+		critical_defense.emit()
+		await get_tree().create_timer(0.5).timeout
 		SfxManager.play_defend_sound()
+		await resume_approved
+		batNavMenu.visible = true
 	@warning_ignore_restore("unsafe_method_access")
 	
 	await get_tree().create_timer(0.5).timeout

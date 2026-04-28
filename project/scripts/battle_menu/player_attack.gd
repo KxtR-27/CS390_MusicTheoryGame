@@ -10,7 +10,10 @@ static var song_scene: Song = preload("res://resources/hot cross buns.tres")
 
 var can_spawn_minigame : bool = true
 
-signal boss_hurt
+signal boss_hurt(dmg: int)
+signal critical_performance
+signal resume_approved
+signal players_lost
 
 func Enter() -> void:
 	print("I am in the PlayerAttack STate right now")
@@ -25,10 +28,7 @@ func Enter() -> void:
 	if not player_1_alive and not player_2_alive:
 		# go to game over scene
 		print("player loses!")
-		var results_screen: PackedScene = load("res://components/result_screen.tscn")
-		var new_results: ResultsScreen = results_screen.instantiate()
-		get_tree().current_scene.add_child(new_results)
-		new_results.results_label.text = "You lose!"
+		players_lost.emit()
 		Exit()
 	
 	
@@ -79,6 +79,12 @@ func Update(_delta: float) -> void:
 		#var damage_dealt_to_enemy := batNavMenu.currently_selected_move.DMG * accuracy
 		#batNavMenu.attack_enemy.emit(damage_dealt_to_enemy)
 		
+		if accuracy == 1.0:
+			critical_performance.emit()
+			batNavMenu.visible = false
+			await resume_approved
+			batNavMenu.visible = true
+		
 		if move.HEAL > 0:
 			var heal_amount := int(move.HEAL * accuracy)
 			player.heal(heal_amount)
@@ -98,7 +104,7 @@ func Update(_delta: float) -> void:
 		var did_damage :float = damage_dealt_to_enemy > 0
 		if did_damage:
 			SfxManager.play_hit_sound()
-			boss_hurt.emit()
+			boss_hurt.emit(damage_dealt_to_enemy)
 		else:
 			SfxManager.play_defend_sound()
 		@warning_ignore_restore("unsafe_method_access")

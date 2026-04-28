@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://uhsnmxsqn237"]
 
+[ext_resource type="Script" uid="uid://4ajoaefyiyie" path="res://components/battle_menu/ui_mix.gd" id="1_2aenj"]
 [ext_resource type="Script" uid="uid://btxh0ktbyasvb" path="res://scripts/battle_menu/state_machine.gd" id="2_1coue"]
 [ext_resource type="Script" uid="uid://dwao5v14tg6be" path="res://scripts/battle_menu/player_attack.gd" id="2_2rajg"]
 [ext_resource type="PackedScene" uid="uid://66uyqv601b5e" path="res://components/battle_menu/hpmpbar.tscn" id="2_g847m"]
@@ -21,6 +22,42 @@
 [ext_resource type="LabelSettings" uid="uid://dge4kigionryt" path="res://resources/adjusted_default_label_settings.tres" id="16_w8dc6"]
 [ext_resource type="Texture2D" uid="uid://c8sh8l73jeqpg" path="res://resources/textures/enemy_icon.tres" id="17_2ioj6"]
 
+[sub_resource type="Animation" id="Animation_nt45v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_kna4a"]
+resource_name = "hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, true, false, true, false, true, false, true, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jterj"]
+_data = {
+&"RESET": SubResource("Animation_nt45v"),
+&"hurt": SubResource("Animation_kna4a")
+}
+
 [sub_resource type="Animation" id="Animation_nlm3i"]
 length = 0.001
 tracks/0/type = "value"
@@ -35,10 +72,46 @@ tracks/0/keys = {
 "update": 0,
 "values": [Rect2(0, 0, 16, 16)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1035, 495)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../FloatingDmgControl:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(959, 396)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../FloatingDmgControl/FloatingDmgLabel:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_2aenj"]
 resource_name = "hurt_anim"
-length = 0.5
+length = 0.9
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -46,19 +119,443 @@ tracks/0/path = NodePath(".:texture:region")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.7, 0.79999995, 0.9),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Rect2(0, 0, 16, 16), Rect2(16, 80, 16, 16), Rect2(32, 80, 16, 16), Rect2(48, 80, 16, 16), Rect2(0, 80, 16, 16), Rect2(0, 16, 16, 16)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.70000005, 0.8, 0.90000004),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(1025, 495), Vector2(1035, 495), Vector2(1025, 495), Vector2(1035, 495), Vector2(1025, 495), Vector2(1035, 495), Vector2(1025, 495), Vector2(1035, 495), Vector2(1025, 495), Vector2(1035, 495)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../FloatingDmgControl:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(952, 396), Vector2(960, 384), Vector2(952, 372), Vector2(960, 360), Vector2(952, 350), Vector2(960, 340), Vector2(960, 330), Vector2(960, 320), Vector2(960, 310), Vector2(960, 300)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../FloatingDmgControl/FloatingDmgLabel:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jterj"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Rect2(0, 16, 16, 16), Rect2(16, 48, 16, 16)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nt45v"]
 _data = {
 &"RESET": SubResource("Animation_nlm3i"),
-&"hurt_anim": SubResource("Animation_2aenj")
+&"hurt_anim": SubResource("Animation_2aenj"),
+&"idle": SubResource("Animation_jterj")
 }
 
-[node name="UiMix" type="Node2D" unique_id=195094249]
+[sub_resource type="LabelSettings" id="LabelSettings_2aenj"]
+line_spacing = 6.0
+font_size = 48
+outline_color = Color(0.36862746, 0.52156866, 0.28627452, 1)
+shadow_size = 4
+shadow_color = Color(0.36862746, 0.52156866, 0.28627452, 1)
+shadow_offset = Vector2(-1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nt45v"]
+line_spacing = 6.0
+font_size = 48
+outline_color = Color(0.36862746, 0.52156866, 0.28627452, 1)
+shadow_size = 4
+shadow_color = Color(0.36862746, 0.52156866, 0.28627452, 1)
+shadow_offset = Vector2(-1, 1)
+
+[sub_resource type="Animation" id="Animation_amt7q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FeedbackLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FeedbackLabel:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FeedbackLabel:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Player1:z_index")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Player2:z_index")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Backdrop:z_index")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("FeedbackLabel:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Backdrop:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("FeedbackLabel:z_index")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("EffectLabel:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(325, 50)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("EffectLabel:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("EffectLabel:modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("EffectLabel:rotation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [8.377581]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("EffectLabel:z_index")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [51]
+}
+
+[sub_resource type="Animation" id="Animation_323y1"]
+resource_name = "critical"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FeedbackLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FeedbackLabel:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [8.377580409572781, 0.2617993877991494]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FeedbackLabel:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 2.6390157, 1),
+"update": 0,
+"values": [Vector2(325, 50), Vector2(325, 50), Vector2(325, 50), Vector2(325, 700)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Player1:z_index")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [51, 0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Player2:z_index")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [51, 0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Backdrop:z_index")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [50, 0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("FeedbackLabel:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Backdrop:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.5, 2),
+"transitions": PackedFloat32Array(0.4506252, 1, 1.5157164, 1.624505),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("FeedbackLabel:z_index")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [52, 0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("EffectLabel:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(325, 50)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("EffectLabel:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5),
+"transitions": PackedFloat32Array(1, 0.5, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(2, 2)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("EffectLabel:modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.51, 1.5),
+"transitions": PackedFloat32Array(1, 1, 0.5, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 0.5), Color(1, 1, 1, 0)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("EffectLabel:rotation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.2617993877991494]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("EffectLabel:z_index")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [51, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kna4a"]
+_data = {
+&"RESET": SubResource("Animation_amt7q"),
+&"critical": SubResource("Animation_323y1")
+}
+
+[node name="UiMix" type="Node2D" unique_id=195094249 node_paths=PackedStringArray("feedback_label", "effect_label", "critical_announcement_animator", "boss_animator", "floating_damage_label")]
+script = ExtResource("1_2aenj")
+feedback_label = NodePath("CriticalAnnouncerControl/FeedbackLabel")
+effect_label = NodePath("CriticalAnnouncerControl/EffectLabel")
+critical_announcement_animator = NodePath("CriticalAnnouncerControl/AnimationPlayer")
+boss_animator = NodePath("Enemy/AnimationPlayer")
+floating_damage_label = NodePath("FloatingDmgControl/FloatingDmgLabel")
 
 [node name="StateMachine" type="Node" parent="." unique_id=74671769 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_1coue")
@@ -84,6 +581,9 @@ mana = 15
 health = 10
 moves = Array[ExtResource("6_2aenj")]([ExtResource("8_amt7q"), ExtResource("10_kna4a"), ExtResource("12_bhdlv")])
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player1" unique_id=2134613325]
+libraries/ = SubResource("AnimationLibrary_jterj")
+
 [node name="Player2" type="Sprite2D" parent="." unique_id=181280006]
 position = Vector2(219, 476)
 scale = Vector2(6, 6)
@@ -93,7 +593,11 @@ mana = 11
 health = 10
 moves = Array[ExtResource("6_2aenj")]([ExtResource("7_nt45v"), ExtResource("11_jterj"), ExtResource("9_323y1")])
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player2" unique_id=859339821]
+libraries/ = SubResource("AnimationLibrary_jterj")
+
 [node name="Enemy" type="Sprite2D" parent="." unique_id=1723623278]
+top_level = true
 position = Vector2(1035, 495)
 scale = Vector2(6, 6)
 texture = ExtResource("17_2ioj6")
@@ -172,7 +676,83 @@ offset_top = 65.0
 offset_bottom = 117.0
 bar_owner = NodePath("../Player2")
 
-[connection signal="boss_hurt" from="StateMachine/PlayerAttack" to="Enemy" method="_on_player_attack_boss_hurt"]
+[node name="FloatingDmgControl" type="Control" parent="." unique_id=1571322690]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 959.0
+offset_top = 396.0
+offset_right = 1038.9954
+offset_bottom = 476.0
+
+[node name="FloatingDmgLabel" type="Label" parent="FloatingDmgControl" unique_id=376493603]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "-0"
+label_settings = SubResource("LabelSettings_2aenj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CriticalAnnouncerControl" type="Control" parent="." unique_id=2089987013]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1158.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FeedbackLabel" type="Label" parent="CriticalAnnouncerControl" unique_id=1604724119]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 0
+offset_right = 816.0005
+offset_bottom = 300.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "CRITICAL DEFENSE!"
+label_settings = SubResource("LabelSettings_nt45v")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EffectLabel" type="Label" parent="CriticalAnnouncerControl" unique_id=1534676911]
+modulate = Color(1, 1, 1, 0)
+z_index = 51
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 0
+offset_left = 325.0
+offset_top = 50.0
+offset_right = 1141.0
+offset_bottom = 350.0
+rotation = 8.377581
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "CRITICAL DEFENSE!"
+label_settings = SubResource("LabelSettings_nt45v")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CriticalAnnouncerControl" unique_id=883204436]
+libraries/ = SubResource("AnimationLibrary_kna4a")
+
+[node name="Backdrop" type="Panel" parent="CriticalAnnouncerControl" unique_id=999864243]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="boss_hurt" from="StateMachine/PlayerAttack" to="." method="_on_player_attack_boss_hurt"]
+[connection signal="critical_performance" from="StateMachine/PlayerAttack" to="." method="_on_player_attack_critical_performance"]
+[connection signal="players_lost" from="StateMachine/PlayerAttack" to="." method="_on_player_attack_players_lost"]
+[connection signal="critical_defense" from="StateMachine/BossAttack" to="." method="_on_boss_attack_critical_defense"]
+[connection signal="defeated" from="Enemy" to="." method="_on_enemy_defeated"]
 [connection signal="enemy_took_damage" from="Enemy" to="Enemy/EnemyHP/HPvalue" method="_on_enemy_enemy_took_damage"]
 [connection signal="attack_enemy" from="BattleMenuNavigation" to="Enemy" method="_on_battle_menu_navigation_attack_enemy"]
 [connection signal="mana_changed" from="BattleMenuNavigation" to="Player1HPMP" method="_on_battle_menu_navigation_mana_changed"]

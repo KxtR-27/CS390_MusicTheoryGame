@@ -30,3 +30,6 @@ func take_damage(amount: int) -> void:
 	var final_damage: int = max(amount - (defense * accuracy), 0)
 	health = max(health - final_damage, 0)
 	health_changed.emit(self)
+	if amount != 0:
+		var anim_player : AnimationPlayer = $AnimationPlayer
+		anim_player.play("hurt")

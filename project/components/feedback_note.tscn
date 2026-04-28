@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://4bcdrhh67g3b"]
+
+[ext_resource type="Texture2D" uid="uid://df7ca2ln625f0" path="res://resources/textures/small note.png" id="1_2rwii"]
+[ext_resource type="Script" uid="uid://b48utdg2yi3m3" path="res://components/scrolling_notes_spawner/feedback_note.gd" id="2_7x0ts"]
+
+[node name="FeedbackNote" type="Sprite2D" unique_id=414026389]
+modulate = Color(1, 1, 1, 0.5)
+z_index = 50
+scale = Vector2(2, 2)
+texture = ExtResource("1_2rwii")
+script = ExtResource("2_7x0ts")

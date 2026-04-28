@@ -154,10 +154,17 @@ func _on_clear_area_area_entered(area: Area2D) -> void:
 func _on_trumpet_controller_for_sequencer_note_started(note_name: String, octave: int) -> void:
 	if current_note:
 		if current_note.pitch_name == note_name and current_note.octave == (octave - 1):
+			notes_hit += 1
+			
+			var feedback_note : PackedScene = load("res://components/feedback_note.tscn")
+			var new_feedback_note : FeedbackNote = feedback_note.instantiate()
+			add_child(new_feedback_note)
+			new_feedback_note.global_position = current_note.global_position
+			new_feedback_note.play()
+			
 			current_note.queue_free()
 			current_note = null
 			
-			notes_hit += 1
 			_update_score()
 
 
