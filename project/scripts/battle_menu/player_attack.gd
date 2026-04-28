@@ -57,6 +57,8 @@ func Update(_delta: float) -> void:
 		batNavMenu.note_list.visible = false
 
 	if batNavMenu.note_list.visible and Input.is_action_just_pressed("ui_accept") and can_spawn_minigame:
+		if (batNavMenu.currently_selected_move.mana_value > batNavMenu.currently_selected_player.mana):
+			return
 		can_spawn_minigame = false
 		batNavMenu.can_interact = false
 		
@@ -87,7 +89,8 @@ func Update(_delta: float) -> void:
 		
 		if move.HEAL > 0:
 			var heal_amount := int(move.HEAL * accuracy)
-			player.heal(heal_amount)
+			for p: Player in [batNavMenu.player1, batNavMenu.player2]:
+				p.heal(heal_amount)
 
 		if move.BUFF_DAMAGE > 0:
 			var buff_amount: int = max(1, int(move.BUFF_DAMAGE * accuracy))

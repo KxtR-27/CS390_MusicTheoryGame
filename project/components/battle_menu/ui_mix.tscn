@@ -14,13 +14,20 @@
 [ext_resource type="Script" uid="uid://bfrg4wuf2mcqb" path="res://scripts/battle_menu/enemy.gd" id="7_d8nam"]
 [ext_resource type="Resource" uid="uid://dkky8mqkk43m6" path="res://resources/moves/In_Bleak_Midwinter.tres" id="7_nt45v"]
 [ext_resource type="Texture2D" uid="uid://bg1cey8814yks" path="res://resources/textures/player_icon.tres" id="7_w8dc6"]
-[ext_resource type="Resource" uid="uid://cn5g8hbrb4qca" path="res://resources/moves/midnight_sonata.tres" id="8_amt7q"]
 [ext_resource type="Resource" uid="uid://b8jjh3ubrfr04" path="res://resources/moves/song_of_healing.tres" id="9_323y1"]
 [ext_resource type="Resource" uid="uid://cu4tjgdyuqdt2" path="res://resources/moves/concierto_for_triangle.tres" id="10_kna4a"]
 [ext_resource type="Resource" uid="uid://djtl7du6e4kmr" path="res://resources/moves/cure_song.tres" id="11_jterj"]
 [ext_resource type="Resource" uid="uid://d0i4m88ge5gre" path="res://resources/moves/fight_song.tres" id="12_bhdlv"]
 [ext_resource type="LabelSettings" uid="uid://dge4kigionryt" path="res://resources/adjusted_default_label_settings.tres" id="16_w8dc6"]
 [ext_resource type="Texture2D" uid="uid://c8sh8l73jeqpg" path="res://resources/textures/enemy_icon.tres" id="17_2ioj6"]
+
+[sub_resource type="Resource" id="Resource_nlm3i"]
+script = ExtResource("6_2aenj")
+NAME = "Midnight Sonata"
+DMG = 3.0
+mana_value = 5
+move_description = "Damages all enemies. If played perfectly, inflicts sleep to 1 target"
+metadata/_custom_type_script = "uid://6u7lbu2fdt12"
 
 [sub_resource type="Animation" id="Animation_nt45v"]
 length = 0.001
@@ -579,7 +586,7 @@ script = ExtResource("5_sig0y")
 strength = 2
 mana = 15
 health = 10
-moves = Array[ExtResource("6_2aenj")]([ExtResource("8_amt7q"), ExtResource("10_kna4a"), ExtResource("12_bhdlv")])
+moves = Array[ExtResource("6_2aenj")]([SubResource("Resource_nlm3i"), ExtResource("10_kna4a"), ExtResource("12_bhdlv")])
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player1" unique_id=2134613325]
 libraries/ = SubResource("AnimationLibrary_jterj")
